@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package dslVersion="1.0.0.0" 
+        Id="fd0f103a-9c48-4cda-8472-62426ceae0bb" 
+        solutionId="fd0f103a-9c48-4cda-8472-62426ceae0bb" 
+        xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel" 
+        name="Infra"
+        sharePointProductVersion="14.0">
+</package>
