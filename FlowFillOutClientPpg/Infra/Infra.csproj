@@ -52,6 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Features\ListPbcGroup\ListPbcGroup.feature">
+      <FeatureId>{fdea19ec-8389-4833-9a01-d1b41b2e9485}</FeatureId>
+    </None>
     <None Include="Features\ListPaymentCondition\ListPaymentCondition.feature">
       <FeatureId>{cbf6b73b-3c83-473a-8de7-292a2decca0d}</FeatureId>
     </None>
@@ -86,6 +89,12 @@
     <None Include="Lists\PaymentConditionList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{43c3b5c1-b032-4e74-a040-4cd6f026fbc8}</SharePointProjectItemId>
     </None>
+    <None Include="Lists\PbcGroupList\PbcGroupListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{c395886a-499f-4f3b-9822-e65c55c024e1}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\PbcGroupList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{ea6cec7f-30f1-4f3c-b867-85cb3d796a82}</SharePointProjectItemId>
+    </None>
     <None Include="Lists\SubBranchActivityList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{ab075b32-f3b3-4b0f-8984-265cec9474a4}</SharePointProjectItemId>
     </None>
@@ -107,6 +116,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Features\ListPbcGroup\ListPbcGroup.Template.xml">
+      <DependentUpon>ListPbcGroup.feature</DependentUpon>
+    </Content>
     <Content Include="Features\ListPaymentCondition\ListPaymentCondition.Template.xml">
       <DependentUpon>ListPaymentCondition.feature</DependentUpon>
     </Content>
@@ -131,6 +143,9 @@
     <Content Include="Lists\PaymentConditionList\Elements.xml" />
     <Content Include="Lists\PaymentConditionList\PaymentConditionListInstance\Elements.xml" />
     <Content Include="Lists\PaymentConditionList\Schema.xml" />
+    <Content Include="Lists\PbcGroupList\Elements.xml" />
+    <Content Include="Lists\PbcGroupList\PbcGroupListInstance\Elements.xml" />
+    <Content Include="Lists\PbcGroupList\Schema.xml" />
     <Content Include="Lists\SubBranchActivityList\Elements.xml" />
     <Content Include="Lists\SubBranchActivityList\Schema.xml" />
     <Content Include="Lists\SubBranchActivityList\SubBranchActivityListInstance\Elements.xml" />
