@@ -52,6 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Features\ListPurchagesGroup\ListPurchagesGroup.feature">
+      <FeatureId>{4dff9ec3-48e3-4486-a561-865c7e70f678}</FeatureId>
+    </None>
     <None Include="Features\ListCommercialProfile\ListCommercialProfile.feature">
       <FeatureId>{99a0d2d5-cc42-494a-8c3a-2184e5838365}</FeatureId>
     </None>
@@ -86,9 +89,18 @@
     <None Include="Package\Package.Template.xml">
       <DependentUpon>Package.package</DependentUpon>
     </None>
+    <None Include="PurchasesGroupList\PurchasesGroupListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{aa7f1dec-38f2-4529-a97b-06b7f6a8080e}</SharePointProjectItemId>
+    </None>
+    <None Include="PurchasesGroupList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{1f4106b8-5688-401e-9019-872f084cc79a}</SharePointProjectItemId>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Features\ListPurchagesGroup\ListPurchagesGroup.Template.xml">
+      <DependentUpon>ListPurchagesGroup.feature</DependentUpon>
+    </Content>
     <Content Include="Features\ListCommercialProfile\ListCommercialProfile.Template.xml">
       <DependentUpon>ListCommercialProfile.feature</DependentUpon>
     </Content>
@@ -107,6 +119,9 @@
     <Content Include="Lists\SubBranchActivityList\Elements.xml" />
     <Content Include="Lists\SubBranchActivityList\Schema.xml" />
     <Content Include="Lists\SubBranchActivityList\SubBranchActivityListInstance\Elements.xml" />
+    <Content Include="PurchasesGroupList\Elements.xml" />
+    <Content Include="PurchasesGroupList\PurchasesGroupListInstance\Elements.xml" />
+    <Content Include="PurchasesGroupList\Schema.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
