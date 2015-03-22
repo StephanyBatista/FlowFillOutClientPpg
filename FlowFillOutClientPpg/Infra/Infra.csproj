@@ -52,6 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Features\ListClientGroup\ListClientGroup.feature">
+      <FeatureId>{5f7157d4-69f9-4a68-8d1b-b3b084ffdbde}</FeatureId>
+    </None>
     <None Include="Features\ListPbcGroup\ListPbcGroup.feature">
       <FeatureId>{fdea19ec-8389-4833-9a01-d1b41b2e9485}</FeatureId>
     </None>
@@ -76,6 +79,12 @@
     </None>
     <None Include="Lists\BranchActivityList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{9d5b7b03-9b2a-4e26-a2c3-ef54142727cd}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\ClientGroupList\ClientGroupListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{973de601-2c7a-4e16-a090-0f5beb0ec016}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\ClientGroupList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{431a02e0-c789-46c5-b2c9-badea7350b78}</SharePointProjectItemId>
     </None>
     <None Include="Lists\CommercialProfileList\CommercialProfileListInstance\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{7a07ef51-a7f1-4bb1-a2d4-5caed84c95a7}</SharePointProjectItemId>
@@ -116,6 +125,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Features\ListClientGroup\ListClientGroup.Template.xml">
+      <DependentUpon>ListClientGroup.feature</DependentUpon>
+    </Content>
     <Content Include="Features\ListPbcGroup\ListPbcGroup.Template.xml">
       <DependentUpon>ListPbcGroup.feature</DependentUpon>
     </Content>
@@ -137,6 +149,9 @@
     <Content Include="Lists\BranchActivityList\BranchActivityListInstance\Elements.xml" />
     <Content Include="Lists\BranchActivityList\Elements.xml" />
     <Content Include="Lists\BranchActivityList\Schema.xml" />
+    <Content Include="Lists\ClientGroupList\ClientGroupListInstance\Elements.xml" />
+    <Content Include="Lists\ClientGroupList\Elements.xml" />
+    <Content Include="Lists\ClientGroupList\Schema.xml" />
     <Content Include="Lists\CommercialProfileList\CommercialProfileListInstance\Elements.xml" />
     <Content Include="Lists\CommercialProfileList\Elements.xml" />
     <Content Include="Lists\CommercialProfileList\Schema.xml" />
