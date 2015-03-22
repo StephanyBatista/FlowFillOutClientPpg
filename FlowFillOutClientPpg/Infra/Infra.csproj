@@ -52,6 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Features\ListPhoneType\ListPhoneType.feature">
+      <FeatureId>{be5b27fb-e5ba-4e74-98bc-ab2645298cca}</FeatureId>
+    </None>
     <None Include="Features\ListClientGroup\ListClientGroup.feature">
       <FeatureId>{5f7157d4-69f9-4a68-8d1b-b3b084ffdbde}</FeatureId>
     </None>
@@ -104,6 +107,12 @@
     <None Include="Lists\PbcGroupList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{ea6cec7f-30f1-4f3c-b867-85cb3d796a82}</SharePointProjectItemId>
     </None>
+    <None Include="Lists\PhoneTypeList\PhoneTypeListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{b5600e61-410f-43c8-b8b2-b32cb2d1a8e8}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\PhoneTypeList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{ca86dd3b-0fe1-4025-b625-ccf0e4afc542}</SharePointProjectItemId>
+    </None>
     <None Include="Lists\SubBranchActivityList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{ab075b32-f3b3-4b0f-8984-265cec9474a4}</SharePointProjectItemId>
     </None>
@@ -125,6 +134,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Features\ListPhoneType\ListPhoneType.Template.xml">
+      <DependentUpon>ListPhoneType.feature</DependentUpon>
+    </Content>
     <Content Include="Features\ListClientGroup\ListClientGroup.Template.xml">
       <DependentUpon>ListClientGroup.feature</DependentUpon>
     </Content>
@@ -161,6 +173,9 @@
     <Content Include="Lists\PbcGroupList\Elements.xml" />
     <Content Include="Lists\PbcGroupList\PbcGroupListInstance\Elements.xml" />
     <Content Include="Lists\PbcGroupList\Schema.xml" />
+    <Content Include="Lists\PhoneTypeList\Elements.xml" />
+    <Content Include="Lists\PhoneTypeList\PhoneTypeListInstance\Elements.xml" />
+    <Content Include="Lists\PhoneTypeList\Schema.xml" />
     <Content Include="Lists\SubBranchActivityList\Elements.xml" />
     <Content Include="Lists\SubBranchActivityList\Schema.xml" />
     <Content Include="Lists\SubBranchActivityList\SubBranchActivityListInstance\Elements.xml" />
