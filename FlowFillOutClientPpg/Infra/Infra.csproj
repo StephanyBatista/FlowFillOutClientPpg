@@ -52,6 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Features\ListClientRequest\ListClientRequest.feature">
+      <FeatureId>{ff2c7d6f-8812-4c69-a687-fdd130d7992a}</FeatureId>
+    </None>
     <None Include="Features\ListSbu\ListSbu.feature">
       <FeatureId>{5453bdeb-4d20-4d3a-9c2f-6eb763a3b4b5}</FeatureId>
     </None>
@@ -91,6 +94,12 @@
     </None>
     <None Include="Lists\ClientGroupList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{431a02e0-c789-46c5-b2c9-badea7350b78}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\ClientRequestList\ClientRequestListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{f94180aa-7855-48dc-bb8a-5f3ce037bfb8}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\ClientRequestList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{d21fc8d5-c0de-4276-87d9-7306c7ec7ec2}</SharePointProjectItemId>
     </None>
     <None Include="Lists\CommercialProfileList\CommercialProfileListInstance\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{7a07ef51-a7f1-4bb1-a2d4-5caed84c95a7}</SharePointProjectItemId>
@@ -143,6 +152,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Features\ListClientRequest\ListClientRequest.Template.xml">
+      <DependentUpon>ListClientRequest.feature</DependentUpon>
+    </Content>
     <Content Include="Features\ListSbu\ListSbu.Template.xml">
       <DependentUpon>ListSbu.feature</DependentUpon>
     </Content>
@@ -176,6 +188,9 @@
     <Content Include="Lists\ClientGroupList\ClientGroupListInstance\Elements.xml" />
     <Content Include="Lists\ClientGroupList\Elements.xml" />
     <Content Include="Lists\ClientGroupList\Schema.xml" />
+    <Content Include="Lists\ClientRequestList\ClientRequestListInstance\Elements.xml" />
+    <Content Include="Lists\ClientRequestList\Elements.xml" />
+    <Content Include="Lists\ClientRequestList\Schema.xml" />
     <Content Include="Lists\CommercialProfileList\CommercialProfileListInstance\Elements.xml" />
     <Content Include="Lists\CommercialProfileList\Elements.xml" />
     <Content Include="Lists\CommercialProfileList\Schema.xml" />
