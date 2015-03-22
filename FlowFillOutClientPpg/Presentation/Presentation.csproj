@@ -45,16 +45,28 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.SharePoint" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Layouts\Presentation\ClientRequest.aspx.cs">
+      <DependentUpon>ClientRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Presentation\ClientRequest.aspx.designer.cs">
+      <DependentUpon>ClientRequest.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\ListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="key.snk" />
+    <None Include="Layouts\Presentation\css\images\Thumbs.db" />
+    <None Include="Layouts\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{15001f02-0843-4e4d-af43-2e2f8c4bcb00}</SharePointProjectItemId>
+    </None>
     <None Include="Package\Package.package">
       <PackageId>{39a9425c-63aa-4c55-a02e-4efe05b4ff84}</PackageId>
     </None>
@@ -64,6 +76,32 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Layouts\Presentation\ClientRequest.aspx" />
+    <Content Include="Layouts\Presentation\css\bootstrap.css" />
+    <Content Include="Layouts\Presentation\css\bootstrap.min.css" />
+    <Content Include="Layouts\Presentation\css\images\animated-overlay.gif" />
+    <Content Include="Layouts\Presentation\css\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Layouts\Presentation\css\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Layouts\Presentation\css\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Layouts\Presentation\css\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Layouts\Presentation\css\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Layouts\Presentation\css\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Layouts\Presentation\css\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Layouts\Presentation\css\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Layouts\Presentation\css\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Layouts\Presentation\css\images\ui-icons_222222_256x240.png" />
+    <Content Include="Layouts\Presentation\css\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Layouts\Presentation\css\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Layouts\Presentation\css\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Layouts\Presentation\css\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Layouts\Presentation\css\Site.css" />
+    <Content Include="Layouts\Presentation\js\bootstrap.js" />
+    <Content Include="Layouts\Presentation\js\bootstrap.min.js" />
+    <Content Include="Layouts\Presentation\js\jquery.min.js" />
+    <Content Include="Layouts\Presentation\js\respond.js" />
+    <Content Include="Layouts\Presentation\js\respond.min.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
