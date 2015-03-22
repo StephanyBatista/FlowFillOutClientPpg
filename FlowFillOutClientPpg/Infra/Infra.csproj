@@ -52,6 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Features\ListSbu\ListSbu.feature">
+      <FeatureId>{5453bdeb-4d20-4d3a-9c2f-6eb763a3b4b5}</FeatureId>
+    </None>
     <None Include="Features\ListPhoneType\ListPhoneType.feature">
       <FeatureId>{be5b27fb-e5ba-4e74-98bc-ab2645298cca}</FeatureId>
     </None>
@@ -113,6 +116,12 @@
     <None Include="Lists\PhoneTypeList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{ca86dd3b-0fe1-4025-b625-ccf0e4afc542}</SharePointProjectItemId>
     </None>
+    <None Include="Lists\SbuList\SbuListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{5a00ce19-3544-4f86-a39e-8ba6f6021c7a}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\SbuList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{846b3c1e-7950-47ef-b26b-5c8f188502a3}</SharePointProjectItemId>
+    </None>
     <None Include="Lists\SubBranchActivityList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{ab075b32-f3b3-4b0f-8984-265cec9474a4}</SharePointProjectItemId>
     </None>
@@ -134,6 +143,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Features\ListSbu\ListSbu.Template.xml">
+      <DependentUpon>ListSbu.feature</DependentUpon>
+    </Content>
     <Content Include="Features\ListPhoneType\ListPhoneType.Template.xml">
       <DependentUpon>ListPhoneType.feature</DependentUpon>
     </Content>
@@ -176,6 +188,9 @@
     <Content Include="Lists\PhoneTypeList\Elements.xml" />
     <Content Include="Lists\PhoneTypeList\PhoneTypeListInstance\Elements.xml" />
     <Content Include="Lists\PhoneTypeList\Schema.xml" />
+    <Content Include="Lists\SbuList\Elements.xml" />
+    <Content Include="Lists\SbuList\SbuListInstance\Elements.xml" />
+    <Content Include="Lists\SbuList\Schema.xml" />
     <Content Include="Lists\SubBranchActivityList\Elements.xml" />
     <Content Include="Lists\SubBranchActivityList\Schema.xml" />
     <Content Include="Lists\SubBranchActivityList\SubBranchActivityListInstance\Elements.xml" />
