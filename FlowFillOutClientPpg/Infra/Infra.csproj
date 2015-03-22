@@ -52,7 +52,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Features\ListBranchActivity\ListBranchActivity.feature">
+      <FeatureId>{6a72c718-f101-4506-bb75-ec719ae2ac6c}</FeatureId>
+    </None>
     <None Include="key.snk" />
+    <None Include="Lists\BranchActivityList\BranchActivityListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{658c5417-a988-410a-903e-bd96e0dcfa96}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\BranchActivityList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{9d5b7b03-9b2a-4e26-a2c3-ef54142727cd}</SharePointProjectItemId>
+    </None>
     <None Include="Package\Package.package">
       <PackageId>{fd0f103a-9c48-4cda-8472-62426ceae0bb}</PackageId>
     </None>
@@ -60,9 +69,14 @@
       <DependentUpon>Package.package</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Features\" />
-    <Folder Include="Lists\" />
+    <Content Include="Features\ListBranchActivity\ListBranchActivity.Template.xml">
+      <DependentUpon>ListBranchActivity.feature</DependentUpon>
+    </Content>
+    <Content Include="Lists\BranchActivityList\BranchActivityListInstance\Elements.xml" />
+    <Content Include="Lists\BranchActivityList\Elements.xml" />
+    <Content Include="Lists\BranchActivityList\Schema.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
