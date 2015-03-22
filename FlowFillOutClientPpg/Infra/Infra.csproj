@@ -52,6 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Features\ListPaymentCondition\ListPaymentCondition.feature">
+      <FeatureId>{cbf6b73b-3c83-473a-8de7-292a2decca0d}</FeatureId>
+    </None>
     <None Include="Features\ListPurchagesGroup\ListPurchagesGroup.feature">
       <FeatureId>{4dff9ec3-48e3-4486-a561-865c7e70f678}</FeatureId>
     </None>
@@ -77,6 +80,12 @@
     <None Include="Lists\CommercialProfileList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{e71faec3-3ce4-490c-ae76-e981e96905b2}</SharePointProjectItemId>
     </None>
+    <None Include="Lists\PaymentConditionList\PaymentConditionListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{9b21cc7e-9277-4979-b934-7de9241535ac}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\PaymentConditionList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{43c3b5c1-b032-4e74-a040-4cd6f026fbc8}</SharePointProjectItemId>
+    </None>
     <None Include="Lists\SubBranchActivityList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{ab075b32-f3b3-4b0f-8984-265cec9474a4}</SharePointProjectItemId>
     </None>
@@ -98,6 +107,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Features\ListPaymentCondition\ListPaymentCondition.Template.xml">
+      <DependentUpon>ListPaymentCondition.feature</DependentUpon>
+    </Content>
     <Content Include="Features\ListPurchagesGroup\ListPurchagesGroup.Template.xml">
       <DependentUpon>ListPurchagesGroup.feature</DependentUpon>
     </Content>
@@ -116,6 +128,9 @@
     <Content Include="Lists\CommercialProfileList\CommercialProfileListInstance\Elements.xml" />
     <Content Include="Lists\CommercialProfileList\Elements.xml" />
     <Content Include="Lists\CommercialProfileList\Schema.xml" />
+    <Content Include="Lists\PaymentConditionList\Elements.xml" />
+    <Content Include="Lists\PaymentConditionList\PaymentConditionListInstance\Elements.xml" />
+    <Content Include="Lists\PaymentConditionList\Schema.xml" />
     <Content Include="Lists\SubBranchActivityList\Elements.xml" />
     <Content Include="Lists\SubBranchActivityList\Schema.xml" />
     <Content Include="Lists\SubBranchActivityList\SubBranchActivityListInstance\Elements.xml" />
