@@ -52,6 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Features\ListSubBranchActivity\ListSubBranchActivity.feature">
+      <FeatureId>{8880faa5-0843-4a7a-8dee-0e1f925fd367}</FeatureId>
+    </None>
     <None Include="Features\ListBranchActivity\ListBranchActivity.feature">
       <FeatureId>{6a72c718-f101-4506-bb75-ec719ae2ac6c}</FeatureId>
     </None>
@@ -62,6 +65,12 @@
     <None Include="Lists\BranchActivityList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{9d5b7b03-9b2a-4e26-a2c3-ef54142727cd}</SharePointProjectItemId>
     </None>
+    <None Include="Lists\SubBranchActivityList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{ab075b32-f3b3-4b0f-8984-265cec9474a4}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\SubBranchActivityList\SubBranchActivityListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{00fc385a-bce8-4de7-b589-19c5f8d673b1}</SharePointProjectItemId>
+    </None>
     <None Include="Package\Package.package">
       <PackageId>{fd0f103a-9c48-4cda-8472-62426ceae0bb}</PackageId>
     </None>
@@ -71,12 +80,18 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Features\ListSubBranchActivity\ListSubBranchActivity.Template.xml">
+      <DependentUpon>ListSubBranchActivity.feature</DependentUpon>
+    </Content>
     <Content Include="Features\ListBranchActivity\ListBranchActivity.Template.xml">
       <DependentUpon>ListBranchActivity.feature</DependentUpon>
     </Content>
     <Content Include="Lists\BranchActivityList\BranchActivityListInstance\Elements.xml" />
     <Content Include="Lists\BranchActivityList\Elements.xml" />
     <Content Include="Lists\BranchActivityList\Schema.xml" />
+    <Content Include="Lists\SubBranchActivityList\Elements.xml" />
+    <Content Include="Lists\SubBranchActivityList\Schema.xml" />
+    <Content Include="Lists\SubBranchActivityList\SubBranchActivityListInstance\Elements.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
