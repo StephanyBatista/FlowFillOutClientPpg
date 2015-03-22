@@ -52,6 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Features\ListCommercialProfile\ListCommercialProfile.feature">
+      <FeatureId>{99a0d2d5-cc42-494a-8c3a-2184e5838365}</FeatureId>
+    </None>
     <None Include="Features\ListSubBranchActivity\ListSubBranchActivity.feature">
       <FeatureId>{8880faa5-0843-4a7a-8dee-0e1f925fd367}</FeatureId>
     </None>
@@ -64,6 +67,12 @@
     </None>
     <None Include="Lists\BranchActivityList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{9d5b7b03-9b2a-4e26-a2c3-ef54142727cd}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\CommercialProfileList\CommercialProfileListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{7a07ef51-a7f1-4bb1-a2d4-5caed84c95a7}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\CommercialProfileList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{e71faec3-3ce4-490c-ae76-e981e96905b2}</SharePointProjectItemId>
     </None>
     <None Include="Lists\SubBranchActivityList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{ab075b32-f3b3-4b0f-8984-265cec9474a4}</SharePointProjectItemId>
@@ -80,6 +89,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Features\ListCommercialProfile\ListCommercialProfile.Template.xml">
+      <DependentUpon>ListCommercialProfile.feature</DependentUpon>
+    </Content>
     <Content Include="Features\ListSubBranchActivity\ListSubBranchActivity.Template.xml">
       <DependentUpon>ListSubBranchActivity.feature</DependentUpon>
     </Content>
@@ -89,6 +101,9 @@
     <Content Include="Lists\BranchActivityList\BranchActivityListInstance\Elements.xml" />
     <Content Include="Lists\BranchActivityList\Elements.xml" />
     <Content Include="Lists\BranchActivityList\Schema.xml" />
+    <Content Include="Lists\CommercialProfileList\CommercialProfileListInstance\Elements.xml" />
+    <Content Include="Lists\CommercialProfileList\Elements.xml" />
+    <Content Include="Lists\CommercialProfileList\Schema.xml" />
     <Content Include="Lists\SubBranchActivityList\Elements.xml" />
     <Content Include="Lists\SubBranchActivityList\Schema.xml" />
     <Content Include="Lists\SubBranchActivityList\SubBranchActivityListInstance\Elements.xml" />
