@@ -53,11 +53,11 @@
   <ItemGroup>
     <Compile Include="Layouts\Presentation\ClientRequest.aspx.cs">
       <DependentUpon>ClientRequest.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Layouts\Presentation\ClientRequest.aspx.designer.cs">
       <DependentUpon>ClientRequest.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\ItemExtend.cs" />
     <Compile Include="Model\ListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

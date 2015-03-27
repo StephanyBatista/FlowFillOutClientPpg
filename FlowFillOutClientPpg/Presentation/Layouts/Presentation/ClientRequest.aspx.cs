@@ -3,6 +3,7 @@ using Microsoft.SharePoint;
 using Microsoft.SharePoint.WebControls;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.UI.WebControls;
 
 namespace Presentation.Layouts.Presentation
 {
@@ -55,10 +56,19 @@ namespace Presentation.Layouts.Presentation
 
         protected void SaveEvent(object sender, EventArgs e)
         {
+            HideAllRequired();
+            
             if (!ValidateRequest())
                 return;
 
             var request = LoadRequestFromClient();
+        }
+
+        private void HideAllRequired()
+        {
+            SellerRequired.Visible = RegisterIdRequired.Visible = ContactFirstNameRequired.Visible =
+            PhoneFirstAreaCodeRequired.Visible = BankRequired.Visible = CheckingAccountNumberRequired.Visible =
+            AgencyCurrency.Visible = EmailContactRequired.Visible = EmailXmlRequired.Visible = false;
         }
 
         private bool ValidateRequest()
@@ -75,7 +85,7 @@ namespace Presentation.Layouts.Presentation
                 validated = false;
                 RegisterIdRequired.Visible = true;
             }
-            
+
             if (string.IsNullOrEmpty(txtContactFirstName.Text))
             {
                 validated = false;
@@ -118,11 +128,6 @@ namespace Presentation.Layouts.Presentation
                 EmailXmlRequired.Visible = true;
             }
 
-            if (string.IsNullOrEmpty(txtEmailXml.Text))
-            {
-                validated = false;
-                EmailXmlRequired.Visible = true;
-            }
             return validated;
         }
 
@@ -135,12 +140,14 @@ namespace Presentation.Layouts.Presentation
             request.Name = txtName.Text;
             request.ContactFirstName = txtContactFirstName.Text;
             request.ContactLastName = txtContactLastName.Text;
-            request.PhoneFirstTypeId = new Item { Id = int.Parse(ddlPhoneFirstType.SelectedValue) };
+            if (ddlPhoneFirstType.SelectedValue != "-1")
+                request.PhoneFirstTypeId = new Item { Id = int.Parse(ddlPhoneFirstType.SelectedValue) };
             request.PhoneFirstAreaCode = txtPhoneFirstAreaCode.Text;
             request.ContactFirstPhone = txtContactFirstPhone.Text;
             request.ContactFirstStation = txtContactFirstStation.Text;
             request.ContactSecondName = txtContactSecondName.Text;
-            request.PhoneSecondTypeId = new Item { Id = int.Parse(ddlPhoneSecondType.SelectedValue) };
+            if (ddlPhoneSecondType.SelectedValue != "-1")
+                request.PhoneSecondTypeId = new Item { Id = int.Parse(ddlPhoneSecondType.SelectedValue) };
             request.PhoneSecondAreaCode = txtPhoneSecondAreaCode.Text;
             request.ContactSecondPhone = txtContactSecondPhone.Text;
             request.ContactSecondStation = txtContactSecondStation.Text;
@@ -148,7 +155,8 @@ namespace Presentation.Layouts.Presentation
             request.CheckingAccountNumber = txtCheckingAccountNumber.Text;
             request.CheckingAccountCurrency = txtCheckingAccountCurrency.Text;
             request.Agency = txtAgency.Text;
-            request.PaymentConditionId = new Item { Id = int.Parse(ddlPaymentCondition.SelectedValue) };
+            if (ddlPaymentCondition.SelectedValue != "-1")
+                request.PaymentConditionId = new Item { Id = int.Parse(ddlPaymentCondition.SelectedValue) };
             request.EmailBillet = txtEmailBillet.Text;
             request.EmailContact = txtEmailContact.Text;
             request.EmailReport = txtEmailReport.Text;
@@ -162,8 +170,34 @@ namespace Presentation.Layouts.Presentation
             request.State = txtState.Text;
             request.Country = txtCountry.Text;
             request.CEP = txtCep.Text;
+            LoadAllAttachments(request);
 
             return request;
+        }
+
+        private void LoadAllAttachments(ClientRequestItem request)
+        {
+            if (fileCreditRequested.HasFile)
+                LoadAttachment(fileCreditRequested, request, "credito_solicitado");
+
+            if (fileSocialContract.HasFile)
+                LoadAttachment(fileSocialContract, request, "contrato_social");
+
+            if (fileAddress.HasFile)
+                LoadAttachment(fileAddress, request, "comprovante_endereço");
+
+            if (fileBalance.HasFile)
+                LoadAttachment(fileBalance, request, "balanco");
+
+            if (fileBankAccountDocument.HasFile)
+                LoadAttachment(fileBankAccountDocument, request, "documento_conta_bancaria");
+        }
+
+        private void LoadAttachment(FileUpload attachment, ClientRequestItem request, string name)
+        {
+            var arraySplit = attachment.FileName.Split('.');
+            var fileName = string.Format("{0}.{1}", name, arraySplit[arraySplit.Length - 1]);
+            request.AddAttachment(fileName, attachment.FileBytes);
         }
 
     }

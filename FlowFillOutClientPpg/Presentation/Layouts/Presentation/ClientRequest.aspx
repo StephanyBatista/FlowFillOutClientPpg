@@ -8,7 +8,7 @@
 
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ClientRequest.aspx.cs" Inherits="Presentation.Layouts.Presentation.ClientRequest" DynamicMasterPageFile="~masterurl/default.master" %>
 
-<asp:Content ID="PageHead" ContentPlaceHolderID="PlaceHolderAdditionalPageHead" runat="server">
+<asp:content id="PageHead" contentplaceholderid="PlaceHolderAdditionalPageHead" runat="server">
 
     <link href="css/bootstrap.min.css" rel="stylesheet" scoped />
     <link href="css/Site.css" rel="stylesheet" scoped />
@@ -18,9 +18,9 @@
 
     <SharePoint:CssLink runat="server" Version="4" />
 
-</asp:Content>
+</asp:content>
 
-<asp:Content ID="Main" ContentPlaceHolderID="PlaceHolderMain" runat="server">
+<asp:content id="Main" contentplaceholderid="PlaceHolderMain" runat="server">
 
     <h1>Solicitação de item</h1>
 
@@ -82,7 +82,9 @@
                     <div class="form-group">
                         <span class="control-label col-md-2">Tipo do Telefone</span>
                         <div class="col-md-10">
-                            <asp:DropDownList ID="ddlPhoneFirstType" runat="server" CssClass="form-control"></asp:DropDownList>
+                            <asp:DropDownList ID="ddlPhoneFirstType" runat="server" CssClass="form-control">
+                                <asp:ListItem Value="-1" Text=""></asp:ListItem>
+                            </asp:DropDownList>
                         </div>
                     </div>
 
@@ -120,7 +122,9 @@
                     <div class="form-group">
                         <span class="control-label col-md-2">Tipo do Telefone 2</span>
                         <div class="col-md-10">
-                            <asp:DropDownList ID="ddlPhoneSecondType" runat="server" CssClass="form-control"></asp:DropDownList>
+                            <asp:DropDownList ID="ddlPhoneSecondType" runat="server" CssClass="form-control">
+                                <asp:ListItem Value="-1" Text=""></asp:ListItem>
+                            </asp:DropDownList>
                         </div>
                     </div>
 
@@ -180,7 +184,9 @@
                     <div class="form-group">
                         <span class="control-label col-md-2">Condição de Pagamento</span>
                         <div class="col-md-10">
-                            <asp:DropDownList ID="ddlPaymentCondition" runat="server" CssClass="form-control"></asp:DropDownList>
+                            <asp:DropDownList ID="ddlPaymentCondition" runat="server" CssClass="form-control">
+                                <asp:ListItem Value="-1" Text=""></asp:ListItem>
+                            </asp:DropDownList>
                         </div>
                     </div>
 
@@ -278,6 +284,41 @@
                     </div>
 
                     <div class="form-group">
+                        <span class="control-label col-md-2">Crédito solicitado </span>
+                        <div class="col-md-10">
+                            <asp:FileUpload runat="server" ID="fileCreditRequested" CssClass="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="control-label col-md-2">Contrato social </span>
+                        <div class="col-md-10">
+                            <asp:FileUpload runat="server" ID="fileSocialContract" CssClass="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="control-label col-md-2">Comprovante endereço </span>
+                        <div class="col-md-10">
+                            <asp:FileUpload runat="server" ID="fileAddress" CssClass="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="control-label col-md-2">Balanço </span>
+                        <div class="col-md-10">
+                            <asp:FileUpload runat="server" ID="fileBalance" CssClass="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="control-label col-md-2">Documento conta bancária </span>
+                        <div class="col-md-10">
+                            <asp:FileUpload runat="server" ID="fileBankAccountDocument" CssClass="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <asp:Button runat="server" ID="Save" Text="Salvar" CssClass="btn btn-default" />
                         </div>
@@ -294,12 +335,12 @@
         <asp:Label ID="RequestMessage" runat="server" Style="font-size: 16px;" Text=""></asp:Label>
     </div>
 
-</asp:Content>
+</asp:content>
 
-<asp:Content ID="PageTitle" ContentPlaceHolderID="PlaceHolderPageTitle" runat="server">
+<asp:content id="PageTitle" contentplaceholderid="PlaceHolderPageTitle" runat="server">
     Solicitação de Cliente
-</asp:Content>
+</asp:content>
 
-<asp:Content ID="PageTitleInTitleArea" ContentPlaceHolderID="PlaceHolderPageTitleInTitleArea" runat="server">
+<asp:content id="PageTitleInTitleArea" contentplaceholderid="PlaceHolderPageTitleInTitleArea" runat="server">
     Solicitação de Cliente
-</asp:Content>
+</asp:content>

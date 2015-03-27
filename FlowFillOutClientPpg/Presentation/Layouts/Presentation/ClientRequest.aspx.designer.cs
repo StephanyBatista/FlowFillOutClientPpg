@@ -409,6 +409,51 @@ namespace Presentation.Layouts.Presentation {
         protected global::System.Web.UI.WebControls.TextBox txtCep;
         
         /// <summary>
+        /// fileCreditRequested control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fileCreditRequested;
+        
+        /// <summary>
+        /// fileSocialContract control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fileSocialContract;
+        
+        /// <summary>
+        /// fileAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fileAddress;
+        
+        /// <summary>
+        /// fileBalance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fileBalance;
+        
+        /// <summary>
+        /// fileBankAccountDocument control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fileBankAccountDocument;
+        
+        /// <summary>
         /// Save control.
         /// </summary>
         /// <remarks>
