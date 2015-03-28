@@ -52,6 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Features\ListTaskClientRegistration\ListTaskClientRegistration.feature">
+      <FeatureId>{0e8c84e1-09b0-460f-adb7-98b1e86d08c0}</FeatureId>
+    </None>
     <None Include="Features\ListUserOfClientRegistration\ListUserOfClientRegistration.feature">
       <FeatureId>{41c47fb0-6168-41d2-bf42-ad8ab2aca22b}</FeatureId>
     </None>
@@ -140,6 +143,12 @@
     <None Include="Lists\SubBranchActivityList\SubBranchActivityListInstance\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{00fc385a-bce8-4de7-b589-19c5f8d673b1}</SharePointProjectItemId>
     </None>
+    <None Include="Lists\TaskClientRegistrationList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{057e32a3-c576-436c-8fc2-320fb5eb2f50}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\TaskClientRegistrationList\TaskClientRegistrationListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{0a28e19f-2c20-4a5e-a43b-7eccff9ed3f4}</SharePointProjectItemId>
+    </None>
     <None Include="Lists\UserOfClientRegistrationList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{a64976f2-647d-4d27-b594-9be2b0fa4f01}</SharePointProjectItemId>
     </None>
@@ -162,6 +171,9 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Config\SPMetal.txt" />
+    <Content Include="Features\ListTaskClientRegistration\ListTaskClientRegistration.Template.xml">
+      <DependentUpon>ListTaskClientRegistration.feature</DependentUpon>
+    </Content>
     <Content Include="Features\ListUserOfClientRegistration\ListUserOfClientRegistration.Template.xml">
       <DependentUpon>ListUserOfClientRegistration.feature</DependentUpon>
     </Content>
@@ -222,6 +234,9 @@
     <Content Include="Lists\SubBranchActivityList\Elements.xml" />
     <Content Include="Lists\SubBranchActivityList\Schema.xml" />
     <Content Include="Lists\SubBranchActivityList\SubBranchActivityListInstance\Elements.xml" />
+    <Content Include="Lists\TaskClientRegistrationList\Elements.xml" />
+    <Content Include="Lists\TaskClientRegistrationList\Schema.xml" />
+    <Content Include="Lists\TaskClientRegistrationList\TaskClientRegistrationListInstance\Elements.xml" />
     <Content Include="Lists\UserOfClientRegistrationList\Elements.xml" />
     <Content Include="Lists\UserOfClientRegistrationList\Schema.xml" />
     <Content Include="Lists\UserOfClientRegistrationList\UserOfClientRegistrationListInstance\Elements.xml" />
