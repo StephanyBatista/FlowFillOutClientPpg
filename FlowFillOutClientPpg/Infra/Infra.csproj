@@ -152,6 +152,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Config\SPMetal.txt" />
     <Content Include="Features\ListClientRequest\ListClientRequest.Template.xml">
       <DependentUpon>ListClientRequest.feature</DependentUpon>
     </Content>

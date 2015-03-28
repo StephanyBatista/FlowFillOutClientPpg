@@ -4,6 +4,8 @@ using Microsoft.SharePoint.WebControls;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI.WebControls;
+using Presentation.Model;
+using System.Drawing;
 
 namespace Presentation.Layouts.Presentation
 {
@@ -12,7 +14,10 @@ namespace Presentation.Layouts.Presentation
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
+            {
+                HideAllRequired();
                 BindDatas();
+            }
 
         }
 
@@ -57,11 +62,23 @@ namespace Presentation.Layouts.Presentation
         protected void SaveEvent(object sender, EventArgs e)
         {
             HideAllRequired();
-            
-            if (!ValidateRequest())
-                return;
 
-            var request = LoadRequestFromClient();
+            try {
+
+                if (!ValidateRequest())
+                    return;
+
+                var request = LoadRequestFromClient();
+                var workflow = new WorkflowClientRequest();
+                if(workflow.Request(request))
+                    SetRequestMessageForSuccess(request.Id.Value);
+                else
+                    SetRequestMessageForError();
+            }
+            catch
+            {
+                SetRequestMessageForError();
+            }
         }
 
         private void HideAllRequired()
@@ -198,6 +215,20 @@ namespace Presentation.Layouts.Presentation
             var arraySplit = attachment.FileName.Split('.');
             var fileName = string.Format("{0}.{1}", name, arraySplit[arraySplit.Length - 1]);
             request.AddAttachment(fileName, attachment.FileBytes);
+        }
+
+        private void SetRequestMessageForSuccess(int requestId)
+        {
+            RequestMessage.Text = string.Format("Solicitação N° {0} salva e enviada para o fluxo do processo", requestId);
+            RequestMessage.ForeColor = Color.Black;
+            divMessage.Visible = true;
+        }
+
+        private void SetRequestMessageForError()
+        {
+            RequestMessage.Text = "Erro ao salvar a solicitação. Contate o administrador";
+            RequestMessage.ForeColor = System.Drawing.Color.Red;
+            divMessage.Visible = true;
         }
 
     }

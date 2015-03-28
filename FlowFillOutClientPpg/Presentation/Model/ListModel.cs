@@ -350,6 +350,10 @@ public partial class ClientRequestItem : Item
 
     private string _geographicRegion;
 
+    private string _step;
+
+    private System.Nullable<RequestStatus> _requestStatus;
+
     private Microsoft.SharePoint.Linq.EntityRef<Item> _sbuId;
 
     private Microsoft.SharePoint.Linq.EntityRef<Item> _phoneFirstTypeId;
@@ -369,6 +373,10 @@ public partial class ClientRequestItem : Item
     private Microsoft.SharePoint.Linq.EntityRef<Item> _branchActivityId;
 
     private Microsoft.SharePoint.Linq.EntityRef<Item> _subBranchActivityId;
+
+    private System.Nullable<int> _requesterId;
+
+    private string _requester;
 
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1137,6 +1145,24 @@ public partial class ClientRequestItem : Item
         }
     }
 
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Etapa", Storage = "_step", Required = true, FieldType = "Text")]
+    public string Step
+    {
+        get
+        {
+            return this._step;
+        }
+        set
+        {
+            if ((value != this._step))
+            {
+                this.OnPropertyChanging("Step", this._step);
+                this._step = value;
+                this.OnPropertyChanged("Step");
+            }
+        }
+    }
+
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
     [Microsoft.SharePoint.Linq.RemovedColumnAttribute()]
     public override string Title
@@ -1148,6 +1174,24 @@ public partial class ClientRequestItem : Item
         set
         {
             throw new System.InvalidOperationException("Field Title was removed from content type ClientRequestContentType.");
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Status", Storage = "_requestStatus", Required = true, FieldType = "Choice")]
+    public System.Nullable<RequestStatus> RequestStatus
+    {
+        get
+        {
+            return this._requestStatus;
+        }
+        set
+        {
+            if ((value != this._requestStatus))
+            {
+                this.OnPropertyChanging("RequestStatus", this._requestStatus);
+                this._requestStatus = value;
+                this.OnPropertyChanged("RequestStatus");
+            }
         }
     }
 
@@ -1286,6 +1330,42 @@ public partial class ClientRequestItem : Item
         }
     }
 
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Solicitante", Storage = "_requesterId", Required = true, FieldType = "User", IsLookupId = true)]
+    public System.Nullable<int> RequesterId
+    {
+        get
+        {
+            return this._requesterId;
+        }
+        set
+        {
+            if ((value != this._requesterId))
+            {
+                this.OnPropertyChanging("RequesterId", this._requesterId);
+                this._requesterId = value;
+                this.OnPropertyChanged("RequesterId");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Solicitante", Storage = "_requester", ReadOnly = true, FieldType = "User", IsLookupValue = true)]
+    public string Requester
+    {
+        get
+        {
+            return this._requester;
+        }
+        set
+        {
+            if ((value != this._requester))
+            {
+                this.OnPropertyChanging("Requester", this._requester);
+                this._requester = value;
+                this.OnPropertyChanged("Requester");
+            }
+        }
+    }
+
     private void OnSbuIdChanging(object sender, System.EventArgs e)
     {
         this.OnPropertyChanging("SbuId", this._sbuId.Clone());
@@ -1411,4 +1491,27 @@ public partial class ClientRequestItem : Item
     private void OnSubBranchActivityIdSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
     {
     }
+}
+
+public enum RequestStatus : int
+{
+
+    None = 0,
+
+    Invalid = 1,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Pendente")]
+    Pendente = 2,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Iniciado")]
+    Iniciado = 4,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Finalizado")]
+    Finalizado = 8,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Retorno")]
+    Retorno = 16,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Reprovado")]
+    Reprovado = 32,
 }

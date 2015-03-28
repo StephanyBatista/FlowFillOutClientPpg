@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Web AccessModifier="Public" 
+     xmlns="http://schemas.microsoft.com/SharePoint/2009/spmetal">
+
+<List Name="Ramo Atividade" Member="BranchActivity"></List> 
+<List Name="Grupo Cliente" Member="ClientGroup"></List> 
+<List Name="Perfil Comercial" Member="CommercialProfile"></List> 
+<List Name="Condicao Pagamento" Member="PaymentCondition"></List> 
+<List Name="Grupo PBC" Member="GroupPbc"></List> 
+<List Name="Tipo Telefone" Member="PhoneType"></List> 
+<List Name="SBU" Member="Sbu"></List> 
+<List Name="Sub-Ramo Atividade" Member="SubBranchActivity"></List> 
+
+<List Name="Solicita Cliente" Member="ClientRequest">
+	<ContentType Name="ClientRequestContentType" Class="ClientRequestItem" >
+		<Column Name="Vendedor_x002f_Representante" Member="Seller" />
+		
+		<Column Name="SBU" Member="SbuId" />
+		<Column Name="CNPJ_x002f_CPFDatasul" Member="RegisterId" />
+		<Column Name="NomeFantasia" Member="Name" />
+		<Column Name="ContatoPrimeiroNome" Member="ContactFirstName" />
+		<Column Name="ContatoSobrenome" Member="ContactLastName" />
+		<Column Name="TipodoTelefone" Member="PhoneFirstTypeId" />
+		<Column Name="C_x00f3_digoDDDContato" Member="PhoneFirstAreaCode" />
+		<Column Name="TelefonedoContato" Member="ContactFirstPhone" />
+		<Column Name="RamalContato" Member="ContactFirstStation" />
+		<Column Name="Contato2" Member="ContactSecondName" />
+		<Column Name="TipodoTelefone2" Member="PhoneSecondTypeId" />
+		<Column Name="C_x00f3_digoDDDContato2" Member="PhoneSecondAreaCode" />
+		<Column Name="TelefonedoContato2" Member="ContactSecondPhone" />
+		<Column Name="RamalContato2" Member="ContactSecondStation" />
+		<Column Name="Banco" Member="Bank" />
+		<Column Name="N_x00fa_merodaCC" Member="CheckingAccountNumber" />
+		<Column Name="MoedadaCC" Member="CheckingAccountCurrency" />
+		<Column Name="Ag_x00ea_ncia" Member="Agency" />
+		<Column Name="Condi_x00e7__x00e3_odePagamento" Member="PaymentConditionId" />
+		<Column Name="E_x002d_mailBoleto" Member="EmailBillet" />
+		<Column Name="E_x002d_mailContato" Member="EmailContact" />
+		<Column Name="E_x002d_mailLaudo" Member="EmailReport" />
+		<Column Name="E_x002d_mailXML" Member="EmailXml" />
+		<Column Name="Endere_x00e7_odeEntregaCompleto" Member="AddressFullDelivery" />
+		<Column Name="Logradouro" Member="Street" />
+		<Column Name="N_x00fa_mero" Member="StreetNumber" />
+		<Column Name="Complemento" Member="StreetComplement" />
+		<Column Name="Bairro" Member="District" />
+		<Column Name="Cidade" Member="City" />
+		<Column Name="Estado" Member="State" />
+		<Column Name="Pa_x00ed_s" Member="Country" />
+		<Column Name="CEP" Member="CEP" />
+		<Column Name="GrupoPBC" Member="PbcGroupId" />
+		<Column Name="Inscri_x00e7__x00e3_oMunicipal" Member="MunicipalRegistration" />
+		<Column Name="ListadePre_x00e7_o" Member="PriceList" />
+		<Column Name="Perfil_x002f_Porte" Member="Postage" />
+		<Column Name="Valorm_x00ed_nimodefaturamento" Member="MinimumBillingValue" />
+		<Column Name="Volume_x002d_DataVigencia" Member="VolumeEffectiveDate" />
+		<Column Name="Volume_x002d_MixdeProdutos" Member="VolumeProductMix" />
+		<Column Name="Volume_x002d_PenulltimoTrimestre" Member="VolumePenultimateTrimester" />
+		<Column Name="Volume_x002d_UltimoTrimestre" Member="VolumeLastTrimester" />
+		<Column Name="Comiss_x00e3_o_x0025_" Member="Commission" />
+		<Column Name="GrupodeCliente" Member="ClientGroupId" />
+		<Column Name="GrupodeCompras" Member="PurchagesGroupId" />
+		<Column Name="PerfilComercial" Member="CommercialProfileId" />
+		<Column Name="RamodeAtividade" Member="BranchActivityId" />
+		<Column Name="Sub_x002d_ramoatividade" Member="SubBranchActivityId" />
+		<Column Name="VolumeCompras" Member="VolumePurchages" />
+		<Column Name="RegiaoGeogr_x00e1_fica" Member="GeographicRegion" />
+		
+		<Column Name="Status" Member="RequestStatus" />
+		<Column Name="Solicitante" Member="Requester" />
+		<Column Name="Etapa" Member="Step" />
+				
+	</ContentType>
+</List>
+    
+<ExcludeOtherLists></ExcludeOtherLists>
+</Web>
+
+SPMetal /web:http://spserver2010:1000/ClientRequest /code:ListModel.cs /parameters:ClientSPMetal.xml

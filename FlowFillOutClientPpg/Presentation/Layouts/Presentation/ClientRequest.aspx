@@ -14,9 +14,16 @@
     <link href="css/Site.css" rel="stylesheet" scoped />
     <script src="js/jquery.min.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/jquery.maskedinput.js" type="text/javascript"></script>
     <script src="js/respond.min.js" type="text/javascript"></script>
 
     <SharePoint:CssLink runat="server" Version="4" />
+
+    <script type="text/javascript">
+        $(function () {
+            $(".cnpj").mask("99.999.999/9999-99");
+        });
+    </script>
 
 </asp:content>
 
@@ -52,7 +59,7 @@
                     <div class="form-group">
                         <span class="control-label col-md-2">CNPJ/CPF Datasul</span>
                         <div class="col-md-10">
-                            <asp:TextBox ID="txtRegisterId" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtRegisterId" runat="server" CssClass="form-control cnpj"></asp:TextBox>
                             <span id="RegisterIdRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
                         </div>
                     </div>
@@ -122,7 +129,7 @@
                     <div class="form-group">
                         <span class="control-label col-md-2">Tipo do Telefone 2</span>
                         <div class="col-md-10">
-                            <asp:DropDownList ID="ddlPhoneSecondType" runat="server" CssClass="form-control">
+                            <asp:DropDownList ID="ddlPhoneSecondType" runat="server" CssClass="form-control" AppendDataBoundItems="true">
                                 <asp:ListItem Value="-1" Text=""></asp:ListItem>
                             </asp:DropDownList>
                         </div>
@@ -184,7 +191,7 @@
                     <div class="form-group">
                         <span class="control-label col-md-2">Condição de Pagamento</span>
                         <div class="col-md-10">
-                            <asp:DropDownList ID="ddlPaymentCondition" runat="server" CssClass="form-control">
+                            <asp:DropDownList ID="ddlPaymentCondition" runat="server" CssClass="form-control" AppendDataBoundItems="true">
                                 <asp:ListItem Value="-1" Text=""></asp:ListItem>
                             </asp:DropDownList>
                         </div>
@@ -320,7 +327,7 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <asp:Button runat="server" ID="Save" Text="Salvar" CssClass="btn btn-default" />
+                            <asp:Button runat="server" ID="Save" Text="Salvar" CssClass="btn btn-default" OnClick="SaveEvent" />
                         </div>
                     </div>
 
