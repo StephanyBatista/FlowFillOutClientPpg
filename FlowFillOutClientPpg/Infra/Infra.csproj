@@ -52,6 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Features\ListUserOfClientRegistration\ListUserOfClientRegistration.feature">
+      <FeatureId>{41c47fb0-6168-41d2-bf42-ad8ab2aca22b}</FeatureId>
+    </None>
     <None Include="Features\ListClientRequest\ListClientRequest.feature">
       <FeatureId>{ff2c7d6f-8812-4c69-a687-fdd130d7992a}</FeatureId>
     </None>
@@ -137,6 +140,12 @@
     <None Include="Lists\SubBranchActivityList\SubBranchActivityListInstance\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{00fc385a-bce8-4de7-b589-19c5f8d673b1}</SharePointProjectItemId>
     </None>
+    <None Include="Lists\UserOfClientRegistrationList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{a64976f2-647d-4d27-b594-9be2b0fa4f01}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\UserOfClientRegistrationList\UserOfClientRegistrationListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{88c81df2-d6cf-4bb3-8455-65928da0845c}</SharePointProjectItemId>
+    </None>
     <None Include="Package\Package.package">
       <PackageId>{fd0f103a-9c48-4cda-8472-62426ceae0bb}</PackageId>
     </None>
@@ -153,6 +162,9 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Config\SPMetal.txt" />
+    <Content Include="Features\ListUserOfClientRegistration\ListUserOfClientRegistration.Template.xml">
+      <DependentUpon>ListUserOfClientRegistration.feature</DependentUpon>
+    </Content>
     <Content Include="Features\ListClientRequest\ListClientRequest.Template.xml">
       <DependentUpon>ListClientRequest.feature</DependentUpon>
     </Content>
@@ -210,6 +222,9 @@
     <Content Include="Lists\SubBranchActivityList\Elements.xml" />
     <Content Include="Lists\SubBranchActivityList\Schema.xml" />
     <Content Include="Lists\SubBranchActivityList\SubBranchActivityListInstance\Elements.xml" />
+    <Content Include="Lists\UserOfClientRegistrationList\Elements.xml" />
+    <Content Include="Lists\UserOfClientRegistrationList\Schema.xml" />
+    <Content Include="Lists\UserOfClientRegistrationList\UserOfClientRegistrationListInstance\Elements.xml" />
     <Content Include="PurchasesGroupList\Elements.xml" />
     <Content Include="PurchasesGroupList\PurchasesGroupListInstance\Elements.xml" />
     <Content Include="PurchasesGroupList\Schema.xml" />
