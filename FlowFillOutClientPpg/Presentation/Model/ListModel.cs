@@ -97,12 +97,33 @@ public partial class ListModelDataContext : Microsoft.SharePoint.Linq.DataContex
         }
     }
 
+    /// <summary>
+    /// My List Instance
+    /// </summary>
+    [Microsoft.SharePoint.Linq.ListAttribute(Name = "Tarefa Cadastro Cliente")]
+    public Microsoft.SharePoint.Linq.EntityList<TaskClientRegistrationItem> TaskClientRegistration
+    {
+        get
+        {
+            return this.GetList<TaskClientRegistrationItem>("Tarefa Cadastro Cliente");
+        }
+    }
+
     [Microsoft.SharePoint.Linq.ListAttribute(Name = "Tipo Telefone")]
     public Microsoft.SharePoint.Linq.EntityList<Item> PhoneType
     {
         get
         {
             return this.GetList<Item>("Tipo Telefone");
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ListAttribute(Name = "Usuario Cadastro Cliente")]
+    public Microsoft.SharePoint.Linq.EntityList<UserOfClientRegistrationItem> UserOfClientRegistration
+    {
+        get
+        {
+            return this.GetList<UserOfClientRegistrationItem>("Usuario Cadastro Cliente");
         }
     }
 }
@@ -112,6 +133,8 @@ public partial class ListModelDataContext : Microsoft.SharePoint.Linq.DataContex
 /// </summary>
 [Microsoft.SharePoint.Linq.ContentTypeAttribute(Name = "Item", Id = "0x01")]
 [Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type = typeof(ClientRequestItem))]
+[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type = typeof(TaskClientRegistrationItem))]
+[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type = typeof(UserOfClientRegistrationItem))]
 public partial class Item : Microsoft.SharePoint.Linq.ITrackEntityState, Microsoft.SharePoint.Linq.ITrackOriginalValues, System.ComponentModel.INotifyPropertyChanged, System.ComponentModel.INotifyPropertyChanging
 {
 
@@ -350,9 +373,9 @@ public partial class ClientRequestItem : Item
 
     private string _geographicRegion;
 
-    private string _step;
-
     private System.Nullable<RequestStatus> _requestStatus;
+
+    private System.Nullable<RequestStep> _requestStep;
 
     private Microsoft.SharePoint.Linq.EntityRef<Item> _sbuId;
 
@@ -947,7 +970,7 @@ public partial class ClientRequestItem : Item
         }
     }
 
-    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Inscri_x00e7__x00e3_oMunicipal", Storage = "_municipalRegistration", Required = true, FieldType = "Text")]
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Inscri_x00e7__x00e3_oMunicipal", Storage = "_municipalRegistration", FieldType = "Text")]
     public string MunicipalRegistration
     {
         get
@@ -965,7 +988,7 @@ public partial class ClientRequestItem : Item
         }
     }
 
-    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "ListadePre_x00e7_o", Storage = "_priceList", Required = true, FieldType = "Note")]
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "ListadePre_x00e7_o", Storage = "_priceList", FieldType = "Note")]
     public string PriceList
     {
         get
@@ -983,7 +1006,7 @@ public partial class ClientRequestItem : Item
         }
     }
 
-    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Perfil_x002f_Porte", Storage = "_postage", Required = true, FieldType = "Note")]
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Perfil_x002f_Porte", Storage = "_postage", FieldType = "Note")]
     public string Postage
     {
         get
@@ -1001,7 +1024,7 @@ public partial class ClientRequestItem : Item
         }
     }
 
-    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Valorm_x00ed_nimodefaturamento", Storage = "_minimumBillingValue", Required = true, FieldType = "Text")]
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Valorm_x00ed_nimodefaturamento", Storage = "_minimumBillingValue", FieldType = "Text")]
     public string MinimumBillingValue
     {
         get
@@ -1019,7 +1042,7 @@ public partial class ClientRequestItem : Item
         }
     }
 
-    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Volume_x002d_DataVigencia", Storage = "_volumeEffectiveDate", Required = true, FieldType = "DateTime")]
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Volume_x002d_DataVigencia", Storage = "_volumeEffectiveDate", FieldType = "DateTime")]
     public System.Nullable<System.DateTime> VolumeEffectiveDate
     {
         get
@@ -1037,7 +1060,7 @@ public partial class ClientRequestItem : Item
         }
     }
 
-    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Volume_x002d_MixdeProdutos", Storage = "_volumeProductMix", Required = true, FieldType = "Text")]
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Volume_x002d_MixdeProdutos", Storage = "_volumeProductMix", FieldType = "Text")]
     public string VolumeProductMix
     {
         get
@@ -1055,7 +1078,7 @@ public partial class ClientRequestItem : Item
         }
     }
 
-    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Volume_x002d_PenulltimoTrimestre", Storage = "_volumePenultimateTrimester", Required = true, FieldType = "Text")]
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Volume_x002d_PenulltimoTrimestre", Storage = "_volumePenultimateTrimester", FieldType = "Text")]
     public string VolumePenultimateTrimester
     {
         get
@@ -1073,7 +1096,7 @@ public partial class ClientRequestItem : Item
         }
     }
 
-    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Volume_x002d_UltimoTrimestre", Storage = "_volumeLastTrimester", Required = true, FieldType = "Text")]
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Volume_x002d_UltimoTrimestre", Storage = "_volumeLastTrimester", FieldType = "Text")]
     public string VolumeLastTrimester
     {
         get
@@ -1091,7 +1114,7 @@ public partial class ClientRequestItem : Item
         }
     }
 
-    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Comiss_x00e3_o_x0025_", Storage = "_commission", Required = true, FieldType = "Text")]
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Comiss_x00e3_o_x0025_", Storage = "_commission", FieldType = "Text")]
     public string Commission
     {
         get
@@ -1109,7 +1132,7 @@ public partial class ClientRequestItem : Item
         }
     }
 
-    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "VolumeCompras", Storage = "_volumePurchages", Required = true, FieldType = "Text")]
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "VolumeCompras", Storage = "_volumePurchages", FieldType = "Text")]
     public string VolumePurchages
     {
         get
@@ -1127,7 +1150,7 @@ public partial class ClientRequestItem : Item
         }
     }
 
-    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "RegiaoGeogr_x00e1_fica", Storage = "_geographicRegion", Required = true, FieldType = "Text")]
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "RegiaoGeogr_x00e1_fica", Storage = "_geographicRegion", FieldType = "Text")]
     public string GeographicRegion
     {
         get
@@ -1141,24 +1164,6 @@ public partial class ClientRequestItem : Item
                 this.OnPropertyChanging("GeographicRegion", this._geographicRegion);
                 this._geographicRegion = value;
                 this.OnPropertyChanged("GeographicRegion");
-            }
-        }
-    }
-
-    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Etapa", Storage = "_step", Required = true, FieldType = "Text")]
-    public string Step
-    {
-        get
-        {
-            return this._step;
-        }
-        set
-        {
-            if ((value != this._step))
-            {
-                this.OnPropertyChanging("Step", this._step);
-                this._step = value;
-                this.OnPropertyChanged("Step");
             }
         }
     }
@@ -1177,7 +1182,7 @@ public partial class ClientRequestItem : Item
         }
     }
 
-    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Status", Storage = "_requestStatus", Required = true, FieldType = "Choice")]
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Status", Storage = "_requestStatus", FieldType = "Choice")]
     public System.Nullable<RequestStatus> RequestStatus
     {
         get
@@ -1191,6 +1196,24 @@ public partial class ClientRequestItem : Item
                 this.OnPropertyChanging("RequestStatus", this._requestStatus);
                 this._requestStatus = value;
                 this.OnPropertyChanged("RequestStatus");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Etapa", Storage = "_requestStep", FieldType = "Choice")]
+    public System.Nullable<RequestStep> RequestStep
+    {
+        get
+        {
+            return this._requestStep;
+        }
+        set
+        {
+            if ((value != this._requestStep))
+            {
+                this.OnPropertyChanging("RequestStep", this._requestStep);
+                this._requestStep = value;
+                this.OnPropertyChanged("RequestStep");
             }
         }
     }
@@ -1273,7 +1296,7 @@ public partial class ClientRequestItem : Item
         }
     }
 
-    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "GrupodeCompras", Storage = "_purchagesGroupIdId", Required = true, FieldType = "Lookup", IsLookupId = true)]
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "GrupodeCompras", Storage = "_purchagesGroupIdId", FieldType = "Lookup", IsLookupId = true)]
     public System.Nullable<int> PurchagesGroupIdId
     {
         get
@@ -1330,7 +1353,7 @@ public partial class ClientRequestItem : Item
         }
     }
 
-    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Solicitante", Storage = "_requesterId", Required = true, FieldType = "User", IsLookupId = true)]
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Solicitante", Storage = "_requesterId", FieldType = "User", IsLookupId = true)]
     public System.Nullable<int> RequesterId
     {
         get
@@ -1493,6 +1516,259 @@ public partial class ClientRequestItem : Item
     }
 }
 
+[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name = "TaskClientRegistratinContentType", Id = "0x01", List = "Tarefa Cadastro Cliente")]
+public partial class TaskClientRegistrationItem : Item
+{
+
+    private string _observation;
+
+    private System.Nullable<TaskStatus> _taskStatus;
+
+    private System.Nullable<TaskStep> _taskStep;
+
+    private Microsoft.SharePoint.Linq.EntityRef<Item> _request;
+
+    private System.Nullable<int> _taskUserId;
+
+    private string _taskUser;
+
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate();
+    partial void OnCreated();
+    #endregion
+
+    public TaskClientRegistrationItem()
+    {
+        this._request = new Microsoft.SharePoint.Linq.EntityRef<Item>();
+        this._request.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnRequestSync);
+        this._request.OnChanged += new System.EventHandler(this.OnRequestChanged);
+        this._request.OnChanging += new System.EventHandler(this.OnRequestChanging);
+        this.OnCreated();
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Observa_x00e7__x00e3_o", Storage = "_observation", FieldType = "Note")]
+    public string Observation
+    {
+        get
+        {
+            return this._observation;
+        }
+        set
+        {
+            if ((value != this._observation))
+            {
+                this.OnPropertyChanging("Observation", this._observation);
+                this._observation = value;
+                this.OnPropertyChanged("Observation");
+            }
+        }
+    }
+
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+    [Microsoft.SharePoint.Linq.RemovedColumnAttribute()]
+    public override string Title
+    {
+        get
+        {
+            throw new System.InvalidOperationException("Field Title was removed from content type TaskClientRegistratinContentType.");
+        }
+        set
+        {
+            throw new System.InvalidOperationException("Field Title was removed from content type TaskClientRegistratinContentType.");
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Status", Storage = "_taskStatus", Required = true, FieldType = "Choice")]
+    public System.Nullable<TaskStatus> TaskStatus
+    {
+        get
+        {
+            return this._taskStatus;
+        }
+        set
+        {
+            if ((value != this._taskStatus))
+            {
+                this.OnPropertyChanging("TaskStatus", this._taskStatus);
+                this._taskStatus = value;
+                this.OnPropertyChanged("TaskStatus");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Fase", Storage = "_taskStep", Required = true, FieldType = "Choice")]
+    public System.Nullable<TaskStep> TaskStep
+    {
+        get
+        {
+            return this._taskStep;
+        }
+        set
+        {
+            if ((value != this._taskStep))
+            {
+                this.OnPropertyChanging("TaskStep", this._taskStep);
+                this._taskStep = value;
+                this.OnPropertyChanged("TaskStep");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "Solicitacao", Storage = "_request", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Solicita Cliente")]
+    public Item Request
+    {
+        get
+        {
+            return this._request.GetEntity();
+        }
+        set
+        {
+            this._request.SetEntity(value);
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Usu_x00e1_rioTarefa", Storage = "_taskUserId", FieldType = "User", IsLookupId = true)]
+    public System.Nullable<int> TaskUserId
+    {
+        get
+        {
+            return this._taskUserId;
+        }
+        set
+        {
+            if ((value != this._taskUserId))
+            {
+                this.OnPropertyChanging("TaskUserId", this._taskUserId);
+                this._taskUserId = value;
+                this.OnPropertyChanged("TaskUserId");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Usu_x00e1_rioTarefa", Storage = "_taskUser", ReadOnly = true, FieldType = "User", IsLookupValue = true)]
+    public string TaskUser
+    {
+        get
+        {
+            return this._taskUser;
+        }
+        set
+        {
+            if ((value != this._taskUser))
+            {
+                this.OnPropertyChanging("TaskUser", this._taskUser);
+                this._taskUser = value;
+                this.OnPropertyChanged("TaskUser");
+            }
+        }
+    }
+
+    private void OnRequestChanging(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanging("Request", this._request.Clone());
+    }
+
+    private void OnRequestChanged(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanged("Request");
+    }
+
+    private void OnRequestSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
+    {
+    }
+}
+
+[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name = "UserOfClientRegistrationContentType", Id = "0x01", List = "Usuario Cadastro Cliente")]
+public partial class UserOfClientRegistrationItem : Item
+{
+
+    private System.Nullable<RegistrationGroup> _registrationGroup;
+
+    private System.Nullable<int> _userId;
+
+    private string _user;
+
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate();
+    partial void OnCreated();
+    #endregion
+
+    public UserOfClientRegistrationItem()
+    {
+        this.OnCreated();
+    }
+
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+    [Microsoft.SharePoint.Linq.RemovedColumnAttribute()]
+    public override string Title
+    {
+        get
+        {
+            throw new System.InvalidOperationException("Field Title was removed from content type UserOfClientRegistrationContentType.");
+        }
+        set
+        {
+            throw new System.InvalidOperationException("Field Title was removed from content type UserOfClientRegistrationContentType.");
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Grupo", Storage = "_registrationGroup", Required = true, FieldType = "Choice")]
+    public System.Nullable<RegistrationGroup> RegistrationGroup
+    {
+        get
+        {
+            return this._registrationGroup;
+        }
+        set
+        {
+            if ((value != this._registrationGroup))
+            {
+                this.OnPropertyChanging("RegistrationGroup", this._registrationGroup);
+                this._registrationGroup = value;
+                this.OnPropertyChanged("RegistrationGroup");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Usuario", Storage = "_userId", Required = true, FieldType = "User", IsLookupId = true)]
+    public System.Nullable<int> UserId
+    {
+        get
+        {
+            return this._userId;
+        }
+        set
+        {
+            if ((value != this._userId))
+            {
+                this.OnPropertyChanging("UserId", this._userId);
+                this._userId = value;
+                this.OnPropertyChanged("UserId");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Usuario", Storage = "_user", ReadOnly = true, FieldType = "User", IsLookupValue = true)]
+    public string User
+    {
+        get
+        {
+            return this._user;
+        }
+        set
+        {
+            if ((value != this._user))
+            {
+                this.OnPropertyChanging("User", this._user);
+                this._user = value;
+                this.OnPropertyChanged("User");
+            }
+        }
+    }
+}
+
 public enum RequestStatus : int
 {
 
@@ -1514,4 +1790,96 @@ public enum RequestStatus : int
 
     [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Reprovado")]
     Reprovado = 32,
+}
+
+public enum RequestStep : int
+{
+
+    None = 0,
+
+    Invalid = 1,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Customer")]
+    Customer = 2,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Fiscal")]
+    Fiscal = 4,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "CAS")]
+    CAS = 8,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Logistica")]
+    Logistica = 16,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Crédito")]
+    Crédito = 32,
+}
+
+public enum TaskStatus : int
+{
+
+    None = 0,
+
+    Invalid = 1,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Pendente")]
+    Pendente = 2,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Iniciado")]
+    Iniciado = 4,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Aprovado")]
+    Aprovado = 8,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Reprovado")]
+    Reprovado = 16,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Retorno")]
+    Retorno = 32,
+}
+
+public enum TaskStep : int
+{
+
+    None = 0,
+
+    Invalid = 1,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Customer")]
+    Customer = 2,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Fiscal")]
+    Fiscal = 4,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "CAS")]
+    CAS = 8,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Logistica")]
+    Logistica = 16,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Crédito")]
+    Crédito = 32,
+}
+
+public enum RegistrationGroup : int
+{
+
+    None = 0,
+
+    Invalid = 1,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Customer")]
+    Customer = 2,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Fiscal")]
+    Fiscal = 4,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "CAS")]
+    CAS = 8,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Logistica")]
+    Logistica = 16,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Crédito")]
+    Crédito = 32,
 }

@@ -51,10 +51,47 @@ namespace Presentation.Model
 
         private void RequestBase(SPWeb oWeb)
         {
-            //var flowCurrent = NextFlow();
+            NextFlow();
             Context.SubmitChanges();
             _request.SaveAttachments(oWeb);
-            //ProcessNextFlow(flowCurrent);
+            ProcessNextFlow();
+        }
+
+        private void NextFlow()
+        {
+            if (_request.RequestStatus == RequestStatus.Finalizado)
+                return;
+
+            if (_request.RequestStep == null)
+            {
+                _request.RequestStep = RequestStep.Customer;
+                CreateTask(TaskStep.Customer); 
+            }
+        }
+
+        private void CreateTask(TaskStep step)
+        {
+            var task = new TaskClientRegistrationItem();
+            task.Created = task.Modified = DateTime.Now;
+            task.Request = _request;
+            task.TaskStatus = TaskStatus.Pendente;
+            task.TaskStep = step;
+            Context.TaskClientRegistration.InsertOnSubmit(task);
+        }
+
+        private void ProcessNextFlow()
+        {
+            //if (_request.RequestStatus == RequestStatus.Reprovado)
+            //    SendEmailReprovedToRequester();
+
+            //if (_request.RequestStatus == RequestStatus.Retorno)
+            //    SendEmailReturnToRequester();
+
+            //else if (_request.RequestStatus == RequestStatus.Finalizado)
+            //    SendEmailStepFinishToRequester();
+
+            //else if (_request.RequestStep != null)
+            //    SendEmailStepInitialCadastre();
         }
     }
 }

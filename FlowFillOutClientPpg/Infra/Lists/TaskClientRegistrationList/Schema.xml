@@ -9,7 +9,7 @@
       </ContentTypeRef><ContentTypeRef ID="0x0120" /></ContentTypes>
     <Fields>
        
-    <Field Name="Solicitacao" ID="{97dcefce-5155-4a06-8b91-546f9972949d}" DisplayName="Solicitação" Type="Lookup" Required="TRUE" List="Lists/Solicita Cliente" ShowField="ID" /><Field Name="Status" ID="{60859900-d676-49ae-a929-6f30b24fab7f}" DisplayName="Status" Type="Choice" Required="TRUE"><CHOICES><CHOICE>Pendente</CHOICE><CHOICE>Iniciado</CHOICE><CHOICE>Aprovado</CHOICE><CHOICE>Reprovado</CHOICE><CHOICE>Retorno</CHOICE></CHOICES></Field><Field Name="Fase" ID="{7d927ac3-439d-4356-949b-be7f0765dc7f}" DisplayName="Fase" Type="Choice" Required="TRUE" /><Field Name="Usu_x00e1_rioTarefa" ID="{e78b9e26-5426-4de0-bfda-39cd813bc949}" DisplayName="Usuário Tarefa" Type="User" Required="FALSE" List="UserInfo" /><Field Name="Observa_x00e7__x00e3_o" ID="{60ada925-33b4-4c39-8bd7-d20e8a2447aa}" DisplayName="Observação" Type="Note" /></Fields>
+    <Field Name="Solicitacao" ID="{97dcefce-5155-4a06-8b91-546f9972949d}" DisplayName="Solicitação" Type="Lookup" Required="TRUE" List="Lists/Solicita Cliente" ShowField="ID" /><Field Name="Status" ID="{60859900-d676-49ae-a929-6f30b24fab7f}" DisplayName="Status" Type="Choice" Required="TRUE"><CHOICES><CHOICE>Pendente</CHOICE><CHOICE>Iniciado</CHOICE><CHOICE>Aprovado</CHOICE><CHOICE>Reprovado</CHOICE><CHOICE>Retorno</CHOICE></CHOICES></Field><Field Name="Fase" ID="{7d927ac3-439d-4356-949b-be7f0765dc7f}" DisplayName="Fase" Type="Choice" Required="TRUE"><CHOICES><CHOICE>Customer</CHOICE><CHOICE>Fiscal</CHOICE><CHOICE>CAS</CHOICE><CHOICE>Logistica</CHOICE><CHOICE>Crédito</CHOICE></CHOICES></Field><Field Name="Usu_x00e1_rioTarefa" ID="{e78b9e26-5426-4de0-bfda-39cd813bc949}" DisplayName="Usuário Tarefa" Type="User" Required="FALSE" List="UserInfo" /><Field Name="Observa_x00e7__x00e3_o" ID="{60ada925-33b4-4c39-8bd7-d20e8a2447aa}" DisplayName="Observação" Type="Note" /></Fields>
     <Views>
       
       
@@ -37,7 +37,7 @@
         <ViewFields>
           
           
-        <FieldRef Name="Attachments"></FieldRef><FieldRef Name="LinkTitle"></FieldRef><FieldRef Name="Solicitacao" /><FieldRef Name="Status" /><FieldRef Name="Fase" /><FieldRef Name="Usu_x00e1_rioTarefa" /><FieldRef Name="Observa_x00e7__x00e3_o" /></ViewFields>
+        <FieldRef Name="Solicitacao" /><FieldRef Name="Status" /><FieldRef Name="Fase" /><FieldRef Name="Usu_x00e1_rioTarefa" /><FieldRef Name="Observa_x00e7__x00e3_o" /></ViewFields>
         <Query>
           <OrderBy>
             

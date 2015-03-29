@@ -58,12 +58,20 @@
     <Compile Include="Layouts\Presentation\ClientRequest.aspx.designer.cs">
       <DependentUpon>ClientRequest.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layouts\Presentation\TaskClient.aspx.cs">
+      <DependentUpon>TaskClient.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Presentation\TaskClient.aspx.designer.cs">
+      <DependentUpon>TaskClient.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\ClientRequestItemExtend.cs" />
     <Compile Include="Model\CustomHttpRequest.cs" />
     <Compile Include="Model\ItemExtend.cs" />
     <Compile Include="Model\ListModel.cs" />
     <Compile Include="Model\RunWithElevatedPrivileges.cs" />
     <Compile Include="Model\WorkflowClientRequest.cs" />
+    <Compile Include="Model\WorkflowEmail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -108,6 +116,7 @@
     <Content Include="Layouts\Presentation\js\jquery.min.js" />
     <Content Include="Layouts\Presentation\js\respond.js" />
     <Content Include="Layouts\Presentation\js\respond.min.js" />
+    <Content Include="Layouts\Presentation\TaskClient.aspx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
