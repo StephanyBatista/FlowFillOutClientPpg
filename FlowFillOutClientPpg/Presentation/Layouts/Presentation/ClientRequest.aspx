@@ -522,9 +522,9 @@
                                     <div class="col-md-10">
                                         <asp:DropDownList ID="ddlCustomerStatus" runat="server" CssClass="form-control">
                                             <asp:ListItem Value="-1" Text=""></asp:ListItem>
-                                            <asp:ListItem Value="-1" Text="Iniciar"></asp:ListItem>
-                                            <asp:ListItem Value="-1" Text="Aprovar"></asp:ListItem>
-                                            <asp:ListItem Value="-1" Text="Reprovar"></asp:ListItem>
+                                            <asp:ListItem Value="1" Text="Iniciar"></asp:ListItem>
+                                            <asp:ListItem Value="2" Text="Aprovar"></asp:ListItem>
+                                            <asp:ListItem Value="3" Text="Reprovar"></asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
                                 </div>
@@ -539,12 +539,420 @@
 
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-10">
-                                        <asp:Button runat="server" ID="btnSaveFlowCustomer" Text="Salvar" CssClass="btn btn-default" OnClick="SaveEvent" />
+                                        <asp:Button runat="server" ID="SaveFlowCustomer" Text="Salvar" CssClass="btn btn-default" OnClick="SaveEvent" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                </asp:Panel>
+		    </div>
+
+            <div class="conteudo">
+			    <asp:Panel ID="formFiscal" runat="server" Enabled="false">
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-horizontal">
+                                <h4>Fluxo Fiscal</h4>
+                                <hr />
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Código CNAE</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtCnae" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="CnaeRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Inscrição SUFRAMA</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtSuframa" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="SuframaRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Ordem de Venda </span>
+                                    <div class="col-md-10">
+                                        <asp:DropDownList ID="ddlSalesOrder" runat="server" CssClass="form-control"></asp:DropDownList>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Tipo Contribuinte</span>
+                                    <div class="col-md-10">
+                                        <asp:DropDownList ID="ddlContributorType" runat="server" CssClass="form-control"></asp:DropDownList>
+                                    </div>
+                                </div>
+
+                                <h5>Aprovação</h5>
+                                <hr />
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Status</span>
+                                    <div class="col-md-10">
+                                        <asp:DropDownList ID="ddlFiscalStatus" runat="server" CssClass="form-control">
+                                            <asp:ListItem Value="-1" Text=""></asp:ListItem>
+                                            <asp:ListItem Value="1" Text="Iniciar"></asp:ListItem>
+                                            <asp:ListItem Value="2" Text="Aprovar"></asp:ListItem>
+                                            <asp:ListItem Value="3" Text="Reprovar"></asp:ListItem>
+                                            <asp:ListItem Value="4" Text="Retornar"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Observação</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtFiscalObservation" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5"></asp:TextBox>
+                                        <span id="FiscalObservationRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <asp:Button runat="server" ID="SaveFlowFiscal" Text="Salvar" CssClass="btn btn-default" OnClick="SaveEvent" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </asp:Panel>
+		    </div>
+
+            <div class="conteudo">
+			    <asp:Panel ID="formCas" runat="server" Enabled="false">
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-horizontal">
+                                <h4>Fluxo CAS</h4>
+                                <hr />
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Data Assinatura CAS</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtDateAsignatureCas" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="DateAsignatureCasRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Data Validade CAS</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtDateExpirationCas" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="DateExpirationCasRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <h5>Aprovação</h5>
+                                <hr />
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Status</span>
+                                    <div class="col-md-10">
+                                        <asp:DropDownList ID="ddlCasStatus" runat="server" CssClass="form-control">
+                                            <asp:ListItem Value="-1" Text=""></asp:ListItem>
+                                            <asp:ListItem Value="1" Text="Iniciar"></asp:ListItem>
+                                            <asp:ListItem Value="2" Text="Aprovar"></asp:ListItem>
+                                            <asp:ListItem Value="3" Text="Reprovar"></asp:ListItem>
+                                            <asp:ListItem Value="4" Text="Retornar"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Observação</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtCasObservation" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5"></asp:TextBox>
+                                        <span id="CasObservationRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <asp:Button runat="server" ID="SaveFlowCas" Text="Salvar" CssClass="btn btn-default" OnClick="SaveEvent" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </asp:Panel>
+		    </div>
+
+            <div class="conteudo">
+			    <asp:Panel ID="formLogistics" runat="server" Enabled="false">
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-horizontal">
+                                <h4>Fluxo Logistica</h4>
+                                <hr />
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Prioridade de Entrega</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtDeliveryPriority" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="DeliveryPriorityRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Metodo de Entrega</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtDeliveryMethod" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="DeliveryMethodRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Condição Frete</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtShippingCondition" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="ShippingConditionRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Ponto FOB</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtPointFob" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="PointFobRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Deposito</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtDeposit" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="DepositRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Classe Demanda</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtDemandClass" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="DemandClassRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <h5>Aprovação</h5>
+                                <hr />
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Status</span>
+                                    <div class="col-md-10">
+                                        <asp:DropDownList ID="ddlLogisticsStatus" runat="server" CssClass="form-control">
+                                            <asp:ListItem Value="-1" Text=""></asp:ListItem>
+                                            <asp:ListItem Value="1" Text="Iniciar"></asp:ListItem>
+                                            <asp:ListItem Value="2" Text="Aprovar"></asp:ListItem>
+                                            <asp:ListItem Value="3" Text="Reprovar"></asp:ListItem>
+                                            <asp:ListItem Value="4" Text="Retornar"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Observação</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtLogisticsObservation" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5"></asp:TextBox>
+                                        <span id="LogisticsObservationRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <asp:Button runat="server" ID="SaveFlowLogistics" Text="Salvar" CssClass="btn btn-default" OnClick="SaveEvent" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </asp:Panel>
+		    </div>
+
+            <div class="conteudo">
+			    <asp:Panel ID="formCredit" runat="server" Enabled="false">
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-horizontal">
+                                <h4>Fluxo Crédit</h4>
+                                <hr />
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Razão Social do Cliente</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtCorporateName" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="CorporateNameRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Conta Cliente</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtClientAccount" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="ClientAccountRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Conta de Receita</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtRevenueAccount" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="RevenueAccountRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Conta Imposto</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtAccountTax" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="AccountTaxRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Método de Pagamento</span>
+                                    <div class="col-md-10">
+                                        <asp:DropDownList id="ddlPaymentMethod" runat="server"></asp:DropDownList>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Tipo de Inscrição</span>
+                                    <div class="col-md-10">
+                                        <asp:DropDownList id="ddlInscriptionType" runat="server"></asp:DropDownList>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Data Inicio Contrato Vendor</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtContractStartDate" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="ContractStartDateRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Número Contrato Vendor</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtContractNumber" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="ContractNumberRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Inscrição Estadual</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtStateRegistration" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="StateRegistrationRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Logradouro</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtStreetForCredit" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="StreetForCreditRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Número</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtStreetNumberForCredit" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="StreetNumberForCreditRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Complemento</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtStreetComplementForCredit" runat="server" CssClass="form-control"></asp:TextBox>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Bairro</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtDistrinctForCredit" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="DistrinctForCreditRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Cidade</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtCityForCredit" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="CityForCreditRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Estado</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtStateForCredit" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="StateForCreditRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">País</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtCountryForCredit" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="CountryForCreditRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">CEP</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtCepForCredit" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <span id="CepForCreditRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <h5>Aprovação</h5>
+                                <hr />
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Status</span>
+                                    <div class="col-md-10">
+                                        <asp:DropDownList ID="ddlCreditStatus" runat="server" CssClass="form-control">
+                                            <asp:ListItem Value="-1" Text=""></asp:ListItem>
+                                            <asp:ListItem Value="1" Text="Iniciar"></asp:ListItem>
+                                            <asp:ListItem Value="2" Text="Aprovar"></asp:ListItem>
+                                            <asp:ListItem Value="3" Text="Reprovar"></asp:ListItem>
+                                            <asp:ListItem Value="4" Text="Retornar"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Observação</span>
+                                    <div class="col-md-10">
+                                        <asp:TextBox ID="txtCreditObservation" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5"></asp:TextBox>
+                                        <span id="Span1" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <asp:Button runat="server" ID="SaveFlowCredit" Text="Salvar" CssClass="btn btn-default" OnClick="SaveEvent" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </asp:Panel>
 		    </div>
         </div>
