@@ -43,8 +43,17 @@ public partial class ListModelDataContext : Microsoft.SharePoint.Linq.DataContex
         }
     }
 
+    [Microsoft.SharePoint.Linq.ListAttribute(Name = "Grupo Compras")]
+    public Microsoft.SharePoint.Linq.EntityList<Item> PurchagesGroup
+    {
+        get
+        {
+            return this.GetList<Item>("Grupo Compras");
+        }
+    }
+
     [Microsoft.SharePoint.Linq.ListAttribute(Name = "Grupo PBC")]
-    public Microsoft.SharePoint.Linq.EntityList<Item> GroupPbc
+    public Microsoft.SharePoint.Linq.EntityList<Item> PbcGroup
     {
         get
         {
@@ -389,7 +398,7 @@ public partial class ClientRequestItem : Item
 
     private Microsoft.SharePoint.Linq.EntityRef<Item> _clientGroupId;
 
-    private System.Nullable<int> _purchagesGroupIdId;
+    private Microsoft.SharePoint.Linq.EntityRef<Item> _purchagesGroupId;
 
     private Microsoft.SharePoint.Linq.EntityRef<Item> _commercialProfileId;
 
@@ -433,6 +442,10 @@ public partial class ClientRequestItem : Item
         this._clientGroupId.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnClientGroupIdSync);
         this._clientGroupId.OnChanged += new System.EventHandler(this.OnClientGroupIdChanged);
         this._clientGroupId.OnChanging += new System.EventHandler(this.OnClientGroupIdChanging);
+        this._purchagesGroupId = new Microsoft.SharePoint.Linq.EntityRef<Item>();
+        this._purchagesGroupId.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnPurchagesGroupIdSync);
+        this._purchagesGroupId.OnChanged += new System.EventHandler(this.OnPurchagesGroupIdChanged);
+        this._purchagesGroupId.OnChanging += new System.EventHandler(this.OnPurchagesGroupIdChanging);
         this._commercialProfileId = new Microsoft.SharePoint.Linq.EntityRef<Item>();
         this._commercialProfileId.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnCommercialProfileIdSync);
         this._commercialProfileId.OnChanged += new System.EventHandler(this.OnCommercialProfileIdChanged);
@@ -1296,21 +1309,16 @@ public partial class ClientRequestItem : Item
         }
     }
 
-    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "GrupodeCompras", Storage = "_purchagesGroupIdId", FieldType = "Lookup", IsLookupId = true)]
-    public System.Nullable<int> PurchagesGroupIdId
+    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "GrupodeCompras", Storage = "_purchagesGroupId", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Grupo Compras")]
+    public Item PurchagesGroupId
     {
         get
         {
-            return this._purchagesGroupIdId;
+            return this._purchagesGroupId.GetEntity();
         }
         set
         {
-            if ((value != this._purchagesGroupIdId))
-            {
-                this.OnPropertyChanging("PurchagesGroupIdId", this._purchagesGroupIdId);
-                this._purchagesGroupIdId = value;
-                this.OnPropertyChanged("PurchagesGroupIdId");
-            }
+            this._purchagesGroupId.SetEntity(value);
         }
     }
 
@@ -1470,6 +1478,20 @@ public partial class ClientRequestItem : Item
     }
 
     private void OnClientGroupIdSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
+    {
+    }
+
+    private void OnPurchagesGroupIdChanging(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanging("PurchagesGroupId", this._purchagesGroupId.Clone());
+    }
+
+    private void OnPurchagesGroupIdChanged(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanged("PurchagesGroupId");
+    }
+
+    private void OnPurchagesGroupIdSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
     {
     }
 

@@ -16,18 +16,120 @@ namespace Presentation.Layouts.Presentation
             if (!Page.IsPostBack)
             {
                 HideAllRequired();
-                BindDatas();
+                BindDatasOfChoise();
+                EnableForm();
             }
-
         }
 
-        private void BindDatas()
+        private void HideAllRequired()
+        {
+            SellerRequired.Visible = RegisterIdRequired.Visible = ContactFirstNameRequired.Visible =
+            PhoneFirstAreaCodeRequired.Visible = BankRequired.Visible = CheckingAccountNumberRequired.Visible =
+            AgencyCurrency.Visible = EmailContactRequired.Visible = EmailXmlRequired.Visible = MunicipalRegistrationRequired.Visible =
+            PriceListRequired.Visible = PostageRequired.Visible = MinimumBillingValueRequired.Visible = VolumeEffectiveDateRequired.Visible =
+            VolumeProductMixRequired.Visible = VolumePenultimateTrimesterRequired.Visible = VolumeLastTrimesterRequired.Visible =
+            CommissionRequired.Visible = VolumePurchagesRequired.Visible = GeographicRegionRequired.Visible = CustomerObservationRequired.Visible = false;
+        }
+
+        private void EnableForm()
+        {
+            if(Request.QueryString["RequestId"] == null)
+            {
+                formRequest.Enabled = true;
+                BindDatasOfChoise();
+            }
+            else
+            {
+                int requestId;
+
+                if(int.TryParse(Request.QueryString["RequestId"], out requestId))
+                {
+                    var request = GetRequestById(requestId);
+                    LoadRequestToClient(request);
+
+                    //TODO: When o group Customer start the flow, the request status must be "Started"
+                    if (request.RequestStatus == RequestStatus.Iniciado || request.RequestStatus == RequestStatus.Pendente)
+                    {
+                        var task = GetLasTaskOpen(request.Id.Value);
+                        if (task.TaskStep == TaskStep.Customer)
+                            formCustomer.Enabled = true;
+                    }
+                }
+            }
+        }
+
+        private ClientRequestItem GetRequestById(int requestId)
+        {
+            using (var context = new ListModelDataContext(SPContext.Current.Web.Url))
+            {
+                return context.ClientRequest.Where(c => c.Id == requestId).FirstOrDefault();
+            }
+        }
+
+        private void LoadRequestToClient(ClientRequestItem request)
+        {
+            txtSeller.Text = request.Seller;
+            ddlSbu.SelectedValue = request.SbuId.Id.ToString();
+            txtRegisterId.Text = request.RegisterId;
+            txtName.Text = request.Name;
+            txtContactFirstName.Text = request.ContactFirstName;
+            txtContactLastName.Text = request.ContactLastName;
+            ddlPhoneFirstType.SelectedValue = request.PhoneFirstTypeId.Id.ToString();
+            txtPhoneFirstAreaCode.Text = request.PhoneFirstAreaCode;
+            txtContactFirstPhone.Text = request.ContactFirstPhone;
+            txtContactFirstStation.Text = request.ContactFirstStation;
+            txtContactSecondName.Text = request.ContactSecondName;
+            if (request.PhoneSecondTypeId != null)
+                ddlPhoneSecondType.SelectedValue = request.PhoneSecondTypeId.Id.ToString();
+            txtPhoneSecondAreaCode.Text = request.PhoneSecondAreaCode;
+            txtContactSecondPhone.Text = request.ContactSecondPhone;
+            txtContactSecondStation.Text = request.ContactSecondStation;
+            txtBank.Text = request.Bank;
+            txtCheckingAccountNumber.Text = request.CheckingAccountNumber;
+            txtCheckingAccountCurrency.Text = request.CheckingAccountCurrency;
+            txtAgency.Text = request.Agency;
+            if (request.PaymentConditionId != null)
+                ddlPaymentCondition.SelectedValue = request.PaymentConditionId.Id.ToString();
+            txtEmailBillet.Text = request.EmailBillet;
+            txtEmailContact.Text = request.EmailContact;
+            txtEmailReport.Text = request.EmailReport;
+            txtEmailXml.Text = request.EmailXml;
+            txtAddressFullDelivery.Text = request.AddressFullDelivery;
+            txtStreet.Text = request.Street;
+            txtStreetNumber.Text = request.StreetNumber;
+            txtStreetComplement.Text = request.StreetComplement;
+            txtDistrict.Text = request.District;
+            txtCity.Text = request.City;
+            txtState.Text = request.State;
+            txtCountry.Text = request.Country;
+            txtCep.Text = request.CEP;
+        }
+
+        private TaskClientRegistrationItem GetLasTaskOpen(int requestId)
+        {
+            using (var context = new ListModelDataContext(SPContext.Current.Web.Url))
+            {
+                return context.TaskClientRegistration.Where(c => 
+                    c.Request.Id == requestId && 
+                    (c.TaskStatus == TaskStatus.Pendente || c.TaskStatus == TaskStatus.Iniciado))
+                    .LastOrDefault();
+
+            }
+        }
+
+        private void BindDatasOfChoise()
         {
             using (var context = new ListModelDataContext(SPContext.Current.Web.Url))
             {
                 BindSbuData(context);
                 BindPaymentConditionsData(context);
                 BindPhoneTypesData(context);
+                BindPbcData(context);
+                BindClientData(context);
+                BindPurchagesData(context);
+                BindCommercialProfileData(context);
+                BindBranchActivityData(context);
+                BindSubBranchActivityData(context);
             }
         }
 
@@ -59,6 +161,60 @@ namespace Presentation.Layouts.Presentation
             ddlSbu.DataBind();
         }
 
+        private void BindPbcData(ListModelDataContext context)
+        {
+            var items = context.PbcGroup.ToList();
+            ddlPbc.DataValueField = "ID";
+            ddlPbc.DataTextField = "Title";
+            ddlPbc.DataSource = items;
+            ddlPbc.DataBind();
+        }
+
+        private void BindClientData(ListModelDataContext context)
+        {
+            var items = context.ClientGroup.ToList();
+            ddlClientGroup.DataValueField = "ID";
+            ddlClientGroup.DataTextField = "Title";
+            ddlClientGroup.DataSource = items;
+            ddlClientGroup.DataBind();
+        }
+
+        private void BindPurchagesData(ListModelDataContext context)
+        {
+            var items = context.PurchagesGroup.ToList();
+            ddlPurchagesGroup.DataValueField = "ID";
+            ddlPurchagesGroup.DataTextField = "Title";
+            ddlPurchagesGroup.DataSource = items;
+            ddlPurchagesGroup.DataBind();
+        }
+
+        private void BindCommercialProfileData(ListModelDataContext context)
+        {
+            var items = context.CommercialProfile.ToList();
+            ddlCommercialProfile.DataValueField = "ID";
+            ddlCommercialProfile.DataTextField = "Title";
+            ddlCommercialProfile.DataSource = items;
+            ddlCommercialProfile.DataBind();
+        }
+
+        private void BindBranchActivityData(ListModelDataContext context)
+        {
+            var items = context.BranchActivity.ToList();
+            ddlBranchActivity.DataValueField = "ID";
+            ddlBranchActivity.DataTextField = "Title";
+            ddlBranchActivity.DataSource = items;
+            ddlBranchActivity.DataBind();
+        }
+
+        private void BindSubBranchActivityData(ListModelDataContext context)
+        {
+            var items = context.CommercialProfile.ToList();
+            ddlSubBranchActivity.DataValueField = "ID";
+            ddlSubBranchActivity.DataTextField = "Title";
+            ddlSubBranchActivity.DataSource = items;
+            ddlSubBranchActivity.DataBind();
+        }
+
         protected void SaveEvent(object sender, EventArgs e)
         {
             HideAllRequired();
@@ -79,13 +235,6 @@ namespace Presentation.Layouts.Presentation
             {
                 SetRequestMessageForError();
             }
-        }
-
-        private void HideAllRequired()
-        {
-            SellerRequired.Visible = RegisterIdRequired.Visible = ContactFirstNameRequired.Visible =
-            PhoneFirstAreaCodeRequired.Visible = BankRequired.Visible = CheckingAccountNumberRequired.Visible =
-            AgencyCurrency.Visible = EmailContactRequired.Visible = EmailXmlRequired.Visible = false;
         }
 
         private bool ValidateRequest()
@@ -222,6 +371,7 @@ namespace Presentation.Layouts.Presentation
             RequestMessage.Text = string.Format("Solicitação N° {0} salva e enviada para o fluxo do processo", requestId);
             RequestMessage.ForeColor = Color.Black;
             divMessage.Visible = true;
+            formRequest.Enabled = false;
         }
 
         private void SetRequestMessageForError()
