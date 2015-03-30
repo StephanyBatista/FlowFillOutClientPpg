@@ -28,7 +28,15 @@ namespace Presentation.Layouts.Presentation
             AgencyCurrency.Visible = EmailContactRequired.Visible = EmailXmlRequired.Visible = MunicipalRegistrationRequired.Visible =
             PriceListRequired.Visible = PostageRequired.Visible = MinimumBillingValueRequired.Visible = VolumeEffectiveDateRequired.Visible =
             VolumeProductMixRequired.Visible = VolumePenultimateTrimesterRequired.Visible = VolumeLastTrimesterRequired.Visible =
-            CommissionRequired.Visible = VolumePurchagesRequired.Visible = GeographicRegionRequired.Visible = CustomerObservationRequired.Visible = false;
+            CommissionRequired.Visible = VolumePurchagesRequired.Visible = GeographicRegionRequired.Visible = CustomerObservationRequired.Visible =
+            CnaeRequired.Visible = SuframaRequired.Visible = FiscalObservationRequired.Visible = DateAsignatureCasRequired.Visible = 
+            DateExpirationCasRequired.Visible = CasObservationRequired.Visible = DeliveryPriorityRequired.Visible = DeliveryMethodRequired.Visible = 
+            ShippingConditionRequired.Visible = PointFobRequired.Visible = DepositRequired.Visible = DemandClassRequired.Visible =
+            LogisticsObservationRequired.Visible = CorporateNameRequired.Visible = ClientAccountRequired.Visible = RevenueAccountRequired.Visible =
+            AccountTaxRequired.Visible = ContractStartDateRequired.Visible = ContractNumberRequired.Visible = StateRegistrationRequired.Visible = 
+            StreetForCreditRequired.Visible = StreetNumberForCreditRequired.Visible = DistrinctForCreditRequired.Visible =
+            CityForCreditRequired.Visible = StateForCreditRequired.Visible = CountryForCreditRequired.Visible = CepForCreditRequired.Visible =
+            CreditObservationRequired.Visible = false;
         }
 
         private void EnableForm()
@@ -50,7 +58,7 @@ namespace Presentation.Layouts.Presentation
                     //TODO: When o group Customer start the flow, the request status must be "Started"
                     if (request.RequestStatus == RequestStatus.Iniciado || request.RequestStatus == RequestStatus.Pendente)
                     {
-                        var task = GetLasTaskOpen(request.Id.Value);
+                        var task = GetLastTaskOpen(request.Id.Value);
                         if (task.TaskStep == TaskStep.Customer)
                             formCustomer.Enabled = true;
                     }
@@ -105,7 +113,7 @@ namespace Presentation.Layouts.Presentation
             txtCep.Text = request.CEP;
         }
 
-        private TaskClientRegistrationItem GetLasTaskOpen(int requestId)
+        private TaskClientRegistrationItem GetLastTaskOpen(int requestId)
         {
             using (var context = new ListModelDataContext(SPContext.Current.Web.Url))
             {
@@ -117,6 +125,32 @@ namespace Presentation.Layouts.Presentation
             }
         }
 
+        private void LoadAllAttachments(ClientRequestItem request)
+        {
+            if (fileCreditRequested.HasFile)
+                LoadAttachment(fileCreditRequested, request, "credito_solicitado");
+
+            if (fileSocialContract.HasFile)
+                LoadAttachment(fileSocialContract, request, "contrato_social");
+
+            if (fileAddress.HasFile)
+                LoadAttachment(fileAddress, request, "comprovante_endereço");
+
+            if (fileBalance.HasFile)
+                LoadAttachment(fileBalance, request, "balanco");
+
+            if (fileBankAccountDocument.HasFile)
+                LoadAttachment(fileBankAccountDocument, request, "documento_conta_bancaria");
+        }
+
+        private void LoadAttachment(FileUpload attachment, ClientRequestItem request, string name)
+        {
+            var arraySplit = attachment.FileName.Split('.');
+            var fileName = string.Format("{0}.{1}", name, arraySplit[arraySplit.Length - 1]);
+            request.AddAttachment(fileName, attachment.FileBytes);
+        }
+
+        #region Binds
         private void BindDatasOfChoise()
         {
             using (var context = new ListModelDataContext(SPContext.Current.Web.Url))
@@ -214,8 +248,10 @@ namespace Presentation.Layouts.Presentation
             ddlSubBranchActivity.DataSource = items;
             ddlSubBranchActivity.DataBind();
         }
+        #endregion
 
-        protected void SaveEvent(object sender, EventArgs e)
+        #region FlowRequest
+        protected void SaveFlowRequestEvent(object sender, EventArgs e)
         {
             HideAllRequired();
 
@@ -339,32 +375,7 @@ namespace Presentation.Layouts.Presentation
             LoadAllAttachments(request);
 
             return request;
-        }
-
-        private void LoadAllAttachments(ClientRequestItem request)
-        {
-            if (fileCreditRequested.HasFile)
-                LoadAttachment(fileCreditRequested, request, "credito_solicitado");
-
-            if (fileSocialContract.HasFile)
-                LoadAttachment(fileSocialContract, request, "contrato_social");
-
-            if (fileAddress.HasFile)
-                LoadAttachment(fileAddress, request, "comprovante_endereço");
-
-            if (fileBalance.HasFile)
-                LoadAttachment(fileBalance, request, "balanco");
-
-            if (fileBankAccountDocument.HasFile)
-                LoadAttachment(fileBankAccountDocument, request, "documento_conta_bancaria");
-        }
-
-        private void LoadAttachment(FileUpload attachment, ClientRequestItem request, string name)
-        {
-            var arraySplit = attachment.FileName.Split('.');
-            var fileName = string.Format("{0}.{1}", name, arraySplit[arraySplit.Length - 1]);
-            request.AddAttachment(fileName, attachment.FileBytes);
-        }
+        }        
 
         private void SetRequestMessageForSuccess(int requestId)
         {
@@ -380,6 +391,6 @@ namespace Presentation.Layouts.Presentation
             RequestMessage.ForeColor = System.Drawing.Color.Red;
             divMessage.Visible = true;
         }
-
+        #endregion
     }
 }

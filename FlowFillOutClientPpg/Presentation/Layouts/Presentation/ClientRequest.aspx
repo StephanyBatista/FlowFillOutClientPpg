@@ -940,7 +940,7 @@
                                     <span class="control-label col-md-2">Observação</span>
                                     <div class="col-md-10">
                                         <asp:TextBox ID="txtCreditObservation" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5"></asp:TextBox>
-                                        <span id="Span1" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                        <span id="CreditObservationRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
                                     </div>
                                 </div>
 

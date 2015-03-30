@@ -1399,13 +1399,13 @@ namespace Presentation.Layouts.Presentation {
         protected global::System.Web.UI.WebControls.TextBox txtCreditObservation;
         
         /// <summary>
-        /// Span1 control.
+        /// CreditObservationRequired control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Span1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CreditObservationRequired;
         
         /// <summary>
         /// SaveFlowCredit control.
