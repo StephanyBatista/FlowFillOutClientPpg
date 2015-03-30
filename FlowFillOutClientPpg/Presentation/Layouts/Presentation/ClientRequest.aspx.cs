@@ -392,5 +392,137 @@ namespace Presentation.Layouts.Presentation
             divMessage.Visible = true;
         }
         #endregion
+
+        #region FlowCustomer
+        protected void SaveFlowCustomerEvent(object sender, EventArgs e)
+        {
+            HideAllRequired();
+
+            try
+            {
+                if (!ValidateCustomer())
+                    return;
+
+                var request = LoadFlowCustomerFromClient();
+                var workflow = new WorkflowClientRequest();
+                if (workflow.Request(request))
+                    SetRequestMessageForSuccess(request.Id.Value);
+                else
+                    SetRequestMessageForError();
+            }
+            catch
+            {
+                SetRequestMessageForError();
+            }
+        }
+
+        private bool ValidateCustomer()
+        {
+            var validated = true;
+
+            if (string.IsNullOrEmpty(txtMunicipalRegistration.Text))
+            {
+                MunicipalRegistrationRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtPriceList.Text))
+            {
+                PriceListRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtPostage.Text))
+            {
+                PostageRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtMinimumBillingValue.Text))
+            {
+                MinimumBillingValueRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtVolumeEffectiveDate.Text))
+            {
+                VolumeEffectiveDateRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtVolumeProductMix.Text))
+            {
+                VolumeProductMixRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtVolumePenultimateTrimester.Text))
+            {
+                VolumePenultimateTrimesterRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtVolumeLastTrimester.Text))
+            {
+                VolumeLastTrimesterRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtCommission.Text))
+            {
+                CommissionRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtVolumePurchages.Text))
+            {
+                VolumePurchagesRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtGeographicRegion.Text))
+            {
+                GeographicRegionRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtCustomerObservation.Text))
+            {
+                CustomerObservationRequired.Visible = true;
+                validated = false;
+            }
+
+            if (ddlCustomerStatus.SelectedValue == "-1")
+            {
+                CustomerStatusRequired.Visible = true;
+                validated = false;
+            }
+
+            return validated;
+        }
+
+        private ClientRequestItem LoadFlowCustomerFromClient()
+        {
+            var request = GetRequestById((int)Request.QueryString["RequestId"]);
+            request.PbcGroupId.Id = int.Parse(ddlPbc.SelectedValue);
+            request.MunicipalRegistration = txtMunicipalRegistration.Text;
+            request.PriceList = txtPriceList.Text;
+            request.Postage = txtPostage.Text;
+            request.MinimumBillingValue = txtMinimumBillingValue.Text;
+            request.VolumeEffectiveDate = DateTime.Parse(txtVolumeEffectiveDate.Text);
+            request.VolumeProductMix = txtVolumeProductMix.Text;
+            request.VolumePenultimateTrimester = txtVolumePenultimateTrimester.Text;
+            request.VolumeLastTrimester = txtVolumeLastTrimester.Text;
+            request.Commission = txtCommission.Text;
+            request.ClientGroupId.Id = int.Parse(ddlClientGroup.SelectedValue);
+            request.PurchagesGroupId.Id = int.Parse(ddlPurchagesGroup.SelectedValue);
+            request.CommercialProfileId.Id = int.Parse(ddlCommercialProfile.SelectedValue);
+            request.BranchActivityId.Id = int.Parse(ddlBranchActivity.SelectedValue);
+            request.SubBranchActivityId.Id = int.Parse(ddlSubBranchActivity.SelectedValue);
+            request.VolumePurchages = txtVolumePurchages.Text;
+            request.GeographicRegion = txtGeographicRegion.Text;
+            return request;
+        }
+        #endregion
     }
 }

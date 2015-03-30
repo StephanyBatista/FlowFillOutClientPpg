@@ -526,6 +526,7 @@
                                             <asp:ListItem Value="2" Text="Aprovar"></asp:ListItem>
                                             <asp:ListItem Value="3" Text="Reprovar"></asp:ListItem>
                                         </asp:DropDownList>
+                                        <span id="CustomerStatusRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
                                     </div>
                                 </div>
 
