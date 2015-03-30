@@ -6,10 +6,28 @@
 <List Name="Grupo Cliente" Member="ClientGroup"></List> 
 <List Name="Perfil Comercial" Member="CommercialProfile"></List> 
 <List Name="Condicao Pagamento" Member="PaymentCondition"></List> 
-<List Name="Grupo PBC" Member="GroupPbc"></List> 
+<List Name="Grupo PBC" Member="PbcGroup"></List> 
 <List Name="Tipo Telefone" Member="PhoneType"></List> 
 <List Name="SBU" Member="Sbu"></List> 
 <List Name="Sub-Ramo Atividade" Member="SubBranchActivity"></List> 
+<List Name="Grupo Compras" Member="PurchagesGroup"></List> 
+
+<List Name="Usuario Cadastro Cliente" Member="UserOfClientRegistration">
+	<ContentType Name="UserOfClientRegistrationContentType" Class="UserOfClientRegistrationItem" >
+		<Column Name="Usuario" Member="User" />
+		<Column Name="Grupo" Member="RegistrationGroup" />
+	</ContentType>
+</List> 
+
+<List Name="Tarefa Cadastro Cliente" Member="TaskClientRegistration">
+	<ContentType Name="TaskClientRegistratinContentType" Class="TaskClientRegistrationItem" >
+		<Column Name="Solicitacao" Member="Request" />
+		<Column Name="Status" Member="TaskStatus" />
+		<Column Name="Fase" Member="TaskStep" />
+		<Column Name="Usu_x00e1_rioTarefa" Member="TaskUser" />
+		<Column Name="Observa_x00e7__x00e3_o" Member="Observation" />
+	</ContentType>
+</List> 
 
 <List Name="Solicita Cliente" Member="ClientRequest">
 	<ContentType Name="ClientRequestContentType" Class="ClientRequestItem" >
@@ -63,11 +81,10 @@
 		<Column Name="RamodeAtividade" Member="BranchActivityId" />
 		<Column Name="Sub_x002d_ramoatividade" Member="SubBranchActivityId" />
 		<Column Name="VolumeCompras" Member="VolumePurchages" />
-		<Column Name="RegiaoGeogr_x00e1_fica" Member="GeographicRegion" />
-		
+		<Column Name="RegiaoGeogr_x00e1_fica" Member="GeographicRegion" />		
 		<Column Name="Status" Member="RequestStatus" />
 		<Column Name="Solicitante" Member="Requester" />
-		<Column Name="Etapa" Member="Step" />
+		<Column Name="Etapa" Member="RequestStep" />
 				
 	</ContentType>
 </List>
