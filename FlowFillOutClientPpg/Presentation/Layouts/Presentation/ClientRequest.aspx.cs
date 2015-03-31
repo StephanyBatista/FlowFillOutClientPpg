@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web.UI.WebControls;
 using Presentation.Model;
 using System.Drawing;
+using System.Web.UI;
 
 namespace Presentation.Layouts.Presentation
 {
@@ -148,6 +149,44 @@ namespace Presentation.Layouts.Presentation
             var arraySplit = attachment.FileName.Split('.');
             var fileName = string.Format("{0}.{1}", name, arraySplit[arraySplit.Length - 1]);
             request.AddAttachment(fileName, attachment.FileBytes);
+        }
+
+        private TaskStatus GetTaskStatusFromApprover(string statusCodeFromControl)
+        {
+            switch(statusCodeFromControl)
+            {
+                case "1":
+                    return TaskStatus.Iniciado;
+                case "2":
+                    return TaskStatus.Aprovado;
+                case "3":
+                    return TaskStatus.Reprovado;
+                case "4":
+                    return TaskStatus.Retorno;
+                default:
+                    return TaskStatus.None;
+            }
+        }
+
+        private bool ValidateApproval(TaskStatus taskStatus, string approvalObservation, Control controlObservationRequired, Control controlStatusRequired)
+        {
+            var validated = true;
+
+            if (taskStatus == TaskStatus.None)
+            {
+                controlStatusRequired.Visible = true;
+                validated = false;
+            }
+
+            else if ((taskStatus == TaskStatus.Reprovado ||
+                taskStatus == TaskStatus.Retorno) &&
+                string.IsNullOrEmpty(approvalObservation))
+            {
+                controlObservationRequired.Visible = true;
+                validated = false;
+            }
+
+            return validated;
         }
 
         #region Binds
@@ -400,15 +439,19 @@ namespace Presentation.Layouts.Presentation
 
             try
             {
-                if (!ValidateCustomer())
+                var statusCodeFromApprover = ddlCustomerStatus.SelectedValue;
+                var taskStatus = GetTaskStatusFromApprover(statusCodeFromApprover);
+
+                if (!ValidateApproval(taskStatus, txtCustomerObservation.Text, CustomerObservationRequired, CustomerStatusRequired))
                     return;
 
-                var request = LoadFlowCustomerFromClient();
-                var workflow = new WorkflowClientRequest();
-                if (workflow.Request(request))
-                    SetRequestMessageForSuccess(request.Id.Value);
-                else
-                    SetRequestMessageForError();
+                if (taskStatus == TaskStatus.Aprovado)
+                {
+                    if (!ValidateCustomer())
+                        return;
+
+                    var request = LoadFlowCustomerFromClient();
+                }
             }
             catch
             {
@@ -489,12 +532,6 @@ namespace Presentation.Layouts.Presentation
             if (string.IsNullOrEmpty(txtCustomerObservation.Text))
             {
                 CustomerObservationRequired.Visible = true;
-                validated = false;
-            }
-
-            if (ddlCustomerStatus.SelectedValue == "-1")
-            {
-                CustomerStatusRequired.Visible = true;
                 validated = false;
             }
 
