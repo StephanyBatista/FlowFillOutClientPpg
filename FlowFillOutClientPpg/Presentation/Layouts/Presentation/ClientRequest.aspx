@@ -602,6 +602,7 @@
                                             <asp:ListItem Value="3" Text="Reprovar"></asp:ListItem>
                                             <asp:ListItem Value="4" Text="Retornar"></asp:ListItem>
                                         </asp:DropDownList>
+                                        <span id="FiscalStatusRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
                                     </div>
                                 </div>
 
@@ -663,6 +664,7 @@
                                             <asp:ListItem Value="3" Text="Reprovar"></asp:ListItem>
                                             <asp:ListItem Value="4" Text="Retornar"></asp:ListItem>
                                         </asp:DropDownList>
+                                        <span id="CasStatusRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
                                     </div>
                                 </div>
 
@@ -756,6 +758,7 @@
                                             <asp:ListItem Value="3" Text="Reprovar"></asp:ListItem>
                                             <asp:ListItem Value="4" Text="Retornar"></asp:ListItem>
                                         </asp:DropDownList>
+                                        <span id="LogisticsStatusRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
                                     </div>
                                 </div>
 
@@ -934,6 +937,7 @@
                                             <asp:ListItem Value="3" Text="Reprovar"></asp:ListItem>
                                             <asp:ListItem Value="4" Text="Retornar"></asp:ListItem>
                                         </asp:DropDownList>
+                                        <span id="CreditStatusRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
                                     </div>
                                 </div>
 

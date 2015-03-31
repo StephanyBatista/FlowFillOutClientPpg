@@ -561,5 +561,343 @@ namespace Presentation.Layouts.Presentation
             return request;
         }
         #endregion
+
+        #region FlowFiscal
+        protected void SaveFlowFiscalEvent(object sender, EventArgs e)
+        {
+            HideAllRequired();
+
+            try
+            {
+                var statusCodeFromApprover = ddlCustomerStatus.SelectedValue;
+                var taskStatus = GetTaskStatusFromApprover(statusCodeFromApprover);
+
+                if (!ValidateApproval(taskStatus, txtFiscalObservation.Text, FiscalObservationRequired, FiscalStatusRequired))
+                    return;
+
+                if (taskStatus == TaskStatus.Aprovado)
+                {
+                    if (!ValidateFiscal())
+                        return;
+
+                    var request = LoadFlowFiscalFromClient();
+                }
+            }
+            catch
+            {
+                SetRequestMessageForError();
+            }
+        }
+
+        private bool ValidateFiscal()
+        {
+            var validated = true;
+
+            if (string.IsNullOrEmpty(txtCnae.Text))
+            {
+                CnaeRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtSuframa.Text))
+            {
+                SuframaRequired.Visible = true;
+                validated = false;
+            }
+
+            return validated;
+        }
+
+        private ClientRequestItem LoadFlowFiscalFromClient()
+        {
+            var request = GetRequestById((int)Request.QueryString["RequestId"]);
+            request.Cnae = txtCnae.Text;
+            request.Suframa = txtSuframa.Text;
+            request.SalesOrder.Id = int.Parse(ddlSalesOrder.SelectedValue);
+            request.ContributorType.Id = int.Parse(ddlContributorType.SelectedValue);
+            return request;
+        }
+        #endregion
+
+        #region FlowCAS
+        protected void SaveFlowCasEvent(object sender, EventArgs e)
+        {
+            HideAllRequired();
+
+            try
+            {
+                var statusCodeFromApprover = ddlCustomerStatus.SelectedValue;
+                var taskStatus = GetTaskStatusFromApprover(statusCodeFromApprover);
+
+                if (!ValidateApproval(taskStatus, txtCasObservation.Text, CasObservationRequired, CasStatusRequired))
+                    return;
+
+                if (taskStatus == TaskStatus.Aprovado)
+                {
+                    if (!ValidateCas())
+                        return;
+
+                    var request = LoadFlowCasFromClient();
+                }
+            }
+            catch
+            {
+                SetRequestMessageForError();
+            }
+        }
+
+        private bool ValidateCas()
+        {
+            var validated = true;
+
+            if (string.IsNullOrEmpty(txtDateAsignatureCas.Text))
+            {
+                DateAsignatureCasRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtDateExpirationCas.Text))
+            {
+                DateExpirationCasRequired.Visible = true;
+                validated = false;
+            }
+
+            return validated;
+        }
+
+        private ClientRequestItem LoadFlowCasFromClient()
+        {
+            var request = GetRequestById((int)Request.QueryString["RequestId"]);
+            request.DateAsignatureCas = txtDateAsignatureCas.Text;
+            request.DateExpirationCas = txtDateExpirationCas.Text;
+            return request;
+        }
+        #endregion
+
+        #region FlowLogistics
+        protected void SaveFlowLogisticsEvent(object sender, EventArgs e)
+        {
+            HideAllRequired();
+
+            try
+            {
+                var statusCodeFromApprover = ddlCustomerStatus.SelectedValue;
+                var taskStatus = GetTaskStatusFromApprover(statusCodeFromApprover);
+
+                if (!ValidateApproval(taskStatus, txtLogisticsObservation.Text, LogisticsObservationRequired, LogisticsStatusRequired))
+                    return;
+
+                if (taskStatus == TaskStatus.Aprovado)
+                {
+                    if (!ValidateLogistics())
+                        return;
+
+                    var request = LoadFlowLogisticsFromClient();
+                }
+            }
+            catch
+            {
+                SetRequestMessageForError();
+            }
+        }
+
+        private bool ValidateLogistics()
+        {
+            var validated = true;
+
+            if (string.IsNullOrEmpty(txtDeliveryPriority.Text))
+            {
+                DeliveryPriorityRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtDeliveryMethod.Text))
+            {
+                DeliveryMethodRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtShippingCondition.Text))
+            {
+                ShippingConditionRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtPointFob.Text))
+            {
+                PointFobRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtDeposit.Text))
+            {
+                DepositRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtDemandClass.Text))
+            {
+                DemandClassRequired.Visible = true;
+                validated = false;
+            }
+
+            return validated;
+        }
+
+        private ClientRequestItem LoadFlowLogisticsFromClient()
+        {
+            var request = GetRequestById((int)Request.QueryString["RequestId"]);
+            request.DeliveryPriority = txtDeliveryPriority.Text;
+            request.DeliveryMethod = txtDeliveryMethod.Text;
+            request.ShippingCondition = txtShippingCondition.Text;
+            request.PointFob = txtPointFob.Text;
+            request.Deposit = txtDeposit.Text;
+            request.DemandClass = txtDemandClass.Text;
+            return request;
+        }
+        #endregion
+
+        #region FlowCredit
+        protected void SaveFlowCreditEvent(object sender, EventArgs e)
+        {
+            HideAllRequired();
+
+            try
+            {
+                var statusCodeFromApprover = ddlCustomerStatus.SelectedValue;
+                var taskStatus = GetTaskStatusFromApprover(statusCodeFromApprover);
+
+                if (!ValidateApproval(taskStatus, txtLogisticsObservation.Text, LogisticsObservationRequired, LogisticsStatusRequired))
+                    return;
+
+                if (taskStatus == TaskStatus.Aprovado)
+                {
+                    if (!ValidateCredit())
+                        return;
+
+                    var request = LoadFlowCreditFromClient();
+                }
+            }
+            catch
+            {
+                SetRequestMessageForError();
+            }
+        }
+
+        private bool ValidateCredit()
+        {
+            var validated = true;
+
+            if (string.IsNullOrEmpty(txtCorporateName.Text))
+            {
+                CorporateNameRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtClientAccount.Text))
+            {
+                ClientAccountRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtRevenueAccount.Text))
+            {
+                RevenueAccountRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtAccountTax.Text))
+            {
+                AccountTaxRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtContractStartDate.Text))
+            {
+                ContractStartDateRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtContractNumber.Text))
+            {
+                ContractNumberRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtStateRegistration.Text))
+            {
+                StateRegistrationRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtStreetForCredit.Text))
+            {
+                StreetForCreditRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtStreetNumberForCredit.Text))
+            {
+                StreetNumberForCreditRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtDistrinctForCredit.Text))
+            {
+                DistrinctForCreditRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtCityForCredit.Text))
+            {
+                CityForCreditRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtStateForCredit.Text))
+            {
+                StateForCreditRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtCountryForCredit.Text))
+            {
+                CountryForCreditRequired.Visible = true;
+                validated = false;
+            }
+
+            if (string.IsNullOrEmpty(txtCepForCredit.Text))
+            {
+                CepForCreditRequired.Visible = true;
+                validated = false;
+            }
+
+            return validated;
+        }
+
+        private ClientRequestItem LoadFlowCreditFromClient()
+        {
+            var request = GetRequestById((int)Request.QueryString["RequestId"]);
+            request.CorporateName = txtCorporateName.Text;
+            request.ClientAccount = txtClientAccount.Text;
+            request.RevenueAccount = txtRevenueAccount.Text;
+            request.AccountTax = txtAccountTax.Text;
+            request.PaymentMethod.Id = int.Parse(ddlPaymentMethod.SelectedValue);
+            request.InscriptionType.Id = int.Parse(ddlInscriptionType.SelectedValue);
+            request.ContractStartDate = txtContractStartDate.Text;
+            request.ContractNumber = txtContractNumber.Text;
+            request.StateRegistration = txtStateRegistration.Text;
+            request.Street = txtStreetForCredit.Text;
+            request.StreetNumber = txtStreetNumberForCredit.Text;
+            request.StreetComplement = txtStreetComplementForCredit.Text;
+            //TODO: Change wrong name to "Distrinct"
+            request.District = txtDistrinctForCredit.Text;
+            request.State = txtStateForCredit.Text;
+            request.Country = txtCountryForCredit.Text;
+            //TODO: Change name to "Cep"
+            request.CEP = txtCepForCredit.Text;
+            return request;
+        }
+        #endregion
     }
 }

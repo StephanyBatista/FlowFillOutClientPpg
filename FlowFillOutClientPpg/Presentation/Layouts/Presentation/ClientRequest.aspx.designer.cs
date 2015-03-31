@@ -841,6 +841,15 @@ namespace Presentation.Layouts.Presentation {
         protected global::System.Web.UI.WebControls.DropDownList ddlFiscalStatus;
         
         /// <summary>
+        /// FiscalStatusRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl FiscalStatusRequired;
+        
+        /// <summary>
         /// txtFiscalObservation control.
         /// </summary>
         /// <remarks>
@@ -920,6 +929,15 @@ namespace Presentation.Layouts.Presentation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCasStatus;
+        
+        /// <summary>
+        /// CasStatusRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CasStatusRequired;
         
         /// <summary>
         /// txtCasObservation control.
@@ -1073,6 +1091,15 @@ namespace Presentation.Layouts.Presentation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlLogisticsStatus;
+        
+        /// <summary>
+        /// LogisticsStatusRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LogisticsStatusRequired;
         
         /// <summary>
         /// txtLogisticsObservation control.
@@ -1397,6 +1424,15 @@ namespace Presentation.Layouts.Presentation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCreditStatus;
+        
+        /// <summary>
+        /// CreditStatusRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CreditStatusRequired;
         
         /// <summary>
         /// txtCreditObservation control.
