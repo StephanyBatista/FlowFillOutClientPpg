@@ -52,6 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Features\ListPaymentMethod\ListPaymentMethod.feature">
+      <FeatureId>{7830c46e-fd5c-4f6b-afa2-0d5214c8ec06}</FeatureId>
+    </None>
     <None Include="Features\ListInscriptionType\ListInscriptionType.feature">
       <FeatureId>{67340569-9b1b-4af5-bd7d-ca56e7add945}</FeatureId>
     </None>
@@ -128,6 +131,12 @@
     <None Include="Lists\PaymentConditionList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{43c3b5c1-b032-4e74-a040-4cd6f026fbc8}</SharePointProjectItemId>
     </None>
+    <None Include="Lists\PaymentMethodList\PaymentMethodListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{2b983fa1-ba48-4e20-ac1a-cd24f38c52ec}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\PaymentMethodList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{82b926a8-1d5b-4f7b-b553-511d855004ec}</SharePointProjectItemId>
+    </None>
     <None Include="Lists\PbcGroupList\PbcGroupListInstance\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{c395886a-499f-4f3b-9822-e65c55c024e1}</SharePointProjectItemId>
     </None>
@@ -180,6 +189,9 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Config\SPMetal.txt" />
+    <Content Include="Features\ListPaymentMethod\ListPaymentMethod.Template.xml">
+      <DependentUpon>ListPaymentMethod.feature</DependentUpon>
+    </Content>
     <Content Include="Features\ListInscriptionType\ListInscriptionType.Template.xml">
       <DependentUpon>ListInscriptionType.feature</DependentUpon>
     </Content>
@@ -237,6 +249,9 @@
     <Content Include="Lists\PaymentConditionList\Elements.xml" />
     <Content Include="Lists\PaymentConditionList\PaymentConditionListInstance\Elements.xml" />
     <Content Include="Lists\PaymentConditionList\Schema.xml" />
+    <Content Include="Lists\PaymentMethodList\Elements.xml" />
+    <Content Include="Lists\PaymentMethodList\PaymentMethodListInstance\Elements.xml" />
+    <Content Include="Lists\PaymentMethodList\Schema.xml" />
     <Content Include="Lists\PbcGroupList\Elements.xml" />
     <Content Include="Lists\PbcGroupList\PbcGroupListInstance\Elements.xml" />
     <Content Include="Lists\PbcGroupList\Schema.xml" />
