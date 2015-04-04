@@ -52,6 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Features\ListInscriptionType\ListInscriptionType.feature">
+      <FeatureId>{67340569-9b1b-4af5-bd7d-ca56e7add945}</FeatureId>
+    </None>
     <None Include="Features\ListTaskClientRegistration\ListTaskClientRegistration.feature">
       <FeatureId>{0e8c84e1-09b0-460f-adb7-98b1e86d08c0}</FeatureId>
     </None>
@@ -113,6 +116,12 @@
     <None Include="Lists\CommercialProfileList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{e71faec3-3ce4-490c-ae76-e981e96905b2}</SharePointProjectItemId>
     </None>
+    <None Include="Lists\InscriptionTypeList\InscriptionTypeListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{6a00d247-d4c1-4285-8862-13ce3b0cf4f1}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\InscriptionTypeList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{68337beb-9148-4d9b-91dd-8eb801183e42}</SharePointProjectItemId>
+    </None>
     <None Include="Lists\PaymentConditionList\PaymentConditionListInstance\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{9b21cc7e-9277-4979-b934-7de9241535ac}</SharePointProjectItemId>
     </None>
@@ -171,6 +180,9 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Config\SPMetal.txt" />
+    <Content Include="Features\ListInscriptionType\ListInscriptionType.Template.xml">
+      <DependentUpon>ListInscriptionType.feature</DependentUpon>
+    </Content>
     <Content Include="Features\ListTaskClientRegistration\ListTaskClientRegistration.Template.xml">
       <DependentUpon>ListTaskClientRegistration.feature</DependentUpon>
     </Content>
@@ -219,6 +231,9 @@
     <Content Include="Lists\CommercialProfileList\CommercialProfileListInstance\Elements.xml" />
     <Content Include="Lists\CommercialProfileList\Elements.xml" />
     <Content Include="Lists\CommercialProfileList\Schema.xml" />
+    <Content Include="Lists\InscriptionTypeList\Elements.xml" />
+    <Content Include="Lists\InscriptionTypeList\InscriptionTypeListInstance\Elements.xml" />
+    <Content Include="Lists\InscriptionTypeList\Schema.xml" />
     <Content Include="Lists\PaymentConditionList\Elements.xml" />
     <Content Include="Lists\PaymentConditionList\PaymentConditionListInstance\Elements.xml" />
     <Content Include="Lists\PaymentConditionList\Schema.xml" />
