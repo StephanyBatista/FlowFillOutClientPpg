@@ -11,6 +11,10 @@
 <List Name="SBU" Member="Sbu"></List> 
 <List Name="Sub-Ramo Atividade" Member="SubBranchActivity"></List> 
 <List Name="Grupo Compras" Member="PurchagesGroup"></List> 
+<List Name="Ordem Venda" Member="SaleOrder"></List> 
+<List Name="Tipo Contribuinte" Member="ContributorType"></List> 
+<List Name="Metodo Pagamento" Member="PaymentMethod"></List> 
+<List Name="Tipo Inscricao" Member="InscriptionType"></List> 
 
 <List Name="Usuario Cadastro Cliente" Member="UserOfClientRegistration">
 	<ContentType Name="UserOfClientRegistrationContentType" Class="UserOfClientRegistrationItem" >

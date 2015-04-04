@@ -431,7 +431,7 @@ namespace Presentation.Layouts.Presentation
             divMessage.Visible = true;
         }
         #endregion
-
+        /*
         #region FlowCustomer
         protected void SaveFlowCustomerEvent(object sender, EventArgs e)
         {
@@ -899,5 +899,6 @@ namespace Presentation.Layouts.Presentation
             return request;
         }
         #endregion
+        */
     }
 }

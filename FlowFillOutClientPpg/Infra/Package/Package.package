@@ -11,11 +11,11 @@
     <featureReference itemId="be5b27fb-e5ba-4e74-98bc-ab2645298cca" />
     <featureReference itemId="5453bdeb-4d20-4d3a-9c2f-6eb763a3b4b5" />
     <featureReference itemId="41c47fb0-6168-41d2-bf42-ad8ab2aca22b" />
-    <featureReference itemId="ff2c7d6f-8812-4c69-a687-fdd130d7992a" />
     <featureReference itemId="67340569-9b1b-4af5-bd7d-ca56e7add945" />
     <featureReference itemId="7830c46e-fd5c-4f6b-afa2-0d5214c8ec06" />
-    <featureReference itemId="17f3f8fc-74e1-4e29-9df1-728380138219" />
     <featureReference itemId="79b0c5df-e21b-4aa8-86c8-0856883535f5" />
+    <featureReference itemId="5f93348f-8d33-49bb-a8dd-d97436c0edf3" />
+    <featureReference itemId="ff2c7d6f-8812-4c69-a687-fdd130d7992a" />
     <featureReference itemId="0e8c84e1-09b0-460f-adb7-98b1e86d08c0" />
   </features>
 </package>
