@@ -52,6 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Features\ListContributorType\ListContributorType.feature">
+      <FeatureId>{17f3f8fc-74e1-4e29-9df1-728380138219}</FeatureId>
+    </None>
     <None Include="Features\ListPaymentMethod\ListPaymentMethod.feature">
       <FeatureId>{7830c46e-fd5c-4f6b-afa2-0d5214c8ec06}</FeatureId>
     </None>
@@ -118,6 +121,12 @@
     </None>
     <None Include="Lists\CommercialProfileList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{e71faec3-3ce4-490c-ae76-e981e96905b2}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\ContributorTypeList\ContributorTypeListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{03094019-39ec-45e6-8267-3e2e6a824853}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\ContributorTypeList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{e21accbb-211a-4370-9846-fc7f729d8471}</SharePointProjectItemId>
     </None>
     <None Include="Lists\InscriptionTypeList\InscriptionTypeListInstance\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6a00d247-d4c1-4285-8862-13ce3b0cf4f1}</SharePointProjectItemId>
@@ -189,6 +198,9 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Config\SPMetal.txt" />
+    <Content Include="Features\ListContributorType\ListContributorType.Template.xml">
+      <DependentUpon>ListContributorType.feature</DependentUpon>
+    </Content>
     <Content Include="Features\ListPaymentMethod\ListPaymentMethod.Template.xml">
       <DependentUpon>ListPaymentMethod.feature</DependentUpon>
     </Content>
@@ -243,6 +255,9 @@
     <Content Include="Lists\CommercialProfileList\CommercialProfileListInstance\Elements.xml" />
     <Content Include="Lists\CommercialProfileList\Elements.xml" />
     <Content Include="Lists\CommercialProfileList\Schema.xml" />
+    <Content Include="Lists\ContributorTypeList\ContributorTypeListInstance\Elements.xml" />
+    <Content Include="Lists\ContributorTypeList\Elements.xml" />
+    <Content Include="Lists\ContributorTypeList\Schema.xml" />
     <Content Include="Lists\InscriptionTypeList\Elements.xml" />
     <Content Include="Lists\InscriptionTypeList\InscriptionTypeListInstance\Elements.xml" />
     <Content Include="Lists\InscriptionTypeList\Schema.xml" />
