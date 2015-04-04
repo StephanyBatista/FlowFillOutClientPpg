@@ -52,6 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Features\ListSaleOrder\ListSaleOrder.feature">
+      <FeatureId>{79b0c5df-e21b-4aa8-86c8-0856883535f5}</FeatureId>
+    </None>
     <None Include="Features\ListContributorType\ListContributorType.feature">
       <FeatureId>{17f3f8fc-74e1-4e29-9df1-728380138219}</FeatureId>
     </None>
@@ -158,6 +161,12 @@
     <None Include="Lists\PhoneTypeList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{ca86dd3b-0fe1-4025-b625-ccf0e4afc542}</SharePointProjectItemId>
     </None>
+    <None Include="Lists\SaleOrderList\SaleOrderListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{d4cac495-c966-41db-80d2-301a01fb9d37}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\SaleOrderList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{5cda9e0e-2a0e-4d91-bdc5-0d8110eaf360}</SharePointProjectItemId>
+    </None>
     <None Include="Lists\SbuList\SbuListInstance\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{5a00ce19-3544-4f86-a39e-8ba6f6021c7a}</SharePointProjectItemId>
     </None>
@@ -198,6 +207,9 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Config\SPMetal.txt" />
+    <Content Include="Features\ListSaleOrder\ListSaleOrder.Template.xml">
+      <DependentUpon>ListSaleOrder.feature</DependentUpon>
+    </Content>
     <Content Include="Features\ListContributorType\ListContributorType.Template.xml">
       <DependentUpon>ListContributorType.feature</DependentUpon>
     </Content>
@@ -273,6 +285,9 @@
     <Content Include="Lists\PhoneTypeList\Elements.xml" />
     <Content Include="Lists\PhoneTypeList\PhoneTypeListInstance\Elements.xml" />
     <Content Include="Lists\PhoneTypeList\Schema.xml" />
+    <Content Include="Lists\SaleOrderList\Elements.xml" />
+    <Content Include="Lists\SaleOrderList\SaleOrderListInstance\Elements.xml" />
+    <Content Include="Lists\SaleOrderList\Schema.xml" />
     <Content Include="Lists\SbuList\Elements.xml" />
     <Content Include="Lists\SbuList\SbuListInstance\Elements.xml" />
     <Content Include="Lists\SbuList\Schema.xml" />
