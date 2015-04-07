@@ -41,12 +41,12 @@ namespace Presentation.Model
 
         private void LoadListsToRequest()
         {
-            _request.SbuId = Context.Sbu.Where(c => c.Id == _request.SbuId.Id).FirstOrDefault();
-            _request.PhoneFirstTypeId = Context.PhoneType.Where(c => c.Id == _request.PhoneFirstTypeId.Id).FirstOrDefault();
-            if (_request.PhoneSecondTypeId != null)
-                _request.PhoneSecondTypeId = Context.PhoneType.Where(c => c.Id == _request.PhoneSecondTypeId.Id).FirstOrDefault();
-            if (_request.PaymentConditionId != null)
-                _request.PaymentConditionId = Context.PaymentCondition.Where(c => c.Id == _request.PaymentConditionId.Id).FirstOrDefault();
+            _request.Sbu = Context.Sbu.Where(c => c.Id == _request.Sbu.Id).FirstOrDefault();
+            _request.PhoneFirstType = Context.PhoneType.Where(c => c.Id == _request.PhoneFirstType.Id).FirstOrDefault();
+            if (_request.PhoneSecondType != null)
+                _request.PhoneSecondType = Context.PhoneType.Where(c => c.Id == _request.PhoneSecondType.Id).FirstOrDefault();
+            if (_request.PaymentCondition != null)
+                _request.PaymentCondition = Context.PaymentCondition.Where(c => c.Id == _request.PaymentCondition.Id).FirstOrDefault();
         }
 
         private void RequestBase(SPWeb oWeb)

@@ -61,6 +61,24 @@ public partial class ListModelDataContext : Microsoft.SharePoint.Linq.DataContex
         }
     }
 
+    [Microsoft.SharePoint.Linq.ListAttribute(Name = "Metodo Pagamento")]
+    public Microsoft.SharePoint.Linq.EntityList<Item> PaymentMethod
+    {
+        get
+        {
+            return this.GetList<Item>("Metodo Pagamento");
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ListAttribute(Name = "Ordem Venda")]
+    public Microsoft.SharePoint.Linq.EntityList<Item> SaleOrder
+    {
+        get
+        {
+            return this.GetList<Item>("Ordem Venda");
+        }
+    }
+
     [Microsoft.SharePoint.Linq.ListAttribute(Name = "Perfil Comercial")]
     public Microsoft.SharePoint.Linq.EntityList<Item> CommercialProfile
     {
@@ -115,6 +133,24 @@ public partial class ListModelDataContext : Microsoft.SharePoint.Linq.DataContex
         get
         {
             return this.GetList<TaskClientRegistrationItem>("Tarefa Cadastro Cliente");
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ListAttribute(Name = "Tipo Contribuinte")]
+    public Microsoft.SharePoint.Linq.EntityList<Item> ContributorType
+    {
+        get
+        {
+            return this.GetList<Item>("Tipo Contribuinte");
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ListAttribute(Name = "Tipo Inscricao")]
+    public Microsoft.SharePoint.Linq.EntityList<Item> InscriptionType
+    {
+        get
+        {
+            return this.GetList<Item>("Tipo Inscricao");
         }
     }
 
@@ -304,7 +340,7 @@ public partial class ClientRequestItem : Item
 
     private string _seller;
 
-    private string _registerId;
+    private string _register;
 
     private string _name;
 
@@ -358,7 +394,7 @@ public partial class ClientRequestItem : Item
 
     private string _country;
 
-    private string _cEP;
+    private string _cep;
 
     private string _municipalRegistration;
 
@@ -382,33 +418,75 @@ public partial class ClientRequestItem : Item
 
     private string _geographicRegion;
 
+    private string _cnae;
+
+    private string _suframa;
+
+    private System.Nullable<System.DateTime> _dateAsignatureCas;
+
+    private System.Nullable<System.DateTime> _dateExpirationCas;
+
+    private string _deliveryPriority;
+
+    private string _deliveryMethod;
+
+    private string _shippingCondition;
+
+    private string _pointFob;
+
+    private string _deposit;
+
+    private string _demandClass;
+
+    private string _corporateName;
+
+    private string _clientAccount;
+
+    private string _revenueAccount;
+
+    private string _taxAccount;
+
+    private System.Nullable<System.DateTime> _contractStartDate;
+
+    private string _contractNumber;
+
+    private string _stateRegistration;
+
     private System.Nullable<RequestStatus> _requestStatus;
 
     private System.Nullable<RequestStep> _requestStep;
 
-    private Microsoft.SharePoint.Linq.EntityRef<Item> _sbuId;
+    private Microsoft.SharePoint.Linq.EntityRef<Item> _sbu;
 
-    private Microsoft.SharePoint.Linq.EntityRef<Item> _phoneFirstTypeId;
+    private Microsoft.SharePoint.Linq.EntityRef<Item> _phoneFirstType;
 
-    private Microsoft.SharePoint.Linq.EntityRef<Item> _phoneSecondTypeId;
+    private Microsoft.SharePoint.Linq.EntityRef<Item> _phoneSecondType;
 
-    private Microsoft.SharePoint.Linq.EntityRef<Item> _paymentConditionId;
+    private Microsoft.SharePoint.Linq.EntityRef<Item> _paymentCondition;
 
-    private Microsoft.SharePoint.Linq.EntityRef<Item> _pbcGroupId;
+    private Microsoft.SharePoint.Linq.EntityRef<Item> _pbcGroup;
 
-    private Microsoft.SharePoint.Linq.EntityRef<Item> _clientGroupId;
+    private Microsoft.SharePoint.Linq.EntityRef<Item> _clientGroup;
 
-    private Microsoft.SharePoint.Linq.EntityRef<Item> _purchagesGroupId;
+    private Microsoft.SharePoint.Linq.EntityRef<Item> _purchagesGroup;
 
-    private Microsoft.SharePoint.Linq.EntityRef<Item> _commercialProfileId;
+    private Microsoft.SharePoint.Linq.EntityRef<Item> _commercialProfile;
 
-    private Microsoft.SharePoint.Linq.EntityRef<Item> _branchActivityId;
+    private Microsoft.SharePoint.Linq.EntityRef<Item> _branchActivity;
 
-    private Microsoft.SharePoint.Linq.EntityRef<Item> _subBranchActivityId;
+    private Microsoft.SharePoint.Linq.EntityRef<Item> _subBranchActivity;
 
     private System.Nullable<int> _requesterId;
 
     private string _requester;
+
+    private Microsoft.SharePoint.Linq.EntityRef<Item> _salesOrder;
+
+    private Microsoft.SharePoint.Linq.EntityRef<Item> _contributorType;
+
+    private Microsoft.SharePoint.Linq.EntityRef<Item> _paymentMethod;
+
+    private Microsoft.SharePoint.Linq.EntityRef<Item> _inscriptionType;
 
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -418,46 +496,62 @@ public partial class ClientRequestItem : Item
 
     public ClientRequestItem()
     {
-        this._sbuId = new Microsoft.SharePoint.Linq.EntityRef<Item>();
-        this._sbuId.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnSbuIdSync);
-        this._sbuId.OnChanged += new System.EventHandler(this.OnSbuIdChanged);
-        this._sbuId.OnChanging += new System.EventHandler(this.OnSbuIdChanging);
-        this._phoneFirstTypeId = new Microsoft.SharePoint.Linq.EntityRef<Item>();
-        this._phoneFirstTypeId.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnPhoneFirstTypeIdSync);
-        this._phoneFirstTypeId.OnChanged += new System.EventHandler(this.OnPhoneFirstTypeIdChanged);
-        this._phoneFirstTypeId.OnChanging += new System.EventHandler(this.OnPhoneFirstTypeIdChanging);
-        this._phoneSecondTypeId = new Microsoft.SharePoint.Linq.EntityRef<Item>();
-        this._phoneSecondTypeId.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnPhoneSecondTypeIdSync);
-        this._phoneSecondTypeId.OnChanged += new System.EventHandler(this.OnPhoneSecondTypeIdChanged);
-        this._phoneSecondTypeId.OnChanging += new System.EventHandler(this.OnPhoneSecondTypeIdChanging);
-        this._paymentConditionId = new Microsoft.SharePoint.Linq.EntityRef<Item>();
-        this._paymentConditionId.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnPaymentConditionIdSync);
-        this._paymentConditionId.OnChanged += new System.EventHandler(this.OnPaymentConditionIdChanged);
-        this._paymentConditionId.OnChanging += new System.EventHandler(this.OnPaymentConditionIdChanging);
-        this._pbcGroupId = new Microsoft.SharePoint.Linq.EntityRef<Item>();
-        this._pbcGroupId.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnPbcGroupIdSync);
-        this._pbcGroupId.OnChanged += new System.EventHandler(this.OnPbcGroupIdChanged);
-        this._pbcGroupId.OnChanging += new System.EventHandler(this.OnPbcGroupIdChanging);
-        this._clientGroupId = new Microsoft.SharePoint.Linq.EntityRef<Item>();
-        this._clientGroupId.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnClientGroupIdSync);
-        this._clientGroupId.OnChanged += new System.EventHandler(this.OnClientGroupIdChanged);
-        this._clientGroupId.OnChanging += new System.EventHandler(this.OnClientGroupIdChanging);
-        this._purchagesGroupId = new Microsoft.SharePoint.Linq.EntityRef<Item>();
-        this._purchagesGroupId.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnPurchagesGroupIdSync);
-        this._purchagesGroupId.OnChanged += new System.EventHandler(this.OnPurchagesGroupIdChanged);
-        this._purchagesGroupId.OnChanging += new System.EventHandler(this.OnPurchagesGroupIdChanging);
-        this._commercialProfileId = new Microsoft.SharePoint.Linq.EntityRef<Item>();
-        this._commercialProfileId.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnCommercialProfileIdSync);
-        this._commercialProfileId.OnChanged += new System.EventHandler(this.OnCommercialProfileIdChanged);
-        this._commercialProfileId.OnChanging += new System.EventHandler(this.OnCommercialProfileIdChanging);
-        this._branchActivityId = new Microsoft.SharePoint.Linq.EntityRef<Item>();
-        this._branchActivityId.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnBranchActivityIdSync);
-        this._branchActivityId.OnChanged += new System.EventHandler(this.OnBranchActivityIdChanged);
-        this._branchActivityId.OnChanging += new System.EventHandler(this.OnBranchActivityIdChanging);
-        this._subBranchActivityId = new Microsoft.SharePoint.Linq.EntityRef<Item>();
-        this._subBranchActivityId.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnSubBranchActivityIdSync);
-        this._subBranchActivityId.OnChanged += new System.EventHandler(this.OnSubBranchActivityIdChanged);
-        this._subBranchActivityId.OnChanging += new System.EventHandler(this.OnSubBranchActivityIdChanging);
+        this._sbu = new Microsoft.SharePoint.Linq.EntityRef<Item>();
+        this._sbu.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnSbuSync);
+        this._sbu.OnChanged += new System.EventHandler(this.OnSbuChanged);
+        this._sbu.OnChanging += new System.EventHandler(this.OnSbuChanging);
+        this._phoneFirstType = new Microsoft.SharePoint.Linq.EntityRef<Item>();
+        this._phoneFirstType.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnPhoneFirstTypeSync);
+        this._phoneFirstType.OnChanged += new System.EventHandler(this.OnPhoneFirstTypeChanged);
+        this._phoneFirstType.OnChanging += new System.EventHandler(this.OnPhoneFirstTypeChanging);
+        this._phoneSecondType = new Microsoft.SharePoint.Linq.EntityRef<Item>();
+        this._phoneSecondType.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnPhoneSecondTypeSync);
+        this._phoneSecondType.OnChanged += new System.EventHandler(this.OnPhoneSecondTypeChanged);
+        this._phoneSecondType.OnChanging += new System.EventHandler(this.OnPhoneSecondTypeChanging);
+        this._paymentCondition = new Microsoft.SharePoint.Linq.EntityRef<Item>();
+        this._paymentCondition.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnPaymentConditionSync);
+        this._paymentCondition.OnChanged += new System.EventHandler(this.OnPaymentConditionChanged);
+        this._paymentCondition.OnChanging += new System.EventHandler(this.OnPaymentConditionChanging);
+        this._pbcGroup = new Microsoft.SharePoint.Linq.EntityRef<Item>();
+        this._pbcGroup.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnPbcGroupSync);
+        this._pbcGroup.OnChanged += new System.EventHandler(this.OnPbcGroupChanged);
+        this._pbcGroup.OnChanging += new System.EventHandler(this.OnPbcGroupChanging);
+        this._clientGroup = new Microsoft.SharePoint.Linq.EntityRef<Item>();
+        this._clientGroup.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnClientGroupSync);
+        this._clientGroup.OnChanged += new System.EventHandler(this.OnClientGroupChanged);
+        this._clientGroup.OnChanging += new System.EventHandler(this.OnClientGroupChanging);
+        this._purchagesGroup = new Microsoft.SharePoint.Linq.EntityRef<Item>();
+        this._purchagesGroup.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnPurchagesGroupSync);
+        this._purchagesGroup.OnChanged += new System.EventHandler(this.OnPurchagesGroupChanged);
+        this._purchagesGroup.OnChanging += new System.EventHandler(this.OnPurchagesGroupChanging);
+        this._commercialProfile = new Microsoft.SharePoint.Linq.EntityRef<Item>();
+        this._commercialProfile.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnCommercialProfileSync);
+        this._commercialProfile.OnChanged += new System.EventHandler(this.OnCommercialProfileChanged);
+        this._commercialProfile.OnChanging += new System.EventHandler(this.OnCommercialProfileChanging);
+        this._branchActivity = new Microsoft.SharePoint.Linq.EntityRef<Item>();
+        this._branchActivity.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnBranchActivitySync);
+        this._branchActivity.OnChanged += new System.EventHandler(this.OnBranchActivityChanged);
+        this._branchActivity.OnChanging += new System.EventHandler(this.OnBranchActivityChanging);
+        this._subBranchActivity = new Microsoft.SharePoint.Linq.EntityRef<Item>();
+        this._subBranchActivity.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnSubBranchActivitySync);
+        this._subBranchActivity.OnChanged += new System.EventHandler(this.OnSubBranchActivityChanged);
+        this._subBranchActivity.OnChanging += new System.EventHandler(this.OnSubBranchActivityChanging);
+        this._salesOrder = new Microsoft.SharePoint.Linq.EntityRef<Item>();
+        this._salesOrder.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnSalesOrderSync);
+        this._salesOrder.OnChanged += new System.EventHandler(this.OnSalesOrderChanged);
+        this._salesOrder.OnChanging += new System.EventHandler(this.OnSalesOrderChanging);
+        this._contributorType = new Microsoft.SharePoint.Linq.EntityRef<Item>();
+        this._contributorType.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnContributorTypeSync);
+        this._contributorType.OnChanged += new System.EventHandler(this.OnContributorTypeChanged);
+        this._contributorType.OnChanging += new System.EventHandler(this.OnContributorTypeChanging);
+        this._paymentMethod = new Microsoft.SharePoint.Linq.EntityRef<Item>();
+        this._paymentMethod.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnPaymentMethodSync);
+        this._paymentMethod.OnChanged += new System.EventHandler(this.OnPaymentMethodChanged);
+        this._paymentMethod.OnChanging += new System.EventHandler(this.OnPaymentMethodChanging);
+        this._inscriptionType = new Microsoft.SharePoint.Linq.EntityRef<Item>();
+        this._inscriptionType.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item>>(this.OnInscriptionTypeSync);
+        this._inscriptionType.OnChanged += new System.EventHandler(this.OnInscriptionTypeChanged);
+        this._inscriptionType.OnChanging += new System.EventHandler(this.OnInscriptionTypeChanging);
         this.OnCreated();
     }
 
@@ -479,20 +573,20 @@ public partial class ClientRequestItem : Item
         }
     }
 
-    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "CNPJ_x002f_CPFDatasul", Storage = "_registerId", Required = true, FieldType = "Text")]
-    public string RegisterId
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "CNPJ_x002f_CPFDatasul", Storage = "_register", Required = true, FieldType = "Text")]
+    public string Register
     {
         get
         {
-            return this._registerId;
+            return this._register;
         }
         set
         {
-            if ((value != this._registerId))
+            if ((value != this._register))
             {
-                this.OnPropertyChanging("RegisterId", this._registerId);
-                this._registerId = value;
-                this.OnPropertyChanged("RegisterId");
+                this.OnPropertyChanging("Register", this._register);
+                this._register = value;
+                this.OnPropertyChanged("Register");
             }
         }
     }
@@ -965,20 +1059,20 @@ public partial class ClientRequestItem : Item
         }
     }
 
-    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "CEP", Storage = "_cEP", FieldType = "Text")]
-    public string CEP
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "CEP", Storage = "_cep", FieldType = "Text")]
+    public string Cep
     {
         get
         {
-            return this._cEP;
+            return this._cep;
         }
         set
         {
-            if ((value != this._cEP))
+            if ((value != this._cep))
             {
-                this.OnPropertyChanging("CEP", this._cEP);
-                this._cEP = value;
-                this.OnPropertyChanged("CEP");
+                this.OnPropertyChanging("Cep", this._cep);
+                this._cep = value;
+                this.OnPropertyChanged("Cep");
             }
         }
     }
@@ -1181,6 +1275,312 @@ public partial class ClientRequestItem : Item
         }
     }
 
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "CNAE", Storage = "_cnae", FieldType = "Text")]
+    public string Cnae
+    {
+        get
+        {
+            return this._cnae;
+        }
+        set
+        {
+            if ((value != this._cnae))
+            {
+                this.OnPropertyChanging("Cnae", this._cnae);
+                this._cnae = value;
+                this.OnPropertyChanged("Cnae");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "SUFRAMA", Storage = "_suframa", FieldType = "Text")]
+    public string Suframa
+    {
+        get
+        {
+            return this._suframa;
+        }
+        set
+        {
+            if ((value != this._suframa))
+            {
+                this.OnPropertyChanging("Suframa", this._suframa);
+                this._suframa = value;
+                this.OnPropertyChanged("Suframa");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "DataAssinaturaCAS", Storage = "_dateAsignatureCas", FieldType = "DateTime")]
+    public System.Nullable<System.DateTime> DateAsignatureCas
+    {
+        get
+        {
+            return this._dateAsignatureCas;
+        }
+        set
+        {
+            if ((value != this._dateAsignatureCas))
+            {
+                this.OnPropertyChanging("DateAsignatureCas", this._dateAsignatureCas);
+                this._dateAsignatureCas = value;
+                this.OnPropertyChanged("DateAsignatureCas");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "DataValidadeCAS", Storage = "_dateExpirationCas", FieldType = "DateTime")]
+    public System.Nullable<System.DateTime> DateExpirationCas
+    {
+        get
+        {
+            return this._dateExpirationCas;
+        }
+        set
+        {
+            if ((value != this._dateExpirationCas))
+            {
+                this.OnPropertyChanging("DateExpirationCas", this._dateExpirationCas);
+                this._dateExpirationCas = value;
+                this.OnPropertyChanged("DateExpirationCas");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "PrioridadeEntrega", Storage = "_deliveryPriority", FieldType = "Text")]
+    public string DeliveryPriority
+    {
+        get
+        {
+            return this._deliveryPriority;
+        }
+        set
+        {
+            if ((value != this._deliveryPriority))
+            {
+                this.OnPropertyChanging("DeliveryPriority", this._deliveryPriority);
+                this._deliveryPriority = value;
+                this.OnPropertyChanged("DeliveryPriority");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "MetodoEntrega", Storage = "_deliveryMethod", FieldType = "Text")]
+    public string DeliveryMethod
+    {
+        get
+        {
+            return this._deliveryMethod;
+        }
+        set
+        {
+            if ((value != this._deliveryMethod))
+            {
+                this.OnPropertyChanging("DeliveryMethod", this._deliveryMethod);
+                this._deliveryMethod = value;
+                this.OnPropertyChanged("DeliveryMethod");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Condi_x00e7__x00e3_oFrete", Storage = "_shippingCondition", FieldType = "Text")]
+    public string ShippingCondition
+    {
+        get
+        {
+            return this._shippingCondition;
+        }
+        set
+        {
+            if ((value != this._shippingCondition))
+            {
+                this.OnPropertyChanging("ShippingCondition", this._shippingCondition);
+                this._shippingCondition = value;
+                this.OnPropertyChanged("ShippingCondition");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "PontoFOB", Storage = "_pointFob", FieldType = "Text")]
+    public string PointFob
+    {
+        get
+        {
+            return this._pointFob;
+        }
+        set
+        {
+            if ((value != this._pointFob))
+            {
+                this.OnPropertyChanging("PointFob", this._pointFob);
+                this._pointFob = value;
+                this.OnPropertyChanged("PointFob");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Deposito", Storage = "_deposit", FieldType = "Text")]
+    public string Deposit
+    {
+        get
+        {
+            return this._deposit;
+        }
+        set
+        {
+            if ((value != this._deposit))
+            {
+                this.OnPropertyChanging("Deposit", this._deposit);
+                this._deposit = value;
+                this.OnPropertyChanged("Deposit");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "ClasseDemanda", Storage = "_demandClass", FieldType = "Text")]
+    public string DemandClass
+    {
+        get
+        {
+            return this._demandClass;
+        }
+        set
+        {
+            if ((value != this._demandClass))
+            {
+                this.OnPropertyChanging("DemandClass", this._demandClass);
+                this._demandClass = value;
+                this.OnPropertyChanged("DemandClass");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Raz_x00e3_oSocial", Storage = "_corporateName", FieldType = "Text")]
+    public string CorporateName
+    {
+        get
+        {
+            return this._corporateName;
+        }
+        set
+        {
+            if ((value != this._corporateName))
+            {
+                this.OnPropertyChanging("CorporateName", this._corporateName);
+                this._corporateName = value;
+                this.OnPropertyChanged("CorporateName");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "ContaCliente", Storage = "_clientAccount", FieldType = "Text")]
+    public string ClientAccount
+    {
+        get
+        {
+            return this._clientAccount;
+        }
+        set
+        {
+            if ((value != this._clientAccount))
+            {
+                this.OnPropertyChanging("ClientAccount", this._clientAccount);
+                this._clientAccount = value;
+                this.OnPropertyChanged("ClientAccount");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "ContaReceita", Storage = "_revenueAccount", FieldType = "Text")]
+    public string RevenueAccount
+    {
+        get
+        {
+            return this._revenueAccount;
+        }
+        set
+        {
+            if ((value != this._revenueAccount))
+            {
+                this.OnPropertyChanging("RevenueAccount", this._revenueAccount);
+                this._revenueAccount = value;
+                this.OnPropertyChanged("RevenueAccount");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "ContaImposto", Storage = "_taxAccount", FieldType = "Text")]
+    public string TaxAccount
+    {
+        get
+        {
+            return this._taxAccount;
+        }
+        set
+        {
+            if ((value != this._taxAccount))
+            {
+                this.OnPropertyChanging("TaxAccount", this._taxAccount);
+                this._taxAccount = value;
+                this.OnPropertyChanged("TaxAccount");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "DataInicioContrato", Storage = "_contractStartDate", FieldType = "DateTime")]
+    public System.Nullable<System.DateTime> ContractStartDate
+    {
+        get
+        {
+            return this._contractStartDate;
+        }
+        set
+        {
+            if ((value != this._contractStartDate))
+            {
+                this.OnPropertyChanging("ContractStartDate", this._contractStartDate);
+                this._contractStartDate = value;
+                this.OnPropertyChanged("ContractStartDate");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "NumeroContrato", Storage = "_contractNumber", FieldType = "Text")]
+    public string ContractNumber
+    {
+        get
+        {
+            return this._contractNumber;
+        }
+        set
+        {
+            if ((value != this._contractNumber))
+            {
+                this.OnPropertyChanging("ContractNumber", this._contractNumber);
+                this._contractNumber = value;
+                this.OnPropertyChanged("ContractNumber");
+            }
+        }
+    }
+
+    [Microsoft.SharePoint.Linq.ColumnAttribute(Name = "Inscri_x00e7__x00e3_oEstadual", Storage = "_stateRegistration", FieldType = "Text")]
+    public string StateRegistration
+    {
+        get
+        {
+            return this._stateRegistration;
+        }
+        set
+        {
+            if ((value != this._stateRegistration))
+            {
+                this.OnPropertyChanging("StateRegistration", this._stateRegistration);
+                this._stateRegistration = value;
+                this.OnPropertyChanged("StateRegistration");
+            }
+        }
+    }
+
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
     [Microsoft.SharePoint.Linq.RemovedColumnAttribute()]
     public override string Title
@@ -1231,133 +1631,133 @@ public partial class ClientRequestItem : Item
         }
     }
 
-    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "SBU", Storage = "_sbuId", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "SBU")]
-    public Item SbuId
+    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "SBU", Storage = "_sbu", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "SBU")]
+    public Item Sbu
     {
         get
         {
-            return this._sbuId.GetEntity();
+            return this._sbu.GetEntity();
         }
         set
         {
-            this._sbuId.SetEntity(value);
+            this._sbu.SetEntity(value);
         }
     }
 
-    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "TipodoTelefone", Storage = "_phoneFirstTypeId", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Tipo Telefone")]
-    public Item PhoneFirstTypeId
+    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "TipodoTelefone", Storage = "_phoneFirstType", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Tipo Telefone")]
+    public Item PhoneFirstType
     {
         get
         {
-            return this._phoneFirstTypeId.GetEntity();
+            return this._phoneFirstType.GetEntity();
         }
         set
         {
-            this._phoneFirstTypeId.SetEntity(value);
+            this._phoneFirstType.SetEntity(value);
         }
     }
 
-    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "TipodoTelefone2", Storage = "_phoneSecondTypeId", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Tipo Telefone")]
-    public Item PhoneSecondTypeId
+    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "TipodoTelefone2", Storage = "_phoneSecondType", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Tipo Telefone")]
+    public Item PhoneSecondType
     {
         get
         {
-            return this._phoneSecondTypeId.GetEntity();
+            return this._phoneSecondType.GetEntity();
         }
         set
         {
-            this._phoneSecondTypeId.SetEntity(value);
+            this._phoneSecondType.SetEntity(value);
         }
     }
 
-    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "Condi_x00e7__x00e3_odePagamento", Storage = "_paymentConditionId", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Condicao Pagamento")]
-    public Item PaymentConditionId
+    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "Condi_x00e7__x00e3_odePagamento", Storage = "_paymentCondition", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Condicao Pagamento")]
+    public Item PaymentCondition
     {
         get
         {
-            return this._paymentConditionId.GetEntity();
+            return this._paymentCondition.GetEntity();
         }
         set
         {
-            this._paymentConditionId.SetEntity(value);
+            this._paymentCondition.SetEntity(value);
         }
     }
 
-    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "GrupoPBC", Storage = "_pbcGroupId", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Grupo PBC")]
-    public Item PbcGroupId
+    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "GrupoPBC", Storage = "_pbcGroup", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Grupo PBC")]
+    public Item PbcGroup
     {
         get
         {
-            return this._pbcGroupId.GetEntity();
+            return this._pbcGroup.GetEntity();
         }
         set
         {
-            this._pbcGroupId.SetEntity(value);
+            this._pbcGroup.SetEntity(value);
         }
     }
 
-    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "GrupodeCliente", Storage = "_clientGroupId", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Grupo Cliente")]
-    public Item ClientGroupId
+    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "GrupodeCliente", Storage = "_clientGroup", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Grupo Cliente")]
+    public Item ClientGroup
     {
         get
         {
-            return this._clientGroupId.GetEntity();
+            return this._clientGroup.GetEntity();
         }
         set
         {
-            this._clientGroupId.SetEntity(value);
+            this._clientGroup.SetEntity(value);
         }
     }
 
-    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "GrupodeCompras", Storage = "_purchagesGroupId", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Grupo Compras")]
-    public Item PurchagesGroupId
+    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "GrupodeCompras", Storage = "_purchagesGroup", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Grupo Compras")]
+    public Item PurchagesGroup
     {
         get
         {
-            return this._purchagesGroupId.GetEntity();
+            return this._purchagesGroup.GetEntity();
         }
         set
         {
-            this._purchagesGroupId.SetEntity(value);
+            this._purchagesGroup.SetEntity(value);
         }
     }
 
-    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "PerfilComercial", Storage = "_commercialProfileId", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Perfil Comercial")]
-    public Item CommercialProfileId
+    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "PerfilComercial", Storage = "_commercialProfile", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Perfil Comercial")]
+    public Item CommercialProfile
     {
         get
         {
-            return this._commercialProfileId.GetEntity();
+            return this._commercialProfile.GetEntity();
         }
         set
         {
-            this._commercialProfileId.SetEntity(value);
+            this._commercialProfile.SetEntity(value);
         }
     }
 
-    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "RamodeAtividade", Storage = "_branchActivityId", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Ramo Atividade")]
-    public Item BranchActivityId
+    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "RamodeAtividade", Storage = "_branchActivity", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Ramo Atividade")]
+    public Item BranchActivity
     {
         get
         {
-            return this._branchActivityId.GetEntity();
+            return this._branchActivity.GetEntity();
         }
         set
         {
-            this._branchActivityId.SetEntity(value);
+            this._branchActivity.SetEntity(value);
         }
     }
 
-    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "Sub_x002d_ramoatividade", Storage = "_subBranchActivityId", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Sub-Ramo Atividade")]
-    public Item SubBranchActivityId
+    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "Sub_x002d_ramoatividade", Storage = "_subBranchActivity", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Sub-Ramo Atividade")]
+    public Item SubBranchActivity
     {
         get
         {
-            return this._subBranchActivityId.GetEntity();
+            return this._subBranchActivity.GetEntity();
         }
         set
         {
-            this._subBranchActivityId.SetEntity(value);
+            this._subBranchActivity.SetEntity(value);
         }
     }
 
@@ -1397,143 +1797,251 @@ public partial class ClientRequestItem : Item
         }
     }
 
-    private void OnSbuIdChanging(object sender, System.EventArgs e)
+    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "OrdemVenda", Storage = "_salesOrder", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Ordem Venda")]
+    public Item SalesOrder
     {
-        this.OnPropertyChanging("SbuId", this._sbuId.Clone());
+        get
+        {
+            return this._salesOrder.GetEntity();
+        }
+        set
+        {
+            this._salesOrder.SetEntity(value);
+        }
     }
 
-    private void OnSbuIdChanged(object sender, System.EventArgs e)
+    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "TipoContribuinte", Storage = "_contributorType", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Tipo Contribuinte")]
+    public Item ContributorType
     {
-        this.OnPropertyChanged("SbuId");
+        get
+        {
+            return this._contributorType.GetEntity();
+        }
+        set
+        {
+            this._contributorType.SetEntity(value);
+        }
     }
 
-    private void OnSbuIdSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
+    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "M_x00e9_todoPagamento", Storage = "_paymentMethod", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Metodo Pagamento")]
+    public Item PaymentMethod
     {
+        get
+        {
+            return this._paymentMethod.GetEntity();
+        }
+        set
+        {
+            this._paymentMethod.SetEntity(value);
+        }
     }
 
-    private void OnPhoneFirstTypeIdChanging(object sender, System.EventArgs e)
+    [Microsoft.SharePoint.Linq.AssociationAttribute(Name = "TIpoInscri_x00e7__x00e3_o", Storage = "_inscriptionType", MultivalueType = Microsoft.SharePoint.Linq.AssociationType.Single, List = "Tipo Inscricao")]
+    public Item InscriptionType
     {
-        this.OnPropertyChanging("PhoneFirstTypeId", this._phoneFirstTypeId.Clone());
+        get
+        {
+            return this._inscriptionType.GetEntity();
+        }
+        set
+        {
+            this._inscriptionType.SetEntity(value);
+        }
     }
 
-    private void OnPhoneFirstTypeIdChanged(object sender, System.EventArgs e)
+    private void OnSbuChanging(object sender, System.EventArgs e)
     {
-        this.OnPropertyChanged("PhoneFirstTypeId");
+        this.OnPropertyChanging("Sbu", this._sbu.Clone());
     }
 
-    private void OnPhoneFirstTypeIdSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
+    private void OnSbuChanged(object sender, System.EventArgs e)
     {
+        this.OnPropertyChanged("Sbu");
     }
 
-    private void OnPhoneSecondTypeIdChanging(object sender, System.EventArgs e)
-    {
-        this.OnPropertyChanging("PhoneSecondTypeId", this._phoneSecondTypeId.Clone());
-    }
-
-    private void OnPhoneSecondTypeIdChanged(object sender, System.EventArgs e)
-    {
-        this.OnPropertyChanged("PhoneSecondTypeId");
-    }
-
-    private void OnPhoneSecondTypeIdSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
-    {
-    }
-
-    private void OnPaymentConditionIdChanging(object sender, System.EventArgs e)
-    {
-        this.OnPropertyChanging("PaymentConditionId", this._paymentConditionId.Clone());
-    }
-
-    private void OnPaymentConditionIdChanged(object sender, System.EventArgs e)
-    {
-        this.OnPropertyChanged("PaymentConditionId");
-    }
-
-    private void OnPaymentConditionIdSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
-    {
-    }
-
-    private void OnPbcGroupIdChanging(object sender, System.EventArgs e)
-    {
-        this.OnPropertyChanging("PbcGroupId", this._pbcGroupId.Clone());
-    }
-
-    private void OnPbcGroupIdChanged(object sender, System.EventArgs e)
-    {
-        this.OnPropertyChanged("PbcGroupId");
-    }
-
-    private void OnPbcGroupIdSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
+    private void OnSbuSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
     {
     }
 
-    private void OnClientGroupIdChanging(object sender, System.EventArgs e)
+    private void OnPhoneFirstTypeChanging(object sender, System.EventArgs e)
     {
-        this.OnPropertyChanging("ClientGroupId", this._clientGroupId.Clone());
+        this.OnPropertyChanging("PhoneFirstType", this._phoneFirstType.Clone());
     }
 
-    private void OnClientGroupIdChanged(object sender, System.EventArgs e)
+    private void OnPhoneFirstTypeChanged(object sender, System.EventArgs e)
     {
-        this.OnPropertyChanged("ClientGroupId");
+        this.OnPropertyChanged("PhoneFirstType");
     }
 
-    private void OnClientGroupIdSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
-    {
-    }
-
-    private void OnPurchagesGroupIdChanging(object sender, System.EventArgs e)
-    {
-        this.OnPropertyChanging("PurchagesGroupId", this._purchagesGroupId.Clone());
-    }
-
-    private void OnPurchagesGroupIdChanged(object sender, System.EventArgs e)
-    {
-        this.OnPropertyChanged("PurchagesGroupId");
-    }
-
-    private void OnPurchagesGroupIdSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
+    private void OnPhoneFirstTypeSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
     {
     }
 
-    private void OnCommercialProfileIdChanging(object sender, System.EventArgs e)
+    private void OnPhoneSecondTypeChanging(object sender, System.EventArgs e)
     {
-        this.OnPropertyChanging("CommercialProfileId", this._commercialProfileId.Clone());
+        this.OnPropertyChanging("PhoneSecondType", this._phoneSecondType.Clone());
     }
 
-    private void OnCommercialProfileIdChanged(object sender, System.EventArgs e)
+    private void OnPhoneSecondTypeChanged(object sender, System.EventArgs e)
     {
-        this.OnPropertyChanged("CommercialProfileId");
+        this.OnPropertyChanged("PhoneSecondType");
     }
 
-    private void OnCommercialProfileIdSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
-    {
-    }
-
-    private void OnBranchActivityIdChanging(object sender, System.EventArgs e)
-    {
-        this.OnPropertyChanging("BranchActivityId", this._branchActivityId.Clone());
-    }
-
-    private void OnBranchActivityIdChanged(object sender, System.EventArgs e)
-    {
-        this.OnPropertyChanged("BranchActivityId");
-    }
-
-    private void OnBranchActivityIdSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
+    private void OnPhoneSecondTypeSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
     {
     }
 
-    private void OnSubBranchActivityIdChanging(object sender, System.EventArgs e)
+    private void OnPaymentConditionChanging(object sender, System.EventArgs e)
     {
-        this.OnPropertyChanging("SubBranchActivityId", this._subBranchActivityId.Clone());
+        this.OnPropertyChanging("PaymentCondition", this._paymentCondition.Clone());
     }
 
-    private void OnSubBranchActivityIdChanged(object sender, System.EventArgs e)
+    private void OnPaymentConditionChanged(object sender, System.EventArgs e)
     {
-        this.OnPropertyChanged("SubBranchActivityId");
+        this.OnPropertyChanged("PaymentCondition");
     }
 
-    private void OnSubBranchActivityIdSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
+    private void OnPaymentConditionSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
+    {
+    }
+
+    private void OnPbcGroupChanging(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanging("PbcGroup", this._pbcGroup.Clone());
+    }
+
+    private void OnPbcGroupChanged(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanged("PbcGroup");
+    }
+
+    private void OnPbcGroupSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
+    {
+    }
+
+    private void OnClientGroupChanging(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanging("ClientGroup", this._clientGroup.Clone());
+    }
+
+    private void OnClientGroupChanged(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanged("ClientGroup");
+    }
+
+    private void OnClientGroupSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
+    {
+    }
+
+    private void OnPurchagesGroupChanging(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanging("PurchagesGroup", this._purchagesGroup.Clone());
+    }
+
+    private void OnPurchagesGroupChanged(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanged("PurchagesGroup");
+    }
+
+    private void OnPurchagesGroupSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
+    {
+    }
+
+    private void OnCommercialProfileChanging(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanging("CommercialProfile", this._commercialProfile.Clone());
+    }
+
+    private void OnCommercialProfileChanged(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanged("CommercialProfile");
+    }
+
+    private void OnCommercialProfileSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
+    {
+    }
+
+    private void OnBranchActivityChanging(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanging("BranchActivity", this._branchActivity.Clone());
+    }
+
+    private void OnBranchActivityChanged(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanged("BranchActivity");
+    }
+
+    private void OnBranchActivitySync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
+    {
+    }
+
+    private void OnSubBranchActivityChanging(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanging("SubBranchActivity", this._subBranchActivity.Clone());
+    }
+
+    private void OnSubBranchActivityChanged(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanged("SubBranchActivity");
+    }
+
+    private void OnSubBranchActivitySync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
+    {
+    }
+
+    private void OnSalesOrderChanging(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanging("SalesOrder", this._salesOrder.Clone());
+    }
+
+    private void OnSalesOrderChanged(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanged("SalesOrder");
+    }
+
+    private void OnSalesOrderSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
+    {
+    }
+
+    private void OnContributorTypeChanging(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanging("ContributorType", this._contributorType.Clone());
+    }
+
+    private void OnContributorTypeChanged(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanged("ContributorType");
+    }
+
+    private void OnContributorTypeSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
+    {
+    }
+
+    private void OnPaymentMethodChanging(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanging("PaymentMethod", this._paymentMethod.Clone());
+    }
+
+    private void OnPaymentMethodChanged(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanged("PaymentMethod");
+    }
+
+    private void OnPaymentMethodSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
+    {
+    }
+
+    private void OnInscriptionTypeChanging(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanging("InscriptionType", this._inscriptionType.Clone());
+    }
+
+    private void OnInscriptionTypeChanged(object sender, System.EventArgs e)
+    {
+        this.OnPropertyChanged("InscriptionType");
+    }
+
+    private void OnInscriptionTypeSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Item> e)
     {
     }
 }

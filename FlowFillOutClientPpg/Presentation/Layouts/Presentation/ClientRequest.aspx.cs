@@ -78,18 +78,18 @@ namespace Presentation.Layouts.Presentation
         private void LoadRequestToClient(ClientRequestItem request)
         {
             txtSeller.Text = request.Seller;
-            ddlSbu.SelectedValue = request.SbuId.Id.ToString();
-            txtRegisterId.Text = request.RegisterId;
+            ddlSbu.SelectedValue = request.Sbu.Id.ToString();
+            txtRegisterId.Text = request.Register;
             txtName.Text = request.Name;
             txtContactFirstName.Text = request.ContactFirstName;
             txtContactLastName.Text = request.ContactLastName;
-            ddlPhoneFirstType.SelectedValue = request.PhoneFirstTypeId.Id.ToString();
+            ddlPhoneFirstType.SelectedValue = request.PhoneFirstType.Id.ToString();
             txtPhoneFirstAreaCode.Text = request.PhoneFirstAreaCode;
             txtContactFirstPhone.Text = request.ContactFirstPhone;
             txtContactFirstStation.Text = request.ContactFirstStation;
             txtContactSecondName.Text = request.ContactSecondName;
-            if (request.PhoneSecondTypeId != null)
-                ddlPhoneSecondType.SelectedValue = request.PhoneSecondTypeId.Id.ToString();
+            if (request.PhoneSecondType != null)
+                ddlPhoneSecondType.SelectedValue = request.PhoneSecondType.Id.ToString();
             txtPhoneSecondAreaCode.Text = request.PhoneSecondAreaCode;
             txtContactSecondPhone.Text = request.ContactSecondPhone;
             txtContactSecondStation.Text = request.ContactSecondStation;
@@ -97,8 +97,8 @@ namespace Presentation.Layouts.Presentation
             txtCheckingAccountNumber.Text = request.CheckingAccountNumber;
             txtCheckingAccountCurrency.Text = request.CheckingAccountCurrency;
             txtAgency.Text = request.Agency;
-            if (request.PaymentConditionId != null)
-                ddlPaymentCondition.SelectedValue = request.PaymentConditionId.Id.ToString();
+            if (request.PaymentCondition != null)
+                ddlPaymentCondition.SelectedValue = request.PaymentCondition.Id.ToString();
             txtEmailBillet.Text = request.EmailBillet;
             txtEmailContact.Text = request.EmailContact;
             txtEmailReport.Text = request.EmailReport;
@@ -111,7 +111,7 @@ namespace Presentation.Layouts.Presentation
             txtCity.Text = request.City;
             txtState.Text = request.State;
             txtCountry.Text = request.Country;
-            txtCep.Text = request.CEP;
+            txtCep.Text = request.Cep;
         }
 
         private TaskClientRegistrationItem GetLastTaskOpen(int requestId)
@@ -376,19 +376,19 @@ namespace Presentation.Layouts.Presentation
         {
             var request = new ClientRequestItem();
             request.Seller = txtSeller.Text;
-            request.SbuId = new Item { Id = int.Parse(ddlSbu.SelectedValue) };
-            request.RegisterId = txtRegisterId.Text;
+            request.Sbu = new Item { Id = int.Parse(ddlSbu.SelectedValue) };
+            request.Register = txtRegisterId.Text;
             request.Name = txtName.Text;
             request.ContactFirstName = txtContactFirstName.Text;
             request.ContactLastName = txtContactLastName.Text;
             if (ddlPhoneFirstType.SelectedValue != "-1")
-                request.PhoneFirstTypeId = new Item { Id = int.Parse(ddlPhoneFirstType.SelectedValue) };
+                request.PhoneFirstType = new Item { Id = int.Parse(ddlPhoneFirstType.SelectedValue) };
             request.PhoneFirstAreaCode = txtPhoneFirstAreaCode.Text;
             request.ContactFirstPhone = txtContactFirstPhone.Text;
             request.ContactFirstStation = txtContactFirstStation.Text;
             request.ContactSecondName = txtContactSecondName.Text;
             if (ddlPhoneSecondType.SelectedValue != "-1")
-                request.PhoneSecondTypeId = new Item { Id = int.Parse(ddlPhoneSecondType.SelectedValue) };
+                request.PhoneSecondType = new Item { Id = int.Parse(ddlPhoneSecondType.SelectedValue) };
             request.PhoneSecondAreaCode = txtPhoneSecondAreaCode.Text;
             request.ContactSecondPhone = txtContactSecondPhone.Text;
             request.ContactSecondStation = txtContactSecondStation.Text;
@@ -397,7 +397,7 @@ namespace Presentation.Layouts.Presentation
             request.CheckingAccountCurrency = txtCheckingAccountCurrency.Text;
             request.Agency = txtAgency.Text;
             if (ddlPaymentCondition.SelectedValue != "-1")
-                request.PaymentConditionId = new Item { Id = int.Parse(ddlPaymentCondition.SelectedValue) };
+                request.PaymentCondition = new Item { Id = int.Parse(ddlPaymentCondition.SelectedValue) };
             request.EmailBillet = txtEmailBillet.Text;
             request.EmailContact = txtEmailContact.Text;
             request.EmailReport = txtEmailReport.Text;
@@ -410,7 +410,7 @@ namespace Presentation.Layouts.Presentation
             request.City = txtCity.Text;
             request.State = txtState.Text;
             request.Country = txtCountry.Text;
-            request.CEP = txtCep.Text;
+            request.Cep = txtCep.Text;
             LoadAllAttachments(request);
 
             return request;
@@ -431,7 +431,7 @@ namespace Presentation.Layouts.Presentation
             divMessage.Visible = true;
         }
         #endregion
-        /*
+        
         #region FlowCustomer
         protected void SaveFlowCustomerEvent(object sender, EventArgs e)
         {
@@ -540,8 +540,8 @@ namespace Presentation.Layouts.Presentation
 
         private ClientRequestItem LoadFlowCustomerFromClient()
         {
-            var request = GetRequestById((int)Request.QueryString["RequestId"]);
-            request.PbcGroupId.Id = int.Parse(ddlPbc.SelectedValue);
+            var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
+            request.PbcGroup.Id = int.Parse(ddlPbc.SelectedValue);
             request.MunicipalRegistration = txtMunicipalRegistration.Text;
             request.PriceList = txtPriceList.Text;
             request.Postage = txtPostage.Text;
@@ -551,11 +551,11 @@ namespace Presentation.Layouts.Presentation
             request.VolumePenultimateTrimester = txtVolumePenultimateTrimester.Text;
             request.VolumeLastTrimester = txtVolumeLastTrimester.Text;
             request.Commission = txtCommission.Text;
-            request.ClientGroupId.Id = int.Parse(ddlClientGroup.SelectedValue);
-            request.PurchagesGroupId.Id = int.Parse(ddlPurchagesGroup.SelectedValue);
-            request.CommercialProfileId.Id = int.Parse(ddlCommercialProfile.SelectedValue);
-            request.BranchActivityId.Id = int.Parse(ddlBranchActivity.SelectedValue);
-            request.SubBranchActivityId.Id = int.Parse(ddlSubBranchActivity.SelectedValue);
+            request.ClientGroup.Id = int.Parse(ddlClientGroup.SelectedValue);
+            request.PurchagesGroup.Id = int.Parse(ddlPurchagesGroup.SelectedValue);
+            request.CommercialProfile.Id = int.Parse(ddlCommercialProfile.SelectedValue);
+            request.BranchActivity.Id = int.Parse(ddlBranchActivity.SelectedValue);
+            request.SubBranchActivity.Id = int.Parse(ddlSubBranchActivity.SelectedValue);
             request.VolumePurchages = txtVolumePurchages.Text;
             request.GeographicRegion = txtGeographicRegion.Text;
             return request;
@@ -610,7 +610,7 @@ namespace Presentation.Layouts.Presentation
 
         private ClientRequestItem LoadFlowFiscalFromClient()
         {
-            var request = GetRequestById((int)Request.QueryString["RequestId"]);
+            var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
             request.Cnae = txtCnae.Text;
             request.Suframa = txtSuframa.Text;
             request.SalesOrder.Id = int.Parse(ddlSalesOrder.SelectedValue);
@@ -667,9 +667,9 @@ namespace Presentation.Layouts.Presentation
 
         private ClientRequestItem LoadFlowCasFromClient()
         {
-            var request = GetRequestById((int)Request.QueryString["RequestId"]);
-            request.DateAsignatureCas = txtDateAsignatureCas.Text;
-            request.DateExpirationCas = txtDateExpirationCas.Text;
+            var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
+            request.DateAsignatureCas = DateTime.Parse(txtDateAsignatureCas.Text);
+            request.DateExpirationCas = DateTime.Parse(txtDateExpirationCas.Text);
             return request;
         }
         #endregion
@@ -746,7 +746,7 @@ namespace Presentation.Layouts.Presentation
 
         private ClientRequestItem LoadFlowLogisticsFromClient()
         {
-            var request = GetRequestById((int)Request.QueryString["RequestId"]);
+            var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
             request.DeliveryPriority = txtDeliveryPriority.Text;
             request.DeliveryMethod = txtDeliveryMethod.Text;
             request.ShippingCondition = txtShippingCondition.Text;
@@ -806,7 +806,7 @@ namespace Presentation.Layouts.Presentation
                 validated = false;
             }
 
-            if (string.IsNullOrEmpty(txtAccountTax.Text))
+            if (string.IsNullOrEmpty(txtTaxAccount.Text))
             {
                 AccountTaxRequired.Visible = true;
                 validated = false;
@@ -842,7 +842,7 @@ namespace Presentation.Layouts.Presentation
                 validated = false;
             }
 
-            if (string.IsNullOrEmpty(txtDistrinctForCredit.Text))
+            if (string.IsNullOrEmpty(txtDistrictForCredit.Text))
             {
                 DistrinctForCreditRequired.Visible = true;
                 validated = false;
@@ -877,28 +877,26 @@ namespace Presentation.Layouts.Presentation
 
         private ClientRequestItem LoadFlowCreditFromClient()
         {
-            var request = GetRequestById((int)Request.QueryString["RequestId"]);
+            var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
             request.CorporateName = txtCorporateName.Text;
             request.ClientAccount = txtClientAccount.Text;
             request.RevenueAccount = txtRevenueAccount.Text;
-            request.AccountTax = txtAccountTax.Text;
+            request.TaxAccount = txtTaxAccount.Text;
             request.PaymentMethod.Id = int.Parse(ddlPaymentMethod.SelectedValue);
             request.InscriptionType.Id = int.Parse(ddlInscriptionType.SelectedValue);
-            request.ContractStartDate = txtContractStartDate.Text;
+            request.ContractStartDate = DateTime.Parse(txtContractStartDate.Text);
             request.ContractNumber = txtContractNumber.Text;
             request.StateRegistration = txtStateRegistration.Text;
             request.Street = txtStreetForCredit.Text;
             request.StreetNumber = txtStreetNumberForCredit.Text;
             request.StreetComplement = txtStreetComplementForCredit.Text;
-            //TODO: Change wrong name to "Distrinct"
-            request.District = txtDistrinctForCredit.Text;
+            request.District = txtDistrictForCredit.Text;
             request.State = txtStateForCredit.Text;
             request.Country = txtCountryForCredit.Text;
-            //TODO: Change name to "Cep"
-            request.CEP = txtCepForCredit.Text;
+            request.Cep = txtCepForCredit.Text;
             return request;
         }
         #endregion
-        */
+        
     }
 }

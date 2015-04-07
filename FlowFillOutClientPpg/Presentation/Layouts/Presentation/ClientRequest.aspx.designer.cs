@@ -1198,7 +1198,7 @@ namespace Presentation.Layouts.Presentation {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAccountTax;
+        protected global::System.Web.UI.WebControls.TextBox txtTaxAccount;
         
         /// <summary>
         /// AccountTaxRequired control.
@@ -1333,7 +1333,7 @@ namespace Presentation.Layouts.Presentation {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDistrinctForCredit;
+        protected global::System.Web.UI.WebControls.TextBox txtDistrictForCredit;
         
         /// <summary>
         /// DistrinctForCreditRequired control.
