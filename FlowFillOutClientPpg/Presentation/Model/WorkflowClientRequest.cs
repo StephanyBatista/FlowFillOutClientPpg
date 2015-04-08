@@ -57,6 +57,31 @@ namespace Presentation.Model
             ProcessNextFlow();
         }
 
+        private void MakeEvaluation(ClientRequestItem request, TaskClientRegistrationItem task, TaskStatus status, string observation)
+        {
+            _request = request;
+            Context = new ListModelDataContext(SPContext.Url);
+            
+            if(status == TaskStatus.Iniciado)
+            {
+                //TODO: Atualiza a tarefa com o responsável
+            }
+            else if(status == TaskStatus.Aprovado)
+            {
+                //TODO: Atualizar a solicitação
+                //TODO: Fechar a tarefa atual;
+                NextFlow();    
+            }
+            else if(status == TaskStatus.Reprovado)
+            {
+                //TODO: Atualizar a solicitação
+                //TODO: Fechar a tarefa atual;
+                _request.RequestStatus = RequestStatus.Reprovado;
+                //Finalizar solicitação;
+                NextFlow();
+            }
+        }
+
         private void NextFlow()
         {
             if (_request.RequestStatus == RequestStatus.Finalizado)
