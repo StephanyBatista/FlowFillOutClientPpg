@@ -806,7 +806,7 @@ namespace Presentation.Layouts.Presentation
                 validated = false;
             }
 
-            if (string.IsNullOrEmpty(txtTaxAccount.Text))
+            if (string.IsNullOrEmpty(txtAccountTax.Text))
             {
                 AccountTaxRequired.Visible = true;
                 validated = false;
@@ -842,7 +842,7 @@ namespace Presentation.Layouts.Presentation
                 validated = false;
             }
 
-            if (string.IsNullOrEmpty(txtDistrictForCredit.Text))
+            if (string.IsNullOrEmpty(txtDistrinctForCredit.Text))
             {
                 DistrinctForCreditRequired.Visible = true;
                 validated = false;
@@ -881,7 +881,7 @@ namespace Presentation.Layouts.Presentation
             request.CorporateName = txtCorporateName.Text;
             request.ClientAccount = txtClientAccount.Text;
             request.RevenueAccount = txtRevenueAccount.Text;
-            request.TaxAccount = txtTaxAccount.Text;
+            request.TaxAccount = txtAccountTax.Text;
             request.PaymentMethod.Id = int.Parse(ddlPaymentMethod.SelectedValue);
             request.InscriptionType.Id = int.Parse(ddlInscriptionType.SelectedValue);
             request.ContractStartDate = DateTime.Parse(txtContractStartDate.Text);
@@ -890,7 +890,7 @@ namespace Presentation.Layouts.Presentation
             request.Street = txtStreetForCredit.Text;
             request.StreetNumber = txtStreetNumberForCredit.Text;
             request.StreetComplement = txtStreetComplementForCredit.Text;
-            request.District = txtDistrictForCredit.Text;
+            request.District = txtDistrinctForCredit.Text;
             request.State = txtStateForCredit.Text;
             request.Country = txtCountryForCredit.Text;
             request.Cep = txtCepForCredit.Text;

@@ -59,27 +59,33 @@ namespace Presentation.Model
 
         private void MakeEvaluation(ClientRequestItem request, TaskClientRegistrationItem task, TaskStatus status, string observation)
         {
-            _request = request;
-            Context = new ListModelDataContext(SPContext.Url);
+            Context = new ListModelDataContext(SPContext.Current.Web.Url);
             
+            _request = request;
+            task.TaskUserId = SPContext.Current.Web.CurrentUser.ID;
+
             if(status == TaskStatus.Iniciado)
             {
-                //TODO: Atualiza a tarefa com o responsável
+                task.TaskStatus = TaskStatus.Iniciado;
+                Context.TaskClientRegistration.Attach(task);
             }
             else if(status == TaskStatus.Aprovado)
             {
-                //TODO: Atualizar a solicitação
-                //TODO: Fechar a tarefa atual;
+                task.TaskStatus = TaskStatus.Aprovado;
+                Context.TaskClientRegistration.Attach(task);
                 NextFlow();    
             }
             else if(status == TaskStatus.Reprovado)
             {
-                //TODO: Atualizar a solicitação
-                //TODO: Fechar a tarefa atual;
+                task.TaskStatus = TaskStatus.Reprovado;
+                task.Observation = observation;
+                Context.TaskClientRegistration.Attach(task);
                 _request.RequestStatus = RequestStatus.Reprovado;
-                //Finalizar solicitação;
+                Context.ClientRequest.Attach(_request);
                 NextFlow();
             }
+
+            Context.SubmitChanges();
         }
 
         private void NextFlow()
@@ -91,6 +97,30 @@ namespace Presentation.Model
             {
                 _request.RequestStep = RequestStep.Customer;
                 CreateTask(TaskStep.Customer); 
+            }
+
+            else if (_request.RequestStep == RequestStep.Customer)
+            {
+                _request.RequestStep = RequestStep.Fiscal;
+                CreateTask(TaskStep.Fiscal);
+            }
+
+            else if (_request.RequestStep == RequestStep.Fiscal)
+            {
+                _request.RequestStep = RequestStep.CAS;
+                CreateTask(TaskStep.CAS);
+            }
+
+            else if (_request.RequestStep == RequestStep.CAS)
+            {
+                _request.RequestStep = RequestStep.Logistica;
+                CreateTask(TaskStep.Logistica);
+            }
+
+            else if (_request.RequestStep == RequestStep.Logistica)
+            {
+                _request.RequestStep = RequestStep.Crédito;
+                CreateTask(TaskStep.Crédito);
             }
         }
 

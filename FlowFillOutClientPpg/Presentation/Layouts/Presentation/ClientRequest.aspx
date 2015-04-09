@@ -560,7 +560,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-10">
-                                        <asp:Button runat="server" ID="SaveFlowCustomer" Text="Salvar" CssClass="btn btn-default" OnClick="SaveFlowRequestEvent" />
+                                        <asp:Button runat="server" ID="SaveFlowCustomer" Text="Salvar" CssClass="btn btn-default" OnClick="SaveFlowCustomerEvent" />
                                     </div>
                                 </div>
                             </div>
@@ -636,7 +636,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-10">
-                                        <asp:Button runat="server" ID="SaveFlowFiscal" Text="Salvar" CssClass="btn btn-default" OnClick="SaveFlowRequestEvent" />
+                                        <asp:Button runat="server" ID="SaveFlowFiscal" Text="Salvar" CssClass="btn btn-default" OnClick="SaveFlowFiscalEvent" />
                                     </div>
                                 </div>
                             </div>
@@ -698,7 +698,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-10">
-                                        <asp:Button runat="server" ID="SaveFlowCas" Text="Salvar" CssClass="btn btn-default" OnClick="SaveFlowRequestEvent" />
+                                        <asp:Button runat="server" ID="SaveFlowCas" Text="Salvar" CssClass="btn btn-default" OnClick="SaveFlowCasEvent" />
                                     </div>
                                 </div>
                             </div>
@@ -792,7 +792,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-10">
-                                        <asp:Button runat="server" ID="SaveFlowLogistics" Text="Salvar" CssClass="btn btn-default" OnClick="SaveFlowRequestEvent" />
+                                        <asp:Button runat="server" ID="SaveFlowLogistics" Text="Salvar" CssClass="btn btn-default" OnClick="SaveFlowLogisticsEvent" />
                                     </div>
                                 </div>
                             </div>
@@ -971,7 +971,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-10">
-                                        <asp:Button runat="server" ID="SaveFlowCredit" Text="Salvar" CssClass="btn btn-default" OnClick="SaveFlowRequestEvent" />
+                                        <asp:Button runat="server" ID="SaveFlowCredit" Text="Salvar" CssClass="btn btn-default" OnClick="SaveFlowCreditEvent" />
                                     </div>
                                 </div>
                             </div>
