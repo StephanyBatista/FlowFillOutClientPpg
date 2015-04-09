@@ -112,6 +112,67 @@ namespace Presentation.Layouts.Presentation
             txtState.Text = request.State;
             txtCountry.Text = request.Country;
             txtCep.Text = request.Cep;
+            if (request.PbcGroup != null)
+                ddlPbc.SelectedValue = request.PbcGroup.Id.Value.ToString();
+            txtMunicipalRegistration.Text = request.MunicipalRegistration;
+            txtPriceList.Text = request.PriceList;
+            txtPostage.Text = request.Postage;
+            txtMinimumBillingValue.Text = request.MinimumBillingValue;
+            if (request.VolumeEffectiveDate != null && request.VolumeEffectiveDate.HasValue)
+                txtVolumeEffectiveDate.Text = request.VolumeEffectiveDate.Value.ToString("dd/MM/yyyy");
+            txtVolumeProductMix.Text = request.VolumeProductMix;
+            txtVolumePenultimateTrimester.Text = request.VolumePenultimateTrimester;
+            txtVolumeLastTrimester.Text = request.VolumeLastTrimester;
+            txtCommission.Text = request.Commission;
+            if(request.ClientGroup != null)
+                ddlClientGroup.SelectedValue = request.ClientGroup.Id.Value.ToString();
+            if(request.PurchagesGroup != null)
+                ddlPurchagesGroup.SelectedValue = request.PurchagesGroup.Id.Value.ToString();
+            if(request.CommercialProfile != null)
+                ddlCommercialProfile.SelectedValue = request.CommercialProfile.Id.Value.ToString();
+            if (request.BranchActivity != null)
+                ddlBranchActivity.SelectedValue = request.BranchActivity.Id.Value.ToString();
+            if (request.SubBranchActivity != null)
+                ddlSubBranchActivity.SelectedValue = request.SubBranchActivity.Id.Value.ToString();
+            txtVolumePurchages.Text = request.VolumePurchages;
+            txtGeographicRegion.Text = request.GeographicRegion;
+            txtCnae.Text = request.Cnae;
+            txtSuframa.Text = request.Suframa;
+            if (request.SalesOrder != null)
+                ddlSalesOrder.SelectedValue = request.SalesOrder.Id.Value.ToString();
+            if (request.ContributorType != null)
+                ddlContributorType.SelectedValue = request.SalesOrder.Id.Value.ToString();
+            if (request.DateAsignatureCas != null)
+                txtDateAsignatureCas.Text = request.DateAsignatureCas.Value.ToString("dd/MM/yyyy");
+            if (request.DateExpirationCas != null)
+                txtDateExpirationCas.Text = request.DateExpirationCas.Value.ToString("dd/MM/yyyy");
+            txtDeliveryPriority.Text = request.DeliveryPriority;
+            txtDeliveryMethod.Text = request.DeliveryMethod;
+            txtShippingCondition.Text = request.ShippingCondition;
+            txtPointFob.Text = request.PointFob;
+            txtDeposit.Text = request.Deposit;
+            txtDemandClass.Text = request.DemandClass;
+            txtCorporateName.Text = request.CorporateName;
+            txtClientAccount.Text = request.ClientAccount;
+            txtRevenueAccount.Text = request.RevenueAccount;
+            txtAccountTax.Text = request.TaxAccount;
+            if (request.PaymentMethod != null)
+                ddlPaymentMethod.SelectedValue = request.PaymentMethod.Id.Value.ToString();
+            if (request.InscriptionType != null)
+                ddlInscriptionType.SelectedValue = request.InscriptionType.Id.Value.ToString();
+            if (request.ContractStartDate != null)
+                txtContractStartDate.Text = request.ContractStartDate.Value.ToString("dd/MM/yyyy");
+            txtContractNumber.Text = request.ContractNumber;
+            txtStateRegistration.Text = request.StateRegistration;
+            txtStreetForCredit.Text = request.Street;
+            txtStreetNumberForCredit.Text = request.StreetNumber;
+            txtStreetComplementForCredit.Text = request.StreetComplement;
+            txtDistrinctForCredit.Text = request.District;
+            txtCityForCredit.Text = request.City;
+            txtStateForCredit.Text = request.State;
+            txtCountryForCredit.Text = request.Country;
+            txtCepForCredit.Text = request.Cep;
+
         }
 
         private TaskClientRegistrationItem GetLastTaskOpen(int requestId)
@@ -442,16 +503,18 @@ namespace Presentation.Layouts.Presentation
                 var statusCodeFromApprover = ddlCustomerStatus.SelectedValue;
                 var taskStatus = GetTaskStatusFromApprover(statusCodeFromApprover);
 
-                if (!ValidateApproval(taskStatus, txtCustomerObservation.Text, CustomerObservationRequired, CustomerStatusRequired))
+                if (!ValidateApproval(taskStatus, txtCustomerObservation.Text, CustomerObservationRequired, CustomerStatusRequired) ||
+                    (taskStatus == TaskStatus.Aprovado && !ValidateCustomer()))
                     return;
 
-                if (taskStatus == TaskStatus.Aprovado)
-                {
-                    if (!ValidateCustomer())
-                        return;
+                var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
+                var task = GetLastTaskOpen(int.Parse(Request.QueryString["RequestId"]));
 
-                    var request = LoadFlowCustomerFromClient();
-                }
+                if (taskStatus == TaskStatus.Aprovado)
+                    request = LoadFlowCustomerFromClient(request);
+
+                var workflow = new WorkflowClientRequest();
+                workflow.MakeEvaluation(request, task, taskStatus, txtCustomerObservation.Text);
             }
             catch
             {
@@ -538,9 +601,8 @@ namespace Presentation.Layouts.Presentation
             return validated;
         }
 
-        private ClientRequestItem LoadFlowCustomerFromClient()
+        private ClientRequestItem LoadFlowCustomerFromClient(ClientRequestItem request)
         {
-            var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
             request.PbcGroup.Id = int.Parse(ddlPbc.SelectedValue);
             request.MunicipalRegistration = txtMunicipalRegistration.Text;
             request.PriceList = txtPriceList.Text;
@@ -572,16 +634,18 @@ namespace Presentation.Layouts.Presentation
                 var statusCodeFromApprover = ddlCustomerStatus.SelectedValue;
                 var taskStatus = GetTaskStatusFromApprover(statusCodeFromApprover);
 
-                if (!ValidateApproval(taskStatus, txtFiscalObservation.Text, FiscalObservationRequired, FiscalStatusRequired))
+                if (!ValidateApproval(taskStatus, txtFiscalObservation.Text, FiscalObservationRequired, FiscalStatusRequired) ||
+                    (taskStatus == TaskStatus.Aprovado && !ValidateFiscal()))
                     return;
 
+                var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
+                var task = GetLastTaskOpen(int.Parse(Request.QueryString["RequestId"]));
+                
                 if (taskStatus == TaskStatus.Aprovado)
-                {
-                    if (!ValidateFiscal())
-                        return;
+                    request = LoadFlowFiscalFromClient(request);
 
-                    var request = LoadFlowFiscalFromClient();
-                }
+                var workflow = new WorkflowClientRequest();
+                workflow.MakeEvaluation(request, task, taskStatus, txtCustomerObservation.Text);
             }
             catch
             {
@@ -608,9 +672,8 @@ namespace Presentation.Layouts.Presentation
             return validated;
         }
 
-        private ClientRequestItem LoadFlowFiscalFromClient()
+        private ClientRequestItem LoadFlowFiscalFromClient(ClientRequestItem request)
         {
-            var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
             request.Cnae = txtCnae.Text;
             request.Suframa = txtSuframa.Text;
             request.SalesOrder.Id = int.Parse(ddlSalesOrder.SelectedValue);
@@ -629,16 +692,18 @@ namespace Presentation.Layouts.Presentation
                 var statusCodeFromApprover = ddlCustomerStatus.SelectedValue;
                 var taskStatus = GetTaskStatusFromApprover(statusCodeFromApprover);
 
-                if (!ValidateApproval(taskStatus, txtCasObservation.Text, CasObservationRequired, CasStatusRequired))
+                if (!ValidateApproval(taskStatus, txtCasObservation.Text, CasObservationRequired, CasStatusRequired) ||
+                    (taskStatus == TaskStatus.Aprovado && !ValidateCas()))
                     return;
 
-                if (taskStatus == TaskStatus.Aprovado)
-                {
-                    if (!ValidateCas())
-                        return;
+                var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
+                var task = GetLastTaskOpen(int.Parse(Request.QueryString["RequestId"]));
 
-                    var request = LoadFlowCasFromClient();
-                }
+                if (taskStatus == TaskStatus.Aprovado)
+                    request = LoadFlowCasFromClient(request);
+
+                var workflow = new WorkflowClientRequest();
+                workflow.MakeEvaluation(request, task, taskStatus, txtCustomerObservation.Text);
             }
             catch
             {
@@ -665,9 +730,8 @@ namespace Presentation.Layouts.Presentation
             return validated;
         }
 
-        private ClientRequestItem LoadFlowCasFromClient()
+        private ClientRequestItem LoadFlowCasFromClient(ClientRequestItem request)
         {
-            var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
             request.DateAsignatureCas = DateTime.Parse(txtDateAsignatureCas.Text);
             request.DateExpirationCas = DateTime.Parse(txtDateExpirationCas.Text);
             return request;
@@ -684,16 +748,18 @@ namespace Presentation.Layouts.Presentation
                 var statusCodeFromApprover = ddlCustomerStatus.SelectedValue;
                 var taskStatus = GetTaskStatusFromApprover(statusCodeFromApprover);
 
-                if (!ValidateApproval(taskStatus, txtLogisticsObservation.Text, LogisticsObservationRequired, LogisticsStatusRequired))
+                if (!ValidateApproval(taskStatus, txtLogisticsObservation.Text, LogisticsObservationRequired, LogisticsStatusRequired) ||
+                    (taskStatus == TaskStatus.Aprovado && !ValidateLogistics()))
                     return;
 
-                if (taskStatus == TaskStatus.Aprovado)
-                {
-                    if (!ValidateLogistics())
-                        return;
+                var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
+                var task = GetLastTaskOpen(int.Parse(Request.QueryString["RequestId"]));
 
-                    var request = LoadFlowLogisticsFromClient();
-                }
+                if (taskStatus == TaskStatus.Aprovado)
+                    request = LoadFlowLogisticsFromClient(request);
+
+                var workflow = new WorkflowClientRequest();
+                workflow.MakeEvaluation(request, task, taskStatus, txtCustomerObservation.Text);
             }
             catch
             {
@@ -744,9 +810,8 @@ namespace Presentation.Layouts.Presentation
             return validated;
         }
 
-        private ClientRequestItem LoadFlowLogisticsFromClient()
+        private ClientRequestItem LoadFlowLogisticsFromClient(ClientRequestItem request)
         {
-            var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
             request.DeliveryPriority = txtDeliveryPriority.Text;
             request.DeliveryMethod = txtDeliveryMethod.Text;
             request.ShippingCondition = txtShippingCondition.Text;
@@ -767,16 +832,18 @@ namespace Presentation.Layouts.Presentation
                 var statusCodeFromApprover = ddlCustomerStatus.SelectedValue;
                 var taskStatus = GetTaskStatusFromApprover(statusCodeFromApprover);
 
-                if (!ValidateApproval(taskStatus, txtLogisticsObservation.Text, LogisticsObservationRequired, LogisticsStatusRequired))
+                if (!ValidateApproval(taskStatus, txtLogisticsObservation.Text, LogisticsObservationRequired, LogisticsStatusRequired) ||
+                    (taskStatus == TaskStatus.Aprovado && !ValidateCredit()))
                     return;
 
-                if (taskStatus == TaskStatus.Aprovado)
-                {
-                    if (!ValidateCredit())
-                        return;
+                var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
+                var task = GetLastTaskOpen(int.Parse(Request.QueryString["RequestId"]));
 
-                    var request = LoadFlowCreditFromClient();
-                }
+                if (taskStatus == TaskStatus.Aprovado)
+                    request = LoadFlowCreditFromClient(request);
+
+                var workflow = new WorkflowClientRequest();
+                workflow.MakeEvaluation(request, task, taskStatus, txtCustomerObservation.Text);
             }
             catch
             {
@@ -875,9 +942,8 @@ namespace Presentation.Layouts.Presentation
             return validated;
         }
 
-        private ClientRequestItem LoadFlowCreditFromClient()
+        private ClientRequestItem LoadFlowCreditFromClient(ClientRequestItem request)
         {
-            var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
             request.CorporateName = txtCorporateName.Text;
             request.ClientAccount = txtClientAccount.Text;
             request.RevenueAccount = txtRevenueAccount.Text;
