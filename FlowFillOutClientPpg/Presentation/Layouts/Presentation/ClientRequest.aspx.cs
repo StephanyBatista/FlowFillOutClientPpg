@@ -42,11 +42,10 @@ namespace Presentation.Layouts.Presentation
 
         private void EnableForm()
         {
+            BindDatasOfChoise();
+            
             if(Request.QueryString["RequestId"] == null)
-            {
                 formRequest.Enabled = true;
-                BindDatasOfChoise();
-            }
             else
             {
                 int requestId;
@@ -56,12 +55,19 @@ namespace Presentation.Layouts.Presentation
                     var request = GetRequestById(requestId);
                     LoadRequestToClient(request);
 
-                    //TODO: When o group Customer start the flow, the request status must be "Started"
                     if (request.RequestStatus == RequestStatus.Iniciado || request.RequestStatus == RequestStatus.Pendente)
                     {
                         var task = GetLastTaskOpen(request.Id.Value);
                         if (task.TaskStep == TaskStep.Customer)
                             formCustomer.Enabled = true;
+                        else if (task.TaskStep == TaskStep.Fiscal)
+                            formFiscal.Enabled = true;
+                        else if (task.TaskStep == TaskStep.CAS)
+                            formCas.Enabled = true;
+                        else if (task.TaskStep == TaskStep.Logistica)
+                            formLogistics.Enabled = true;
+                        else if (task.TaskStep == TaskStep.Crédito)
+                            formCredit.Enabled = true;
                     }
                 }
             }
@@ -183,7 +189,6 @@ namespace Presentation.Layouts.Presentation
                     c.Request.Id == requestId && 
                     (c.TaskStatus == TaskStatus.Pendente || c.TaskStatus == TaskStatus.Iniciado))
                     .LastOrDefault();
-
             }
         }
 
@@ -264,6 +269,10 @@ namespace Presentation.Layouts.Presentation
                 BindCommercialProfileData(context);
                 BindBranchActivityData(context);
                 BindSubBranchActivityData(context);
+                BindSalesOrderData(context);
+                BindContributorTypeData(context);
+                BindPaymentMethodData(context);
+                BindInscriptionTypeData(context);
             }
         }
 
@@ -347,6 +356,42 @@ namespace Presentation.Layouts.Presentation
             ddlSubBranchActivity.DataTextField = "Title";
             ddlSubBranchActivity.DataSource = items;
             ddlSubBranchActivity.DataBind();
+        }
+
+        private void BindSalesOrderData(ListModelDataContext context)
+        {
+            var items = context.SaleOrder.ToList();
+            ddlSalesOrder.DataValueField = "ID";
+            ddlSalesOrder.DataTextField = "Title";
+            ddlSalesOrder.DataSource = items;
+            ddlSalesOrder.DataBind();
+        }
+
+        private void BindContributorTypeData(ListModelDataContext context)
+        {
+            var items = context.ContributorType.ToList();
+            ddlContributorType.DataValueField = "ID";
+            ddlContributorType.DataTextField = "Title";
+            ddlContributorType.DataSource = items;
+            ddlContributorType.DataBind();
+        }
+
+        private void BindPaymentMethodData(ListModelDataContext context)
+        {
+            var items = context.PaymentMethod.ToList();
+            ddlPaymentMethod.DataValueField = "ID";
+            ddlPaymentMethod.DataTextField = "Title";
+            ddlPaymentMethod.DataSource = items;
+            ddlPaymentMethod.DataBind();
+        }
+
+        private void BindInscriptionTypeData(ListModelDataContext context)
+        {
+            var items = context.InscriptionType.ToList();
+            ddlInscriptionType.DataValueField = "ID";
+            ddlInscriptionType.DataTextField = "Title";
+            ddlInscriptionType.DataSource = items;
+            ddlInscriptionType.DataBind();
         }
         #endregion
 
