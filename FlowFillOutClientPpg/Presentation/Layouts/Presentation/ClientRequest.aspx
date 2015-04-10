@@ -37,8 +37,10 @@
             $(".aba").hover(
                 function(){$(this).addClass("ativa")},
                 function(){$(this).removeClass("ativa")}
-            );	
+            );
 
+            if ($("#ctl00_PlaceHolderMain_hddScript").val() != '')
+                eval($("#ctl00_PlaceHolderMain_hddScript").val());
         });
 
     </script>
@@ -50,37 +52,38 @@
     <h1>Solicitação de item</h1>
 
     <asp:HiddenField runat="server" ID="hddRequestId" />
+    <asp:HiddenField runat="server" ID="hddScript" />
 
     <div class="TabControl">
         <div id="header">
             <ul class="abas">
                 <li>
-                    <div class="aba">
+                    <div class="aba" id="abaRequest">
                         <span>Solicitação</span>
                     </div>
                 </li>
                 <li>
-                    <div class="aba">
+                    <div class="aba" id="abaCustomer">
                         <span>Customer</span>
                     </div>
                 </li>
                 <li>
-                    <div class="aba">
+                    <div class="aba" id="abaFiscal">
                         <span>Fiscal</span>
                     </div>
                 </li>
                 <li>
-                    <div class="aba">
+                    <div class="aba" id="abaCas">
                         <span>CAS</span>
                     </div>
                 </li>
                 <li>
-                    <div class="aba">
+                    <div class="aba" id="abaLogistic">
                         <span>Logistica</span>
                     </div>
                 </li>
                 <li>
-                    <div class="aba">
+                    <div class="aba" id="abaCredit">
                         <span>Crédito</span>
                     </div>
                 </li>

@@ -20,6 +20,7 @@ namespace Presentation.Layouts.Presentation
                 BindDatasOfChoise();
                 EnableForm();
             }
+
         }
 
         private void HideAllRequired()
@@ -37,7 +38,8 @@ namespace Presentation.Layouts.Presentation
             AccountTaxRequired.Visible = ContractStartDateRequired.Visible = ContractNumberRequired.Visible = StateRegistrationRequired.Visible = 
             StreetForCreditRequired.Visible = StreetNumberForCreditRequired.Visible = DistrinctForCreditRequired.Visible =
             CityForCreditRequired.Visible = StateForCreditRequired.Visible = CountryForCreditRequired.Visible = CepForCreditRequired.Visible =
-            CreditObservationRequired.Visible = false;
+            CreditObservationRequired.Visible = CasStatusRequired.Visible = CreditStatusRequired.Visible = CustomerStatusRequired.Visible =
+            FiscalStatusRequired.Visible = LogisticsStatusRequired.Visible = false;
         }
 
         private void EnableForm()
@@ -55,7 +57,9 @@ namespace Presentation.Layouts.Presentation
                     var request = GetRequestById(requestId);
                     LoadRequestToClient(request);
 
-                    if (request.RequestStatus == RequestStatus.Iniciado || request.RequestStatus == RequestStatus.Pendente)
+                    if (request.RequestStatus == RequestStatus.Iniciado || 
+                        request.RequestStatus == RequestStatus.Pendente ||
+                        request.RequestStatus == RequestStatus.Retorno)
                     {
                         var task = GetLastTaskOpen(request.Id.Value);
                         if (task.TaskStep == TaskStep.Customer)
@@ -407,8 +411,12 @@ namespace Presentation.Layouts.Presentation
 
                 var request = LoadRequestFromClient();
                 var workflow = new WorkflowClientRequest();
-                if(workflow.Request(request))
-                    SetRequestMessageForSuccess(request.Id.Value);
+                if (workflow.Request(request))
+                {
+                    var msg = string.Format("Solicitação N° {0} salva e enviada para o fluxo do processo", request.Id.Value);
+                    SetRequestMessageForSuccess(msg);
+                    formRequest.Enabled = false;
+                }
                 else
                     SetRequestMessageForError();
             }
@@ -522,12 +530,11 @@ namespace Presentation.Layouts.Presentation
             return request;
         }        
 
-        private void SetRequestMessageForSuccess(int requestId)
+        private void SetRequestMessageForSuccess(string msg)
         {
-            RequestMessage.Text = string.Format("Solicitação N° {0} salva e enviada para o fluxo do processo", requestId);
+            RequestMessage.Text = msg;
             RequestMessage.ForeColor = Color.Black;
-            divMessage.Visible = true;
-            formRequest.Enabled = false;
+            divMessage.Visible = true;            
         }
 
         private void SetRequestMessageForError()
@@ -541,6 +548,7 @@ namespace Presentation.Layouts.Presentation
         #region FlowCustomer
         protected void SaveFlowCustomerEvent(object sender, EventArgs e)
         {
+            hddScript.Value = "$('#abaCustomer').click();";
             HideAllRequired();
 
             try
@@ -560,6 +568,8 @@ namespace Presentation.Layouts.Presentation
 
                 var workflow = new WorkflowClientRequest();
                 workflow.MakeEvaluation(request, task, taskStatus, txtCustomerObservation.Text);
+                SetRequestMessageForSuccess("Fluxo salvo");
+                formCustomer.Enabled = false;
             }
             catch
             {
@@ -648,7 +658,7 @@ namespace Presentation.Layouts.Presentation
 
         private ClientRequestItem LoadFlowCustomerFromClient(ClientRequestItem request)
         {
-            request.PbcGroup.Id = int.Parse(ddlPbc.SelectedValue);
+            request.PbcGroup = new Item { Id = int.Parse(ddlPbc.SelectedValue) };
             request.MunicipalRegistration = txtMunicipalRegistration.Text;
             request.PriceList = txtPriceList.Text;
             request.Postage = txtPostage.Text;
@@ -658,11 +668,11 @@ namespace Presentation.Layouts.Presentation
             request.VolumePenultimateTrimester = txtVolumePenultimateTrimester.Text;
             request.VolumeLastTrimester = txtVolumeLastTrimester.Text;
             request.Commission = txtCommission.Text;
-            request.ClientGroup.Id = int.Parse(ddlClientGroup.SelectedValue);
-            request.PurchagesGroup.Id = int.Parse(ddlPurchagesGroup.SelectedValue);
-            request.CommercialProfile.Id = int.Parse(ddlCommercialProfile.SelectedValue);
-            request.BranchActivity.Id = int.Parse(ddlBranchActivity.SelectedValue);
-            request.SubBranchActivity.Id = int.Parse(ddlSubBranchActivity.SelectedValue);
+            request.ClientGroup = new Item { Id = int.Parse(ddlClientGroup.SelectedValue) };
+            request.PurchagesGroup = new Item { Id = int.Parse(ddlPurchagesGroup.SelectedValue) };
+            request.CommercialProfile = new Item { Id = int.Parse(ddlCommercialProfile.SelectedValue) };
+            request.BranchActivity = new Item { Id = int.Parse(ddlBranchActivity.SelectedValue) };
+            request.SubBranchActivity = new Item { Id = int.Parse(ddlSubBranchActivity.SelectedValue) };
             request.VolumePurchages = txtVolumePurchages.Text;
             request.GeographicRegion = txtGeographicRegion.Text;
             return request;
@@ -672,11 +682,12 @@ namespace Presentation.Layouts.Presentation
         #region FlowFiscal
         protected void SaveFlowFiscalEvent(object sender, EventArgs e)
         {
+            hddScript.Value = "$('#abaFiscal').click();";
             HideAllRequired();
 
             try
             {
-                var statusCodeFromApprover = ddlCustomerStatus.SelectedValue;
+                var statusCodeFromApprover = ddlFiscalStatus.SelectedValue;
                 var taskStatus = GetTaskStatusFromApprover(statusCodeFromApprover);
 
                 if (!ValidateApproval(taskStatus, txtFiscalObservation.Text, FiscalObservationRequired, FiscalStatusRequired) ||
@@ -691,6 +702,8 @@ namespace Presentation.Layouts.Presentation
 
                 var workflow = new WorkflowClientRequest();
                 workflow.MakeEvaluation(request, task, taskStatus, txtCustomerObservation.Text);
+                SetRequestMessageForSuccess("Fluxo salvo");
+                formFiscal.Enabled = false;
             }
             catch
             {
@@ -721,8 +734,8 @@ namespace Presentation.Layouts.Presentation
         {
             request.Cnae = txtCnae.Text;
             request.Suframa = txtSuframa.Text;
-            request.SalesOrder.Id = int.Parse(ddlSalesOrder.SelectedValue);
-            request.ContributorType.Id = int.Parse(ddlContributorType.SelectedValue);
+            request.SalesOrder = new Item { Id = int.Parse(ddlSalesOrder.SelectedValue) };
+            request.ContributorType = new Item { Id = int.Parse(ddlContributorType.SelectedValue) };
             return request;
         }
         #endregion
@@ -730,11 +743,12 @@ namespace Presentation.Layouts.Presentation
         #region FlowCAS
         protected void SaveFlowCasEvent(object sender, EventArgs e)
         {
+            hddScript.Value = "$('#abaCas').click();";
             HideAllRequired();
 
             try
             {
-                var statusCodeFromApprover = ddlCustomerStatus.SelectedValue;
+                var statusCodeFromApprover = ddlCasStatus.SelectedValue;
                 var taskStatus = GetTaskStatusFromApprover(statusCodeFromApprover);
 
                 if (!ValidateApproval(taskStatus, txtCasObservation.Text, CasObservationRequired, CasStatusRequired) ||
@@ -749,6 +763,8 @@ namespace Presentation.Layouts.Presentation
 
                 var workflow = new WorkflowClientRequest();
                 workflow.MakeEvaluation(request, task, taskStatus, txtCustomerObservation.Text);
+                SetRequestMessageForSuccess("Fluxo salvo");
+                formCas.Enabled = false;
             }
             catch
             {
@@ -786,11 +802,12 @@ namespace Presentation.Layouts.Presentation
         #region FlowLogistics
         protected void SaveFlowLogisticsEvent(object sender, EventArgs e)
         {
+            hddScript.Value = "$('#abaLogistic').click();";
             HideAllRequired();
 
             try
             {
-                var statusCodeFromApprover = ddlCustomerStatus.SelectedValue;
+                var statusCodeFromApprover = ddlLogisticsStatus.SelectedValue;
                 var taskStatus = GetTaskStatusFromApprover(statusCodeFromApprover);
 
                 if (!ValidateApproval(taskStatus, txtLogisticsObservation.Text, LogisticsObservationRequired, LogisticsStatusRequired) ||
@@ -805,6 +822,8 @@ namespace Presentation.Layouts.Presentation
 
                 var workflow = new WorkflowClientRequest();
                 workflow.MakeEvaluation(request, task, taskStatus, txtCustomerObservation.Text);
+                SetRequestMessageForSuccess("Fluxo salvo");
+                formLogistics.Enabled = false;
             }
             catch
             {
@@ -870,11 +889,12 @@ namespace Presentation.Layouts.Presentation
         #region FlowCredit
         protected void SaveFlowCreditEvent(object sender, EventArgs e)
         {
+            hddScript.Value = "$('#abaCredit').click();";
             HideAllRequired();
 
             try
             {
-                var statusCodeFromApprover = ddlCustomerStatus.SelectedValue;
+                var statusCodeFromApprover = ddlCreditStatus.SelectedValue;
                 var taskStatus = GetTaskStatusFromApprover(statusCodeFromApprover);
 
                 if (!ValidateApproval(taskStatus, txtLogisticsObservation.Text, LogisticsObservationRequired, LogisticsStatusRequired) ||
@@ -889,6 +909,8 @@ namespace Presentation.Layouts.Presentation
 
                 var workflow = new WorkflowClientRequest();
                 workflow.MakeEvaluation(request, task, taskStatus, txtCustomerObservation.Text);
+                SetRequestMessageForSuccess("Fluxo salvo");
+                formCredit.Enabled = false;
             }
             catch
             {
@@ -993,8 +1015,8 @@ namespace Presentation.Layouts.Presentation
             request.ClientAccount = txtClientAccount.Text;
             request.RevenueAccount = txtRevenueAccount.Text;
             request.TaxAccount = txtAccountTax.Text;
-            request.PaymentMethod.Id = int.Parse(ddlPaymentMethod.SelectedValue);
-            request.InscriptionType.Id = int.Parse(ddlInscriptionType.SelectedValue);
+            request.PaymentMethod = new Item { Id = int.Parse(ddlPaymentMethod.SelectedValue) };
+            request.InscriptionType = new Item { Id = int.Parse(ddlInscriptionType.SelectedValue) };
             request.ContractStartDate = DateTime.Parse(txtContractStartDate.Text);
             request.ContractNumber = txtContractNumber.Text;
             request.StateRegistration = txtStateRegistration.Text;

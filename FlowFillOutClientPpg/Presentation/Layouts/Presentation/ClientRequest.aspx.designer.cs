@@ -22,6 +22,15 @@ namespace Presentation.Layouts.Presentation {
         protected global::System.Web.UI.WebControls.HiddenField hddRequestId;
         
         /// <summary>
+        /// hddScript control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hddScript;
+        
+        /// <summary>
         /// formRequest control.
         /// </summary>
         /// <remarks>

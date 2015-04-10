@@ -10,6 +10,7 @@ namespace Presentation.Model
     public class WorkflowClientRequest
     {
         private ClientRequestItem _request;
+        private TaskClientRegistrationItem _task;
         public ListModelDataContext Context { get; private set; }
         
         public bool Request(ClientRequestItem request)
@@ -62,37 +63,38 @@ namespace Presentation.Model
             Context = new ListModelDataContext(SPContext.Current.Web.Url);
             
             _request = request;
+            _task = task;
             task.TaskUserId = SPContext.Current.Web.CurrentUser.ID;
 
             if(status == TaskStatus.Iniciado)
             {
-                task.TaskStatus = TaskStatus.Iniciado;
+                _task.TaskStatus = TaskStatus.Iniciado;
                 if(_request.RequestStatus != RequestStatus.Retorno)
                     _request.RequestStatus = RequestStatus.Iniciado;
             }
             else if(status == TaskStatus.Aprovado)
             {
-                task.TaskStatus = TaskStatus.Aprovado;
+                _task.TaskStatus = TaskStatus.Aprovado;
                 if (_request.RequestStatus != RequestStatus.Retorno)
                     _request.RequestStatus = RequestStatus.Iniciado;
                 NextFlow();    
             }
             else if(status == TaskStatus.Reprovado)
             {
-                task.TaskStatus = TaskStatus.Reprovado;
-                task.Observation = observation;
+                _task.TaskStatus = TaskStatus.Reprovado;
+                _task.Observation = observation;
                 _request.RequestStatus = RequestStatus.Reprovado;
                 NextFlow();
             }
             else if (status == TaskStatus.Retorno)
             {
-                task.TaskStatus = TaskStatus.Retorno;
-                task.Observation = observation;
+                _task.TaskStatus = TaskStatus.Retorno;
+                _task.Observation = observation;
                 _request.RequestStatus = RequestStatus.Retorno;
                 NextFlow();
             }
 
-            Context.TaskClientRegistration.Attach(task);
+            Context.TaskClientRegistration.Attach(_task);
             Context.ClientRequest.Attach(_request);
             Context.SubmitChanges();
         }
@@ -102,18 +104,20 @@ namespace Presentation.Model
             if (_request.RequestStatus == RequestStatus.Finalizado || _request.RequestStatus == RequestStatus.Reprovado)
                 return;
 
-            else if (_request.RequestStep == null || _request.RequestStatus == RequestStatus.Retorno)
+            if(_task != null && _task.TaskStatus == TaskStatus.Retorno)
+            {
+                CreateTask(TaskStep.Customer); 
+            }
+            else if (_request.RequestStep == null)
             {
                 _request.RequestStep = RequestStep.Customer;
                 CreateTask(TaskStep.Customer); 
             }
-
             else if (_request.RequestStep == RequestStep.Customer)
             {
                 _request.RequestStep = RequestStep.Fiscal;
                 CreateTask(TaskStep.Fiscal);
             }
-
             else if (_request.RequestStep == RequestStep.Fiscal)
             {
                 if(_request.RequestStatus != RequestStatus.Retorno)
@@ -124,12 +128,10 @@ namespace Presentation.Model
                 else
                 {
                     _request.RequestStatus = RequestStatus.Iniciado;
-                    _request.RequestStep = RequestStep.Fiscal;
                     CreateTask(TaskStep.Fiscal);
                 }
                 
             }
-
             else if (_request.RequestStep == RequestStep.CAS)
             {
                 if (_request.RequestStatus != RequestStatus.Retorno)
@@ -140,12 +142,10 @@ namespace Presentation.Model
                 else
                 {
                     _request.RequestStatus = RequestStatus.Iniciado;
-                    _request.RequestStep = RequestStep.CAS;
                     CreateTask(TaskStep.CAS);
                 }
                 
             }
-
             else if (_request.RequestStep == RequestStep.Logistica)
             {
                 if (_request.RequestStatus != RequestStatus.Retorno)
@@ -156,8 +156,17 @@ namespace Presentation.Model
                 else
                 {
                     _request.RequestStatus = RequestStatus.Iniciado;
-                    _request.RequestStep = RequestStep.Logistica;
                     CreateTask(TaskStep.Logistica);
+                }
+            }
+            else if (_request.RequestStep == RequestStep.Crédito)
+            {
+                if (_request.RequestStatus != RequestStatus.Retorno)
+                    _request.RequestStatus = RequestStatus.Finalizado;
+                else
+                {
+                    _request.RequestStatus = RequestStatus.Iniciado;
+                    CreateTask(TaskStep.Crédito);
                 }
             }
         }
