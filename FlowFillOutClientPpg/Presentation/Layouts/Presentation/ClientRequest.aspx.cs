@@ -704,6 +704,8 @@ namespace Presentation.Layouts.Presentation
             request.SubBranchActivity = new Item { Id = int.Parse(ddlSubBranchActivity.SelectedValue) };
             request.VolumePurchages = txtVolumePurchages.Text;
             request.GeographicRegion = txtGeographicRegion.Text;
+            if (fileSintegra.HasFile)
+                LoadAttachment(fileSintegra, request, "sintegra");
             return request;
         }
 
@@ -1071,6 +1073,8 @@ namespace Presentation.Layouts.Presentation
             request.State = txtStateForCredit.Text;
             request.Country = txtCountryForCredit.Text;
             request.Cep = txtCepForCredit.Text;
+            if (fileSerasa.HasFile)
+                LoadAttachment(fileSerasa, request, "serasa");
             return request;
         }
 

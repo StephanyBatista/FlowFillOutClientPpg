@@ -59,32 +59,32 @@
             <ul class="abas">
                 <li>
                     <div class="aba" id="abaRequest">
-                        <span>Solicitação</span>
+                        <span style="cursor:pointer">Solicitação</span>
                     </div>
                 </li>
                 <li>
                     <div class="aba" id="abaCustomer">
-                        <span>Customer</span>
+                        <span style="cursor:pointer">Customer</span>
                     </div>
                 </li>
                 <li>
                     <div class="aba" id="abaFiscal">
-                        <span>Fiscal</span>
+                        <span style="cursor:pointer">Fiscal</span>
                     </div>
                 </li>
                 <li>
                     <div class="aba" id="abaCas">
-                        <span>CAS</span>
+                        <span style="cursor:pointer">CAS</span>
                     </div>
                 </li>
                 <li>
                     <div class="aba" id="abaLogistic">
-                        <span>Logistica</span>
+                        <span style="cursor:pointer">Logistica</span>
                     </div>
                 </li>
                 <li>
                     <div class="aba" id="abaCredit">
-                        <span>Crédito</span>
+                        <span style="cursor:pointer">Crédito</span>
                     </div>
                 </li>
             </ul>
@@ -100,7 +100,8 @@
                                 <h4>Cadastro de cliente</h4>
                                 <hr />
 
-                                <asp:LinkButton ID="linkRequest" runat="server" Visible="false" Text="Acessar solicitação"></asp:LinkButton>
+                                <asp:LinkButton ID="linkRequest" runat="server" Visible="false" Text="Acessar solicitação" style="cursor:pointer">
+                                </asp:LinkButton>
 
                                 <br />
                                 <br />
@@ -543,6 +544,13 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">SINTEGRA </span>
+                                    <div class="col-md-10">
+                                        <asp:FileUpload runat="server" ID="fileSintegra" CssClass="form-control" />
+                                    </div>
+                                </div>
+
                                 <h5>Aprovação</h5>
                                 <hr />
 
@@ -953,6 +961,13 @@
                                     <div class="col-md-10">
                                         <asp:TextBox ID="txtCepForCredit" runat="server" CssClass="form-control"></asp:TextBox>
                                         <span id="CepForCreditRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">SERASA </span>
+                                    <div class="col-md-10">
+                                        <asp:FileUpload runat="server" ID="fileSerasa" CssClass="form-control" />
                                     </div>
                                 </div>
 

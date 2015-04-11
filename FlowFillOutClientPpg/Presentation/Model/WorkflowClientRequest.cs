@@ -97,6 +97,7 @@ namespace Presentation.Model
             Context.TaskClientRegistration.Attach(_task);
             Context.ClientRequest.Attach(_request);
             Context.SubmitChanges();
+            _request.SaveAttachments(SPContext.Current.Web);
         }
 
         private void NextFlow()
