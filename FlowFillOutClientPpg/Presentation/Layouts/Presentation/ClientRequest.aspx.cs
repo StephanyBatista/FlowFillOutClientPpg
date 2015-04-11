@@ -52,6 +52,9 @@ namespace Presentation.Layouts.Presentation
             {
                 int requestId;
 
+                linkRequest.Visible = true;
+                linkRequest.OnClientClick = string.Format("window.location = '{0}/Lists/Solicita Cliente/DispForm.aspx?ID={1}'", SPContext.Current.Web.Url, Request.QueryString["RequestId"]);
+
                 if(int.TryParse(Request.QueryString["RequestId"], out requestId))
                 {
                     var request = GetRequestById(requestId);
@@ -63,15 +66,30 @@ namespace Presentation.Layouts.Presentation
                     {
                         var task = GetLastTaskOpen(request.Id.Value);
                         if (task.TaskStep == TaskStep.Customer)
+                        {
                             formCustomer.Enabled = true;
+                            ddlCustomerStatus.SelectedValue = GetCodeFromTaskStatus(task.TaskStatus.Value);
+                        }
                         else if (task.TaskStep == TaskStep.Fiscal)
+                        {
                             formFiscal.Enabled = true;
+                            ddlFiscalStatus.SelectedValue = GetCodeFromTaskStatus(task.TaskStatus.Value);
+                        }
                         else if (task.TaskStep == TaskStep.CAS)
+                        {
                             formCas.Enabled = true;
+                            ddlCasStatus.SelectedValue = GetCodeFromTaskStatus(task.TaskStatus.Value);
+                        }
                         else if (task.TaskStep == TaskStep.Logistica)
+                        {
                             formLogistics.Enabled = true;
+                            ddlLogisticsStatus.SelectedValue = GetCodeFromTaskStatus(task.TaskStatus.Value);
+                        }
                         else if (task.TaskStep == TaskStep.Crédito)
+                        {
                             formCredit.Enabled = true;
+                            ddlCreditStatus.SelectedValue = GetCodeFromTaskStatus(task.TaskStatus.Value);
+                        }
                     }
                 }
             }
@@ -129,7 +147,7 @@ namespace Presentation.Layouts.Presentation
             txtPostage.Text = request.Postage;
             txtMinimumBillingValue.Text = request.MinimumBillingValue;
             if (request.VolumeEffectiveDate != null && request.VolumeEffectiveDate.HasValue)
-                txtVolumeEffectiveDate.Text = request.VolumeEffectiveDate.Value.ToString("dd/MM/yyyy");
+                txtVolumeEffectiveDate.SelectedDate = request.VolumeEffectiveDate.Value;
             txtVolumeProductMix.Text = request.VolumeProductMix;
             txtVolumePenultimateTrimester.Text = request.VolumePenultimateTrimester;
             txtVolumeLastTrimester.Text = request.VolumeLastTrimester;
@@ -153,9 +171,9 @@ namespace Presentation.Layouts.Presentation
             if (request.ContributorType != null)
                 ddlContributorType.SelectedValue = request.SalesOrder.Id.Value.ToString();
             if (request.DateAsignatureCas != null)
-                txtDateAsignatureCas.Text = request.DateAsignatureCas.Value.ToString("dd/MM/yyyy");
+                txtDateAsignatureCas.SelectedDate = request.DateAsignatureCas.Value;
             if (request.DateExpirationCas != null)
-                txtDateExpirationCas.Text = request.DateExpirationCas.Value.ToString("dd/MM/yyyy");
+                txtDateExpirationCas.SelectedDate = request.DateExpirationCas.Value;
             txtDeliveryPriority.Text = request.DeliveryPriority;
             txtDeliveryMethod.Text = request.DeliveryMethod;
             txtShippingCondition.Text = request.ShippingCondition;
@@ -171,7 +189,7 @@ namespace Presentation.Layouts.Presentation
             if (request.InscriptionType != null)
                 ddlInscriptionType.SelectedValue = request.InscriptionType.Id.Value.ToString();
             if (request.ContractStartDate != null)
-                txtContractStartDate.Text = request.ContractStartDate.Value.ToString("dd/MM/yyyy");
+                txtContractStartDate.SelectedDate = request.ContractStartDate.Value;
             txtContractNumber.Text = request.ContractNumber;
             txtStateRegistration.Text = request.StateRegistration;
             txtStreetForCredit.Text = request.Street;
@@ -235,6 +253,23 @@ namespace Presentation.Layouts.Presentation
                     return TaskStatus.Retorno;
                 default:
                     return TaskStatus.None;
+            }
+        }
+
+        private string GetCodeFromTaskStatus(TaskStatus status)
+        {
+            switch (status)
+            {
+                case TaskStatus.Iniciado:
+                    return "1";
+                case TaskStatus.Aprovado:
+                    return "2";
+                case TaskStatus.Reprovado:
+                    return "3";
+                case TaskStatus.Retorno:
+                    return "4";
+                default:
+                    return "0";
             }
         }
 
@@ -605,7 +640,7 @@ namespace Presentation.Layouts.Presentation
                 validated = false;
             }
 
-            if (string.IsNullOrEmpty(txtVolumeEffectiveDate.Text))
+            if (txtVolumeEffectiveDate.SelectedDate == null)
             {
                 VolumeEffectiveDateRequired.Visible = true;
                 validated = false;
@@ -647,12 +682,6 @@ namespace Presentation.Layouts.Presentation
                 validated = false;
             }
 
-            if (string.IsNullOrEmpty(txtCustomerObservation.Text))
-            {
-                CustomerObservationRequired.Visible = true;
-                validated = false;
-            }
-
             return validated;
         }
 
@@ -663,7 +692,7 @@ namespace Presentation.Layouts.Presentation
             request.PriceList = txtPriceList.Text;
             request.Postage = txtPostage.Text;
             request.MinimumBillingValue = txtMinimumBillingValue.Text;
-            request.VolumeEffectiveDate = DateTime.Parse(txtVolumeEffectiveDate.Text);
+            request.VolumeEffectiveDate =txtVolumeEffectiveDate.SelectedDate;
             request.VolumeProductMix = txtVolumeProductMix.Text;
             request.VolumePenultimateTrimester = txtVolumePenultimateTrimester.Text;
             request.VolumeLastTrimester = txtVolumeLastTrimester.Text;
@@ -676,6 +705,11 @@ namespace Presentation.Layouts.Presentation
             request.VolumePurchages = txtVolumePurchages.Text;
             request.GeographicRegion = txtGeographicRegion.Text;
             return request;
+        }
+
+        protected void VolumeEffectiveDateEvent(object sender, EventArgs e)
+        {
+            hddScript.Value = "$('#abaCustomer').click();";
         }
         #endregion
 
@@ -776,13 +810,13 @@ namespace Presentation.Layouts.Presentation
         {
             var validated = true;
 
-            if (string.IsNullOrEmpty(txtDateAsignatureCas.Text))
+            if (txtDateAsignatureCas.SelectedDate == null)
             {
                 DateAsignatureCasRequired.Visible = true;
                 validated = false;
             }
 
-            if (string.IsNullOrEmpty(txtDateExpirationCas.Text))
+            if (txtDateExpirationCas.SelectedDate == null)
             {
                 DateExpirationCasRequired.Visible = true;
                 validated = false;
@@ -793,9 +827,19 @@ namespace Presentation.Layouts.Presentation
 
         private ClientRequestItem LoadFlowCasFromClient(ClientRequestItem request)
         {
-            request.DateAsignatureCas = DateTime.Parse(txtDateAsignatureCas.Text);
-            request.DateExpirationCas = DateTime.Parse(txtDateExpirationCas.Text);
+            request.DateAsignatureCas = txtDateAsignatureCas.SelectedDate;
+            request.DateExpirationCas = txtDateExpirationCas.SelectedDate;
             return request;
+        }
+
+        protected void DateAsignatureCasEvent(object sender, EventArgs e)
+        {
+            hddScript.Value = "$('#abaCas').click();";
+        }
+
+        protected void DateExpirationCasEvent(object sender, EventArgs e)
+        {
+            hddScript.Value = "$('#abaCas').click();";
         }
         #endregion
 
@@ -946,7 +990,7 @@ namespace Presentation.Layouts.Presentation
                 validated = false;
             }
 
-            if (string.IsNullOrEmpty(txtContractStartDate.Text))
+            if (txtContractStartDate.SelectedDate == null)
             {
                 ContractStartDateRequired.Visible = true;
                 validated = false;
@@ -1017,7 +1061,7 @@ namespace Presentation.Layouts.Presentation
             request.TaxAccount = txtAccountTax.Text;
             request.PaymentMethod = new Item { Id = int.Parse(ddlPaymentMethod.SelectedValue) };
             request.InscriptionType = new Item { Id = int.Parse(ddlInscriptionType.SelectedValue) };
-            request.ContractStartDate = DateTime.Parse(txtContractStartDate.Text);
+            request.ContractStartDate = txtContractStartDate.SelectedDate;
             request.ContractNumber = txtContractNumber.Text;
             request.StateRegistration = txtStateRegistration.Text;
             request.Street = txtStreetForCredit.Text;
@@ -1028,6 +1072,11 @@ namespace Presentation.Layouts.Presentation
             request.Country = txtCountryForCredit.Text;
             request.Cep = txtCepForCredit.Text;
             return request;
+        }
+
+        protected void ContractStartDateEvent(object sender, EventArgs e)
+        {
+            hddScript.Value = "$('#abaCredit').click();";
         }
         #endregion
         

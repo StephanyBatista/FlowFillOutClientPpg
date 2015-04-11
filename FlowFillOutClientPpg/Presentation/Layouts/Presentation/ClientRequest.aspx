@@ -100,6 +100,11 @@
                                 <h4>Cadastro de cliente</h4>
                                 <hr />
 
+                                <asp:LinkButton ID="linkRequest" runat="server" Visible="false" Text="Acessar solicitação"></asp:LinkButton>
+
+                                <br />
+                                <br />
+
                                 <div class="form-group">
                                     <span class="control-label col-md-2">Vendedor/Representante</span>
                                     <div class="col-md-10">
@@ -449,7 +454,8 @@
                                 <div class="form-group">
                                     <span class="control-label col-md-2">Volume - Data Vigencia</span>
                                     <div class="col-md-10">
-                                        <asp:TextBox ID="txtVolumeEffectiveDate" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <asp:Calendar runat="server" ID="txtVolumeEffectiveDate" OnSelectionChanged="VolumeEffectiveDateEvent"></asp:Calendar>
+                                        <%--<asp:TextBox ID="txtVolumeEffectiveDate" runat="server" CssClass="form-control"></asp:TextBox>--%>
                                         <span id="VolumeEffectiveDateRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
                                     </div>
                                 </div>
@@ -661,7 +667,8 @@
                                 <div class="form-group">
                                     <span class="control-label col-md-2">Data Assinatura CAS</span>
                                     <div class="col-md-10">
-                                        <asp:TextBox ID="txtDateAsignatureCas" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <asp:Calendar runat="server" ID="txtDateAsignatureCas" OnSelectionChanged="DateAsignatureCasEvent" ></asp:Calendar>
+                                        <%--<asp:TextBox ID="txtDateAsignatureCas" runat="server" CssClass="form-control"></asp:TextBox>--%>
                                         <span id="DateAsignatureCasRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
                                     </div>
                                 </div>
@@ -669,7 +676,8 @@
                                 <div class="form-group">
                                     <span class="control-label col-md-2">Data Validade CAS</span>
                                     <div class="col-md-10">
-                                        <asp:TextBox ID="txtDateExpirationCas" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <asp:Calendar runat="server" ID="txtDateExpirationCas" OnSelectionChanged="DateExpirationCasEvent" ></asp:Calendar>
+                                        <%--<asp:TextBox ID="txtDateExpirationCas" runat="server" CssClass="form-control"></asp:TextBox>--%>
                                         <span id="DateExpirationCasRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
                                     </div>
                                 </div>
@@ -849,21 +857,22 @@
                                 <div class="form-group">
                                     <span class="control-label col-md-2">Método de Pagamento</span>
                                     <div class="col-md-10">
-                                        <asp:DropDownList id="ddlPaymentMethod" runat="server"></asp:DropDownList>
+                                        <asp:DropDownList id="ddlPaymentMethod" runat="server" CssClass="form-control"></asp:DropDownList>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <span class="control-label col-md-2">Tipo de Inscrição</span>
                                     <div class="col-md-10">
-                                        <asp:DropDownList id="ddlInscriptionType" runat="server"></asp:DropDownList>
+                                        <asp:DropDownList id="ddlInscriptionType" runat="server" CssClass="form-control"></asp:DropDownList>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <span class="control-label col-md-2">Data Inicio Contrato Vendor</span>
                                     <div class="col-md-10">
-                                        <asp:TextBox ID="txtContractStartDate" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <asp:Calendar runat="server" ID="txtContractStartDate" OnSelectionChanged="ContractStartDateEvent" ></asp:Calendar>
+                                        <%--<asp:TextBox ID="txtContractStartDate" runat="server" CssClass="form-control"></asp:TextBox>--%>
                                         <span id="ContractStartDateRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
                                     </div>
                                 </div>
