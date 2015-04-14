@@ -2418,4 +2418,7 @@ public enum RegistrationGroup : int
 
     [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Crédito")]
     Crédito = 32,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Cadastro")]
+    Cadastro = 64,
 }

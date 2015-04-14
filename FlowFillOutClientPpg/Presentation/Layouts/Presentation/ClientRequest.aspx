@@ -87,6 +87,11 @@
                         <span style="cursor:pointer">Crédito</span>
                     </div>
                 </li>
+                <li>
+                    <div class="aba" id="abaCadastre">
+                        <span style="cursor:pointer">Cadastro</span>
+                    </div>
+                </li>
             </ul>
         </div>
         <div id="content">

@@ -11,11 +11,13 @@ namespace Presentation.Model
     {
         private ClientRequestItem _request;
         private TaskClientRegistrationItem _task;
-        public ListModelDataContext Context { get; private set; }
+        public ListModelDataContext contextModel { get; private set; }
+        private WorkflowEmail workflowEmail;
         
         public bool Request(ClientRequestItem request)
         {
             _request = request;
+            _request.RequesterId = SPContext.Current.Web.CurrentUser.ID;
             var run = new RunWithElevatedPrivileges();
             return run.Execute(RequestDelegate);
         }
@@ -24,14 +26,14 @@ namespace Presentation.Model
         {
             try
             {
-                Context = new ListModelDataContext(oWeb.Url);
+                contextModel = new ListModelDataContext(oWeb.Url);
                 if (_request.Id.HasValue)
                     throw new Exception("Request already save. Use method Update");
 
                 LoadListsToRequest();
                 _request.RequestStatus = RequestStatus.Pendente;
                 _request.Created = _request.Modified = DateTime.Now;
-                Context.ClientRequest.InsertOnSubmit(_request);
+                contextModel.ClientRequest.InsertOnSubmit(_request);
                 RequestBase(oWeb);
                 return true;
             }catch
@@ -42,25 +44,25 @@ namespace Presentation.Model
 
         private void LoadListsToRequest()
         {
-            _request.Sbu = Context.Sbu.Where(c => c.Id == _request.Sbu.Id).FirstOrDefault();
-            _request.PhoneFirstType = Context.PhoneType.Where(c => c.Id == _request.PhoneFirstType.Id).FirstOrDefault();
+            _request.Sbu = contextModel.Sbu.Where(c => c.Id == _request.Sbu.Id).FirstOrDefault();
+            _request.PhoneFirstType = contextModel.PhoneType.Where(c => c.Id == _request.PhoneFirstType.Id).FirstOrDefault();
             if (_request.PhoneSecondType != null)
-                _request.PhoneSecondType = Context.PhoneType.Where(c => c.Id == _request.PhoneSecondType.Id).FirstOrDefault();
+                _request.PhoneSecondType = contextModel.PhoneType.Where(c => c.Id == _request.PhoneSecondType.Id).FirstOrDefault();
             if (_request.PaymentCondition != null)
-                _request.PaymentCondition = Context.PaymentCondition.Where(c => c.Id == _request.PaymentCondition.Id).FirstOrDefault();
+                _request.PaymentCondition = contextModel.PaymentCondition.Where(c => c.Id == _request.PaymentCondition.Id).FirstOrDefault();
         }
 
         private void RequestBase(SPWeb oWeb)
         {
             NextFlow();
-            Context.SubmitChanges();
+            contextModel.SubmitChanges();
             _request.SaveAttachments(oWeb);
             ProcessNextFlow();
         }
 
         public void MakeEvaluation(ClientRequestItem request, TaskClientRegistrationItem task, TaskStatus status, string observation)
         {
-            Context = new ListModelDataContext(SPContext.Current.Web.Url);
+            contextModel = new ListModelDataContext(SPContext.Current.Web.Url);
             
             _request = request;
             _task = task;
@@ -94,17 +96,18 @@ namespace Presentation.Model
                 NextFlow();
             }
 
-            Context.TaskClientRegistration.Attach(_task);
-            Context.ClientRequest.Attach(_request);
-            Context.SubmitChanges();
+            contextModel.TaskClientRegistration.Attach(_task);
+            contextModel.ClientRequest.Attach(_request);
+            contextModel.SubmitChanges();
             _request.SaveAttachments(SPContext.Current.Web);
+            ProcessNextFlow();
         }
 
         private void NextFlow()
         {
             if (_request.RequestStatus == RequestStatus.Finalizado || _request.RequestStatus == RequestStatus.Reprovado)
                 return;
-
+            
             if(_task != null && _task.TaskStatus == TaskStatus.Retorno)
             {
                 CreateTask(TaskStep.Customer); 
@@ -188,22 +191,24 @@ namespace Presentation.Model
             task.Request = _request;
             task.TaskStatus = TaskStatus.Pendente;
             task.TaskStep = step;
-            Context.TaskClientRegistration.InsertOnSubmit(task);
+            contextModel.TaskClientRegistration.InsertOnSubmit(task);
         }
 
         private void ProcessNextFlow()
         {
-            //if (_request.RequestStatus == RequestStatus.Reprovado)
-            //    SendEmailReprovedToRequester();
+            workflowEmail = new WorkflowEmail(_request);
 
-            //if (_request.RequestStatus == RequestStatus.Retorno)
-            //    SendEmailReturnToRequester();
+            if (_request.RequestStatus == RequestStatus.Reprovado)
+                workflowEmail.SendEmailReproved();
 
-            //else if (_request.RequestStatus == RequestStatus.Finalizado)
-            //    SendEmailStepFinishToRequester();
+            if (_request.RequestStatus == RequestStatus.Retorno)
+                workflowEmail.SendEmailReturn();
 
-            //else if (_request.RequestStep != null)
-            //    SendEmailStepInitialCadastre();
+            else if (_request.RequestStatus == RequestStatus.Finalizado)
+                workflowEmail.SendEmailStepFinish();
+
+            else if (_request.RequestStep != null)
+                workflowEmail.SendEmailStepInitialCadastre();
         }
     }
 }

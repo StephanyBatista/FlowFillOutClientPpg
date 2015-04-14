@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using Presentation.Model;
 using System.Drawing;
 using System.Web.UI;
+using Microsoft.SharePoint.Utilities;
 
 namespace Presentation.Layouts.Presentation
 {
@@ -20,7 +21,6 @@ namespace Presentation.Layouts.Presentation
                 BindDatasOfChoise();
                 EnableForm();
             }
-
         }
 
         private void HideAllRequired()
@@ -89,6 +89,11 @@ namespace Presentation.Layouts.Presentation
                         {
                             formCredit.Enabled = true;
                             ddlCreditStatus.SelectedValue = GetCodeFromTaskStatus(task.TaskStatus.Value);
+                        }
+                        else if (task.TaskStep == TaskStep.Cadastro)
+                        {
+                            formCadastre.Enabled = true;
+                            ddlCadastreStatus.SelectedValue = GetCodeFromTaskStatus(task.TaskStatus.Value);
                         }
                     }
                 }
@@ -1104,7 +1109,7 @@ namespace Presentation.Layouts.Presentation
                 var workflow = new WorkflowClientRequest();
                 workflow.MakeEvaluation(request, task, taskStatus, null);
                 SetRequestMessageForSuccess("Fluxo salvo");
-                formCredit.Enabled = false;
+                formCadastre.Enabled = false;
             }
             catch
             {
