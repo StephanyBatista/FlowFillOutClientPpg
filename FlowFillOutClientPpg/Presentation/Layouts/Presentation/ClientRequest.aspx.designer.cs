@@ -1498,6 +1498,42 @@ namespace Presentation.Layouts.Presentation {
         protected global::System.Web.UI.WebControls.Button SaveFlowCredit;
         
         /// <summary>
+        /// formCadastre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel formCadastre;
+        
+        /// <summary>
+        /// ddlCadastreStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCadastreStatus;
+        
+        /// <summary>
+        /// CadastreStatusRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CadastreStatusRequired;
+        
+        /// <summary>
+        /// SaveFlowCadastre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button SaveFlowCadastre;
+        
+        /// <summary>
         /// divMessage control.
         /// </summary>
         /// <remarks>

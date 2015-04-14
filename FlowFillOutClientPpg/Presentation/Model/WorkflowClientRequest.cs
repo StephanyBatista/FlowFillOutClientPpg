@@ -163,12 +163,21 @@ namespace Presentation.Model
             else if (_request.RequestStep == RequestStep.Crédito)
             {
                 if (_request.RequestStatus != RequestStatus.Retorno)
-                    _request.RequestStatus = RequestStatus.Finalizado;
+                {
+                    _request.RequestStep = RequestStep.Cadastro;
+                    CreateTask(TaskStep.Cadastro);
+                }
+                    
                 else
                 {
                     _request.RequestStatus = RequestStatus.Iniciado;
                     CreateTask(TaskStep.Crédito);
                 }
+            }
+
+            else if (_request.RequestStep == RequestStep.Cadastro)
+            {
+                _request.RequestStatus = RequestStatus.Finalizado;
             }
         }
 

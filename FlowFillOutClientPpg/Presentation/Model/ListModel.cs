@@ -2343,6 +2343,9 @@ public enum RequestStep : int
 
     [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Crédito")]
     Crédito = 32,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Cadastro")]
+    Cadastro = 64,
 }
 
 public enum TaskStatus : int
@@ -2389,6 +2392,9 @@ public enum TaskStep : int
 
     [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Crédito")]
     Crédito = 32,
+
+    [Microsoft.SharePoint.Linq.ChoiceAttribute(Value = "Cadastro")]
+    Cadastro = 64,
 }
 
 public enum RegistrationGroup : int

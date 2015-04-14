@@ -1007,6 +1007,40 @@
 
                 </asp:Panel>
 		    </div>
+
+            <div class="conteudo">
+			    <asp:Panel ID="formCadastre" runat="server" Enabled="false">
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-horizontal">
+                                <h4>Fluxo Cadastro</h4>
+                                
+                                <h5>Aprovação</h5>
+                                <hr />
+
+                                <div class="form-group">
+                                    <span class="control-label col-md-2">Status</span>
+                                    <div class="col-md-10">
+                                        <asp:DropDownList ID="ddlCadastreStatus" runat="server" CssClass="form-control">
+                                            <asp:ListItem Value="-1" Text=""></asp:ListItem>
+                                            <asp:ListItem Value="1" Text="Iniciar"></asp:ListItem>
+                                            <asp:ListItem Value="2" Text="Finalizar"></asp:ListItem>
+                                        </asp:DropDownList>
+                                        <span id="CadastreStatusRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <asp:Button runat="server" ID="SaveFlowCadastre" Text="Salvar" CssClass="btn btn-default" OnClick="SaveFlowCadastreEvent" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </asp:Panel>
+		    </div>
         </div>
 
     </div>

@@ -39,7 +39,7 @@ namespace Presentation.Layouts.Presentation
             StreetForCreditRequired.Visible = StreetNumberForCreditRequired.Visible = DistrinctForCreditRequired.Visible =
             CityForCreditRequired.Visible = StateForCreditRequired.Visible = CountryForCreditRequired.Visible = CepForCreditRequired.Visible =
             CreditObservationRequired.Visible = CasStatusRequired.Visible = CreditStatusRequired.Visible = CustomerStatusRequired.Visible =
-            FiscalStatusRequired.Visible = LogisticsStatusRequired.Visible = false;
+            FiscalStatusRequired.Visible = LogisticsStatusRequired.Visible = CadastreStatusRequired.Visible = false;
         }
 
         private void EnableForm()
@@ -943,7 +943,7 @@ namespace Presentation.Layouts.Presentation
                 var statusCodeFromApprover = ddlCreditStatus.SelectedValue;
                 var taskStatus = GetTaskStatusFromApprover(statusCodeFromApprover);
 
-                if (!ValidateApproval(taskStatus, txtLogisticsObservation.Text, LogisticsObservationRequired, LogisticsStatusRequired) ||
+                if (!ValidateApproval(taskStatus, txtCreditObservation.Text, CreditObservationRequired, CreditStatusRequired) ||
                     (taskStatus == TaskStatus.Aprovado && !ValidateCredit()))
                     return;
 
@@ -1083,6 +1083,35 @@ namespace Presentation.Layouts.Presentation
             hddScript.Value = "$('#abaCredit').click();";
         }
         #endregion
-        
+
+        #region FlowCadastre
+        protected void SaveFlowCadastreEvent(object sender, EventArgs e)
+        {
+            hddScript.Value = "$('#abaCadastre').click();";
+            HideAllRequired();
+
+            try
+            {
+                var statusCodeFromApprover = ddlCadastreStatus.SelectedValue;
+                var taskStatus = GetTaskStatusFromApprover(statusCodeFromApprover);
+
+                if (!ValidateApproval(taskStatus, null, null, CadastreStatusRequired))
+                    return;
+
+                var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
+                var task = GetLastTaskOpen(int.Parse(Request.QueryString["RequestId"]));
+
+                var workflow = new WorkflowClientRequest();
+                workflow.MakeEvaluation(request, task, taskStatus, null);
+                SetRequestMessageForSuccess("Fluxo salvo");
+                formCredit.Enabled = false;
+            }
+            catch
+            {
+                SetRequestMessageForError();
+            }
+        }
+        #endregion
+
     }
 }
