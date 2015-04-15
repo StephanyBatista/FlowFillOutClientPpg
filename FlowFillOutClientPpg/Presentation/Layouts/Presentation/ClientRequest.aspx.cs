@@ -54,6 +54,7 @@ namespace Presentation.Layouts.Presentation
 
                 linkRequest.Visible = true;
                 linkRequest.OnClientClick = string.Format("window.location = '{0}/Lists/Solicita Cliente/DispForm.aspx?ID={1}'", SPContext.Current.Web.Url, Request.QueryString["RequestId"]);
+                linkPrintRequest.OnClientClick = string.Format("window.location = '{0}/_layouts/Presentation/PrintRequest.aspx?RequestId={1}'", SPContext.Current.Web.Url, Request.QueryString["RequestId"]);
 
                 if(int.TryParse(Request.QueryString["RequestId"], out requestId))
                 {

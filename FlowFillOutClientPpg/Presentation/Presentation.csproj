@@ -58,6 +58,13 @@
     <Compile Include="Layouts\Presentation\ClientRequest.aspx.designer.cs">
       <DependentUpon>ClientRequest.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layouts\Presentation\PrintRequest.aspx.cs">
+      <DependentUpon>PrintRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Presentation\PrintRequest.aspx.designer.cs">
+      <DependentUpon>PrintRequest.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Layouts\Presentation\TaskClient.aspx.cs">
       <DependentUpon>TaskClient.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -116,6 +123,7 @@
     <Content Include="Layouts\Presentation\js\jquery.min.js" />
     <Content Include="Layouts\Presentation\js\respond.js" />
     <Content Include="Layouts\Presentation\js\respond.min.js" />
+    <Content Include="Layouts\Presentation\PrintRequest.aspx" />
     <Content Include="Layouts\Presentation\TaskClient.aspx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

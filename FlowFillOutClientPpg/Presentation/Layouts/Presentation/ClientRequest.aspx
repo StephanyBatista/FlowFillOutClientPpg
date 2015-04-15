@@ -1021,6 +1021,9 @@
                             <div class="form-horizontal">
                                 <h4>Fluxo Cadastro</h4>
                                 
+                                <asp:LinkButton ID="linkPrintRequest" runat="server" Text="Impressão solicitação" style="cursor:pointer">
+                                </asp:LinkButton>
+
                                 <h5>Aprovação</h5>
                                 <hr />
 
