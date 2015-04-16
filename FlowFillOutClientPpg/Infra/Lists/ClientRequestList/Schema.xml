@@ -399,7 +399,7 @@
           
           
           
-        <FieldRef Name="Attachments"></FieldRef><FieldRef Name="Vendedor_x002f_Representante" /><FieldRef Name="SBU" /><FieldRef Name="CNPJ_x002f_CPFDatasul" /><FieldRef Name="NomeFantasia" /><FieldRef Name="Status" /><FieldRef Name="Solicitante" /><FieldRef Name="Etapa" /><FieldRef Name="CNAE" /><FieldRef Name="SUFRAMA" /><FieldRef Name="DataAssinaturaCAS" /><FieldRef Name="DataValidadeCAS" /><FieldRef Name="PrioridadeEntrega" /><FieldRef Name="MetodoEntrega" /><FieldRef Name="Condi_x00e7__x00e3_oFrete" /><FieldRef Name="PontoFOB" /><FieldRef Name="Deposito" /><FieldRef Name="ClasseDemanda" /><FieldRef Name="Raz_x00e3_oSocial" /><FieldRef Name="ContaCliente" /><FieldRef Name="ContaReceita" /><FieldRef Name="ContaImposto" /><FieldRef Name="DataInicioContrato" /><FieldRef Name="NumeroContrato" /><FieldRef Name="Inscri_x00e7__x00e3_oEstadual" /><FieldRef Name="OrdemVenda" /><FieldRef Name="TipoContribuinte" /><FieldRef Name="M_x00e9_todoPagamento" /><FieldRef Name="TIpoInscri_x00e7__x00e3_o" /></ViewFields>
+        <FieldRef Name="Attachments"></FieldRef><FieldRef Name="Vendedor_x002f_Representante" /><FieldRef Name="SBU" /><FieldRef Name="CNPJ_x002f_CPFDatasul" /><FieldRef Name="NomeFantasia" /><FieldRef Name="Status" /><FieldRef Name="Solicitante" /><FieldRef Name="Etapa" /><FieldRef Name="Raz_x00e3_oSocial" /></ViewFields>
         <Query>
           <OrderBy>
 

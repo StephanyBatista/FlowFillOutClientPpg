@@ -80,6 +80,8 @@
     <Compile Include="Model\WorkflowClientRequest.cs" />
     <Compile Include="Model\WorkflowEmail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\Encryption.cs" />
+    <Compile Include="Util\EncryptionRequestParameter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="key.snk" />

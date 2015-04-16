@@ -180,6 +180,7 @@ public partial class ListModelDataContext : Microsoft.SharePoint.Linq.DataContex
 [Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type = typeof(ClientRequestItem))]
 [Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type = typeof(TaskClientRegistrationItem))]
 [Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type = typeof(UserOfClientRegistrationItem))]
+[Serializable]
 public partial class Item : Microsoft.SharePoint.Linq.ITrackEntityState, Microsoft.SharePoint.Linq.ITrackOriginalValues, System.ComponentModel.INotifyPropertyChanged, System.ComponentModel.INotifyPropertyChanging
 {
 
@@ -2047,6 +2048,7 @@ public partial class ClientRequestItem : Item
 }
 
 [Microsoft.SharePoint.Linq.ContentTypeAttribute(Name = "TaskClientRegistratinContentType", Id = "0x01", List = "Tarefa Cadastro Cliente")]
+[Serializable]
 public partial class TaskClientRegistrationItem : Item
 {
 

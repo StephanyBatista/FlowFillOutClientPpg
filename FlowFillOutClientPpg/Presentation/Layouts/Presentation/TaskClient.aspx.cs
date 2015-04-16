@@ -3,6 +3,7 @@ using Microsoft.SharePoint;
 using Microsoft.SharePoint.WebControls;
 using System.Linq;
 using System.Web.UI.WebControls;
+using Presentation.Util;
 
 namespace Presentation.Layouts.Presentation
 {
@@ -12,6 +13,8 @@ namespace Presentation.Layouts.Presentation
         {
             if (!IsPostBack)
                 BindTasks(UserGroup());
+
+            
         }
 
         private RegistrationGroup UserGroup()
@@ -23,7 +26,9 @@ namespace Presentation.Layouts.Presentation
                 if (!query.Any())
                     return RegistrationGroup.None;
 
-                return query.FirstOrDefault().RegistrationGroup.Value;
+                ViewState["RegistrationGroup"] = query.FirstOrDefault().RegistrationGroup.Value;
+
+                return (RegistrationGroup)ViewState["RegistrationGroup"];
             }
         }
 
@@ -59,9 +64,10 @@ namespace Presentation.Layouts.Presentation
                 throw new Exception("Error in method ApproverRowDataBound, cast HyperRequest");
 
             linkRequest.Text = task.Request.Id.ToString();
-            linkRequest.NavigateUrl = string.Format("{0}/_layouts/Presentation/ClientRequest.aspx?RequestId={1}",
+            linkRequest.NavigateUrl = string.Format("{0}/_layouts/Presentation/ClientRequest.aspx?RequestId={1}&p={2}",
                 SPContext.Current.Web.Url,
-                task.Request.Id);
+                task.Request.Id,
+                Server.UrlEncode(Encryption.Encrypt(task.Id.ToString() + "@" + ((RegistrationGroup)ViewState["RegistrationGroup"]).GetHashCode().ToString())));
 
         }
     }

@@ -8,6 +8,7 @@ using Presentation.Model;
 using System.Drawing;
 using System.Web.UI;
 using Microsoft.SharePoint.Utilities;
+using Presentation.Util;
 
 namespace Presentation.Layouts.Presentation
 {
@@ -42,63 +43,89 @@ namespace Presentation.Layouts.Presentation
             FiscalStatusRequired.Visible = LogisticsStatusRequired.Visible = CadastreStatusRequired.Visible = false;
         }
 
+        private void DecryptParameter()
+        {
+            var text = Server.UrlDecode(Encryption.Decrypt(Request.QueryString["p"]));
+            
+            var taskId = int.Parse(text.Split('@')[0]);
+            ViewState["TaskId"] = taskId;
+
+            var groupId = int.Parse(text.Split('@')[1]);
+            ViewState["Group"] = (RegistrationGroup)groupId;
+        }
+
         private void EnableForm()
         {
             BindDatasOfChoise();
-            
-            if(Request.QueryString["RequestId"] == null)
+
+            if (Request.QueryString["RequestId"] == null || Request.QueryString["p"] == null)
                 formRequest.Enabled = true;
             else
             {
+                DecryptParameter();
                 int requestId;
 
-                linkRequest.Visible = true;
-                linkRequest.OnClientClick = string.Format("window.location = '{0}/Lists/Solicita Cliente/DispForm.aspx?ID={1}'", SPContext.Current.Web.Url, Request.QueryString["RequestId"]);
-                linkPrintRequest.OnClientClick = string.Format("window.location = '{0}/_layouts/Presentation/PrintRequest.aspx?RequestId={1}'", SPContext.Current.Web.Url, Request.QueryString["RequestId"]);
+                SetLinksOfRequest();
 
                 if(int.TryParse(Request.QueryString["RequestId"], out requestId))
                 {
                     var request = GetRequestById(requestId);
+                    var task = GetTaskById((int)ViewState["TaskId"]);
                     LoadRequestToClient(request);
 
-                    if (request.RequestStatus == RequestStatus.Iniciado || 
-                        request.RequestStatus == RequestStatus.Pendente ||
-                        request.RequestStatus == RequestStatus.Retorno)
-                    {
-                        var task = GetLastTaskOpen(request.Id.Value);
-                        if (task.TaskStep == TaskStep.Customer)
-                        {
-                            formCustomer.Enabled = true;
-                            ddlCustomerStatus.SelectedValue = GetCodeFromTaskStatus(task.TaskStatus.Value);
-                        }
-                        else if (task.TaskStep == TaskStep.Fiscal)
-                        {
-                            formFiscal.Enabled = true;
-                            ddlFiscalStatus.SelectedValue = GetCodeFromTaskStatus(task.TaskStatus.Value);
-                        }
-                        else if (task.TaskStep == TaskStep.CAS)
-                        {
-                            formCas.Enabled = true;
-                            ddlCasStatus.SelectedValue = GetCodeFromTaskStatus(task.TaskStatus.Value);
-                        }
-                        else if (task.TaskStep == TaskStep.Logistica)
-                        {
-                            formLogistics.Enabled = true;
-                            ddlLogisticsStatus.SelectedValue = GetCodeFromTaskStatus(task.TaskStatus.Value);
-                        }
-                        else if (task.TaskStep == TaskStep.Crédito)
-                        {
-                            formCredit.Enabled = true;
-                            ddlCreditStatus.SelectedValue = GetCodeFromTaskStatus(task.TaskStatus.Value);
-                        }
-                        else if (task.TaskStep == TaskStep.Cadastro)
-                        {
-                            formCadastre.Enabled = true;
-                            ddlCadastreStatus.SelectedValue = GetCodeFromTaskStatus(task.TaskStatus.Value);
-                        }
-                    }
+                    if (HasPermissionToEvaluation(request, task))
+                        EnableEvaluationForm(task);
                 }
             }
+        }
+
+        private void SetLinksOfRequest()
+        {
+            linkRequest.Visible = true;
+            linkRequest.OnClientClick = string.Format("window.location = '{0}/Lists/Solicita Cliente/DispForm.aspx?ID={1}'; return false;", SPContext.Current.Web.Url, Request.QueryString["RequestId"]);
+            linkPrintRequest.OnClientClick = string.Format("window.location = '{0}/_layouts/Presentation/PrintRequest.aspx?RequestId={1}'; return false;", SPContext.Current.Web.Url, Request.QueryString["RequestId"]);
+        }
+
+        private void EnableEvaluationForm(TaskClientRegistrationItem task)
+        {
+            if (task.TaskStep == TaskStep.Customer)
+            {
+                formCustomer.Enabled = true;
+                ddlCustomerStatus.SelectedValue = GetCodeFromTaskStatus(task.TaskStatus.Value);
+            }
+            else if (task.TaskStep == TaskStep.Fiscal)
+            {
+                formFiscal.Enabled = true;
+                ddlFiscalStatus.SelectedValue = GetCodeFromTaskStatus(task.TaskStatus.Value);
+            }
+            else if (task.TaskStep == TaskStep.CAS)
+            {
+                formCas.Enabled = true;
+                ddlCasStatus.SelectedValue = GetCodeFromTaskStatus(task.TaskStatus.Value);
+            }
+            else if (task.TaskStep == TaskStep.Logistica)
+            {
+                formLogistics.Enabled = true;
+                ddlLogisticsStatus.SelectedValue = GetCodeFromTaskStatus(task.TaskStatus.Value);
+            }
+            else if (task.TaskStep == TaskStep.Crédito)
+            {
+                formCredit.Enabled = true;
+                ddlCreditStatus.SelectedValue = GetCodeFromTaskStatus(task.TaskStatus.Value);
+            }
+            else if (task.TaskStep == TaskStep.Cadastro)
+            {
+                formCadastre.Enabled = true;
+                ddlCadastreStatus.SelectedValue = GetCodeFromTaskStatus(task.TaskStatus.Value);
+            }
+        }
+
+        private static bool HasPermissionToEvaluation(ClientRequestItem request, TaskClientRegistrationItem task)
+        {
+            return (request.RequestStatus == RequestStatus.Iniciado ||
+                                    request.RequestStatus == RequestStatus.Pendente ||
+                                    request.RequestStatus == RequestStatus.Retorno) &&
+                                    (task.TaskStatus == TaskStatus.Iniciado || task.TaskStatus == TaskStatus.Pendente);
         }
 
         private ClientRequestItem GetRequestById(int requestId)
@@ -216,6 +243,15 @@ namespace Presentation.Layouts.Presentation
                 return context.TaskClientRegistration.Where(c => 
                     c.Request.Id == requestId && 
                     (c.TaskStatus == TaskStatus.Pendente || c.TaskStatus == TaskStatus.Iniciado))
+                    .LastOrDefault();
+            }
+        }
+
+        private TaskClientRegistrationItem GetTaskById(int id)
+        {
+            using (var context = new ListModelDataContext(SPContext.Current.Web.Url))
+            {
+                return context.TaskClientRegistration.Where(c => c.Id == id)
                     .LastOrDefault();
             }
         }
@@ -602,7 +638,7 @@ namespace Presentation.Layouts.Presentation
                     return;
 
                 var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
-                var task = GetLastTaskOpen(int.Parse(Request.QueryString["RequestId"]));
+                var task = GetTaskById((int)ViewState["TaskId"]);
 
                 if (taskStatus == TaskStatus.Aprovado)
                     request = LoadFlowCustomerFromClient(request);
@@ -737,7 +773,7 @@ namespace Presentation.Layouts.Presentation
                     return;
 
                 var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
-                var task = GetLastTaskOpen(int.Parse(Request.QueryString["RequestId"]));
+                var task = GetTaskById((int)ViewState["TaskId"]);
                 
                 if (taskStatus == TaskStatus.Aprovado)
                     request = LoadFlowFiscalFromClient(request);
@@ -798,7 +834,7 @@ namespace Presentation.Layouts.Presentation
                     return;
 
                 var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
-                var task = GetLastTaskOpen(int.Parse(Request.QueryString["RequestId"]));
+                var task = GetTaskById((int)ViewState["TaskId"]);
 
                 if (taskStatus == TaskStatus.Aprovado)
                     request = LoadFlowCasFromClient(request);
@@ -867,7 +903,7 @@ namespace Presentation.Layouts.Presentation
                     return;
 
                 var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
-                var task = GetLastTaskOpen(int.Parse(Request.QueryString["RequestId"]));
+                var task = GetTaskById((int)ViewState["TaskId"]);
 
                 if (taskStatus == TaskStatus.Aprovado)
                     request = LoadFlowLogisticsFromClient(request);
@@ -954,7 +990,7 @@ namespace Presentation.Layouts.Presentation
                     return;
 
                 var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
-                var task = GetLastTaskOpen(int.Parse(Request.QueryString["RequestId"]));
+                var task = GetTaskById((int)ViewState["TaskId"]);
 
                 if (taskStatus == TaskStatus.Aprovado)
                     request = LoadFlowCreditFromClient(request);
@@ -1105,7 +1141,7 @@ namespace Presentation.Layouts.Presentation
                     return;
 
                 var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
-                var task = GetLastTaskOpen(int.Parse(Request.QueryString["RequestId"]));
+                var task = GetTaskById((int)ViewState["TaskId"]);
 
                 var workflow = new WorkflowClientRequest();
                 workflow.MakeEvaluation(request, task, taskStatus, null);

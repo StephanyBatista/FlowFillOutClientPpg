@@ -283,7 +283,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <span class="control-label col-md-2">E-mail Contato</span>
+                                    <span class="control-label col-md-2">E-mail Laudo</span>
                                     <div class="col-md-10">
                                         <asp:TextBox ID="txtEmailReport" runat="server" CssClass="form-control"></asp:TextBox>
                                     </div>
