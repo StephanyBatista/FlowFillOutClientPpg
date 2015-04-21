@@ -121,6 +121,7 @@
     <Content Include="Layouts\Presentation\css\Site.css" />
     <Content Include="Layouts\Presentation\js\bootstrap.js" />
     <Content Include="Layouts\Presentation\js\bootstrap.min.js" />
+    <Content Include="Layouts\Presentation\js\cpfCnpj.js" />
     <Content Include="Layouts\Presentation\js\jquery.maskedinput.js" />
     <Content Include="Layouts\Presentation\js\jquery.min.js" />
     <Content Include="Layouts\Presentation\js\respond.js" />

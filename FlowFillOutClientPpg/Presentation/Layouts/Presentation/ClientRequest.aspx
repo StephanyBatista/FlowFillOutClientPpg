@@ -16,12 +16,13 @@
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/jquery.maskedinput.js" type="text/javascript"></script>
     <script src="js/respond.min.js" type="text/javascript"></script>
+    <script src="js/cpfCnpj.js" type="text/javascript"></script>
 
     <SharePoint:CssLink runat="server" Version="4" />
 
     <script type="text/javascript">
         $(function () {
-            $(".cnpj").mask("99.999.999/9999-99");
+            //$(".cnpj").mask("99.999.999/9999-99");
 
             $("#content div:nth-child(1)").show();
             $(".abas li:first div").addClass("selected");		
@@ -129,7 +130,7 @@
                                 <div class="form-group">
                                     <span class="control-label col-md-2">CNPJ/CPF Datasul</span>
                                     <div class="col-md-10">
-                                        <asp:TextBox ID="txtRegisterId" runat="server" CssClass="form-control cnpj"></asp:TextBox>
+                                        <asp:TextBox ID="txtRegisterId" runat="server" CssClass="form-control" onkeypress='mascaraMutuario(this,cpfCnpj)' MaxLength="17"></asp:TextBox>
                                         <span id="RegisterIdRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
                                     </div>
                                 </div>
