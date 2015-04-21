@@ -109,7 +109,7 @@
                 <asp:Label runat="server" ID="State"></asp:Label></td>
         </tr>
         <tr>
-            <td>Pa&iacute; s</td>
+            <td>Pa&iacute;s</td>
             <td>
                 <asp:Label runat="server" ID="Country"></asp:Label></td>
         </tr>

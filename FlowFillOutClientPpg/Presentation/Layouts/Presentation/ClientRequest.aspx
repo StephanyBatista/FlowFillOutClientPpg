@@ -25,10 +25,10 @@
             //$(".cnpj").mask("99.999.999/9999-99");
 
             $("#content div:nth-child(1)").show();
-            $(".abas li:first div").addClass("selected");		
+            $(".abas li:first div").addClass("tabSelected");
             $(".aba").click(function(){
-                $(".aba").removeClass("selected");
-                $(this).addClass("selected");
+                $(".aba").removeClass("tabSelected");
+                $(this).addClass("tabSelected");
                 var indice = $(this).parent().index();
                 indice++;
                 $("#content .conteudo").hide();
@@ -98,6 +98,12 @@
         <div id="content">
             <div class="conteudo">
 
+                <asp:HyperLink ID="linkRequest" runat="server" Target="_blank" Visible="false" Text="Acessar solicitação" style="cursor:pointer">
+                </asp:HyperLink>
+
+                <br />
+                <br />
+
                 <asp:Panel ID="formRequest" runat="server" Enabled="false">
 
                     <div class="row">
@@ -105,12 +111,6 @@
                             <div class="form-horizontal">
                                 <h4>Cadastro de cliente</h4>
                                 <hr />
-
-                                <asp:LinkButton ID="linkRequest" runat="server" Visible="false" Text="Acessar solicitação" style="cursor:pointer">
-                                </asp:LinkButton>
-
-                                <br />
-                                <br />
 
                                 <div class="form-group">
                                     <span class="control-label col-md-2">Vendedor/Representante</span>
@@ -1022,8 +1022,8 @@
                             <div class="form-horizontal">
                                 <h4>Fluxo Cadastro</h4>
                                 
-                                <asp:LinkButton ID="linkPrintRequest" runat="server" Text="Impressão solicitação" style="cursor:pointer">
-                                </asp:LinkButton>
+                                <asp:HyperLink ID="linkPrintRequest" Target="_blank" runat="server" Text="Impressão solicitação" style="cursor:pointer">
+                                </asp:HyperLink>
 
                                 <h5>Aprovação</h5>
                                 <hr />

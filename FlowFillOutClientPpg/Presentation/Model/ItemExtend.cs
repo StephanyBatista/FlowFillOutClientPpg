@@ -12,8 +12,8 @@ public partial class Item : ICustomMapping
         this.ListItem = item;
         this.Modified = (DateTime)item["Modified"];
         this.Created = (DateTime)item["Created"];
-        this.CreatedBy = (string)item["Author"];
-        this.ModifiedBy = (string)item["Editor"];
+        //this.CreatedBy = (string)item["Author"];
+        //this.ModifiedBy = (string)item["Editor"];
     }
 
     public void MapTo(object listItem)
@@ -21,8 +21,8 @@ public partial class Item : ICustomMapping
         SPListItem item = (SPListItem)listItem;
         item["Modified"] = this.Modified;
         item["Created"] = this.Created;
-        item["Author"] = this.CreatedBy;
-        item["Editor"] = this.ModifiedBy;
+        //item["Author"] = this.CreatedBy;
+        //item["Editor"] = this.ModifiedBy;
     }
 
     public void Resolve(RefreshMode mode, object originalListItem, object databaseObject)

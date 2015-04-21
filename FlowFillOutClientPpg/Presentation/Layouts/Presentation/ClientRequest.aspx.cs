@@ -65,8 +65,6 @@ namespace Presentation.Layouts.Presentation
                 DecryptParameter();
                 int requestId;
 
-                SetLinksOfRequest();
-
                 if(int.TryParse(Request.QueryString["RequestId"], out requestId))
                 {
                     var request = GetRequestById(requestId);
@@ -76,14 +74,18 @@ namespace Presentation.Layouts.Presentation
                     if (HasPermissionToEvaluation(request, task))
                         EnableEvaluationForm(task);
                 }
+
+                SetLinksOfRequest();
             }
         }
 
         private void SetLinksOfRequest()
         {
             linkRequest.Visible = true;
-            linkRequest.OnClientClick = string.Format("window.location = '{0}/Lists/Solicita Cliente/DispForm.aspx?ID={1}'; return false;", SPContext.Current.Web.Url, Request.QueryString["RequestId"]);
-            linkPrintRequest.OnClientClick = string.Format("window.location = '{0}/_layouts/Presentation/PrintRequest.aspx?RequestId={1}'; return false;", SPContext.Current.Web.Url, Request.QueryString["RequestId"]);
+            linkRequest.Enabled = true;
+            linkRequest.NavigateUrl = string.Format("{0}/Lists/Solicita Cliente/DispForm.aspx?ID={1}", SPContext.Current.Web.Url, Request.QueryString["RequestId"]);
+            linkPrintRequest.Enabled = true;
+            linkPrintRequest.NavigateUrl = string.Format("{0}/_layouts/Presentation/PrintRequest.aspx?RequestId={1}", SPContext.Current.Web.Url, Request.QueryString["RequestId"]);
         }
 
         private void EnableEvaluationForm(TaskClientRegistrationItem task)

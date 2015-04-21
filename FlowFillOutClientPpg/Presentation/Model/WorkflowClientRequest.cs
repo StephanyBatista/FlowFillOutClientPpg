@@ -13,6 +13,8 @@ namespace Presentation.Model
         private TaskClientRegistrationItem _task;
         public ListModelDataContext contextModel { get; private set; }
         private WorkflowEmail workflowEmail;
+        private TaskStatus _status;
+        private string _evaluationObservation;
         
         public bool Request(ClientRequestItem request)
         {
@@ -60,47 +62,71 @@ namespace Presentation.Model
             ProcessNextFlow();
         }
 
-        public void MakeEvaluation(ClientRequestItem request, TaskClientRegistrationItem task, TaskStatus status, string observation)
+        public void MakeEvaluation(ClientRequestItem request, TaskClientRegistrationItem task, TaskStatus status, string evaluationObservation)
         {
-            contextModel = new ListModelDataContext(SPContext.Current.Web.Url);
-            
             _request = request;
             _task = task;
-            task.TaskUserId = SPContext.Current.Web.CurrentUser.ID;
+            _status = status;
+            _evaluationObservation = evaluationObservation;
 
-            if(status == TaskStatus.Iniciado)
+            var run = new RunWithElevatedPrivileges();
+            run.Execute(MakeEvaluationDelegate);
+        }
+
+        private bool MakeEvaluationDelegate(SPWeb web)
+        {
+            try
+            {
+                contextModel = new ListModelDataContext(web.Url);
+                _task.TaskUserId = web.CurrentUser.ID;
+
+                SetEvaluationByStatus();
+                SaveEvaluation(web);
+                ProcessNextFlow();
+                return true;
+            }catch
+            {
+                return false;
+            }
+        }
+
+        private void SaveEvaluation(SPWeb web)
+        {
+            contextModel.TaskClientRegistration.Attach(_task);
+            contextModel.ClientRequest.Attach(_request);
+            contextModel.SubmitChanges();
+            _request.SaveAttachments(web);
+        }
+
+        private void SetEvaluationByStatus()
+        {
+            if (_status == TaskStatus.Iniciado)
             {
                 _task.TaskStatus = TaskStatus.Iniciado;
-                if(_request.RequestStatus != RequestStatus.Retorno)
+                if (_request.RequestStatus != RequestStatus.Retorno)
                     _request.RequestStatus = RequestStatus.Iniciado;
             }
-            else if(status == TaskStatus.Aprovado)
+            else if (_status == TaskStatus.Aprovado)
             {
                 _task.TaskStatus = TaskStatus.Aprovado;
                 if (_request.RequestStatus != RequestStatus.Retorno)
                     _request.RequestStatus = RequestStatus.Iniciado;
-                NextFlow();    
+                NextFlow();
             }
-            else if(status == TaskStatus.Reprovado)
+            else if (_status == TaskStatus.Reprovado)
             {
                 _task.TaskStatus = TaskStatus.Reprovado;
-                _task.Observation = observation;
+                _task.Observation = _evaluationObservation;
                 _request.RequestStatus = RequestStatus.Reprovado;
                 NextFlow();
             }
-            else if (status == TaskStatus.Retorno)
+            else if (_status == TaskStatus.Retorno)
             {
                 _task.TaskStatus = TaskStatus.Retorno;
-                _task.Observation = observation;
+                _task.Observation = _evaluationObservation;
                 _request.RequestStatus = RequestStatus.Retorno;
                 NextFlow();
             }
-
-            contextModel.TaskClientRegistration.Attach(_task);
-            contextModel.ClientRequest.Attach(_request);
-            contextModel.SubmitChanges();
-            _request.SaveAttachments(SPContext.Current.Web);
-            ProcessNextFlow();
         }
 
         private void NextFlow()

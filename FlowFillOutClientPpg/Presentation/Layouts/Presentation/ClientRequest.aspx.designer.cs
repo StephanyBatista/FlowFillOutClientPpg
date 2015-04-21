@@ -31,6 +31,15 @@ namespace Presentation.Layouts.Presentation {
         protected global::System.Web.UI.WebControls.HiddenField hddScript;
         
         /// <summary>
+        /// linkRequest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink linkRequest;
+        
+        /// <summary>
         /// formRequest control.
         /// </summary>
         /// <remarks>
@@ -38,15 +47,6 @@ namespace Presentation.Layouts.Presentation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel formRequest;
-        
-        /// <summary>
-        /// linkRequest control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton linkRequest;
         
         /// <summary>
         /// txtSeller control.
@@ -1513,7 +1513,7 @@ namespace Presentation.Layouts.Presentation {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton linkPrintRequest;
+        protected global::System.Web.UI.WebControls.HyperLink linkPrintRequest;
         
         /// <summary>
         /// ddlCadastreStatus control.

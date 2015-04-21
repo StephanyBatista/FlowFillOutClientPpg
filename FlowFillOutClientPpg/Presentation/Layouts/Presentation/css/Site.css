@@ -139,7 +139,7 @@ li > a {
     /*color: #fff;*/
 }
 
-.selected-internal {
+.tabSelected {
     width: 100px;
     height: 30px;
     border: solid 1 px;

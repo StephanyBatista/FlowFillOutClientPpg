@@ -127,10 +127,6 @@ namespace Presentation.Model
                 : _request.RequestStep == RequestStep.Crédito ? RegistrationGroup.Crédito
                 : RegistrationGroup.Cadastro;
 
-            #if (DEBUG)
-            email = "salmeidabatista@gmail.com";
-            #endif
-
             using(var contextModel = new ListModelDataContext(SPContext.Current.Web.Url))
             {
                 foreach (var user in contextModel.UserOfClientRegistration.Where(c => c.RegistrationGroup == filterGroup))
