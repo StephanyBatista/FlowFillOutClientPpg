@@ -142,7 +142,7 @@ namespace Presentation.Model
         public void SendEmailStepFinish()
         {
             var body = string.Empty;
-            body += string.Format("Sua <a href='{0}/_layouts/SupplierRequest/Request.aspx?Id={1}'>solicitação de cadastro de cliente</a> foi finalizada<br /> <br />",
+            body += string.Format("Sua <a href='{0}/_layouts/Presentation/ClientRequest.aspx?Id={1}'>solicitação de cadastro de cliente</a> foi finalizada<br /> <br />",
                 SPContext.Current.Web.Url, _request.Id);
 
             body = TemplateEmail(_request, body);
@@ -155,7 +155,7 @@ namespace Presentation.Model
         public void SendEmailReproved()
         {
             var body = string.Empty;
-            body += string.Format("Sua <a href='{0}/_layouts/SupplierRequest/Request.aspx?RequestId={1}'>solicitação de cadastro de cliente</a> foi reprovada<br /> <br />",
+            body += string.Format("Sua <a href='{0}/_layouts/Presentation/ClientRequest.aspx?RequestId={1}'>solicitação de cadastro de cliente</a> foi reprovada<br /> <br />",
                 SPContext.Current.Web.Url, _request.Id);
 
             body = TemplateEmail(_request, body);
@@ -168,7 +168,7 @@ namespace Presentation.Model
         public void SendEmailReturn()
         {
             var body = string.Empty;
-            body += string.Format("Sua <a href='{0}/_layouts/SupplierRequest/Request.aspx?RequestId={1}'>solicitação de cadastro de cliente</a> foi retornada, é necessário que você revise<br /> <br />",
+            body += string.Format("A solicitação {1} foi retornada. <a href='{0}/_layouts/Presentation/TaskClient.aspx'>Acesse tela de tarefa para visualizar</a><br /> <br />",
                 SPContext.Current.Web.Url, _request.Id);
 
             body = TemplateEmail(_request, body);
