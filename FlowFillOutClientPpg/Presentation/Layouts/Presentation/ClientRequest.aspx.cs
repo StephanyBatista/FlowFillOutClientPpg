@@ -56,8 +56,6 @@ namespace Presentation.Layouts.Presentation
 
         private void EnableForm()
         {
-            BindDatasOfChoise();
-
             if (Request.QueryString["RequestId"] == null || Request.QueryString["p"] == null)
                 formRequest.Enabled = true;
             else
@@ -364,7 +362,8 @@ namespace Presentation.Layouts.Presentation
             var phoneTypes = context.PhoneType.ToList();
             ddlPhoneFirstType.DataValueField = ddlPhoneSecondType.DataValueField = "ID";
             ddlPhoneFirstType.DataTextField = ddlPhoneSecondType.DataTextField = "Title";
-            ddlPhoneFirstType.DataSource = ddlPhoneSecondType.DataSource = phoneTypes;
+            ddlPhoneFirstType.DataSource = phoneTypes;
+            ddlPhoneSecondType.DataSource = phoneTypes;
             ddlPhoneFirstType.DataBind();
             ddlPhoneSecondType.DataBind();
         }
