@@ -641,7 +641,7 @@ namespace Presentation.Layouts.Presentation
                 var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
                 var task = GetTaskById((int)ViewState["TaskId"]);
 
-                if (taskStatus == TaskStatus.Aprovado)
+                if (taskStatus == TaskStatus.Aprovado || taskStatus == TaskStatus.Iniciado)
                     request = LoadFlowCustomerFromClient(request);
 
                 var workflow = new WorkflowClientRequest();
@@ -781,7 +781,7 @@ namespace Presentation.Layouts.Presentation
                 var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
                 var task = GetTaskById((int)ViewState["TaskId"]);
                 
-                if (taskStatus == TaskStatus.Aprovado)
+                if (taskStatus == TaskStatus.Aprovado || taskStatus == TaskStatus.Iniciado)
                     request = LoadFlowFiscalFromClient(request);
 
                 var workflow = new WorkflowClientRequest();
@@ -842,7 +842,7 @@ namespace Presentation.Layouts.Presentation
                 var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
                 var task = GetTaskById((int)ViewState["TaskId"]);
 
-                if (taskStatus == TaskStatus.Aprovado)
+                if (taskStatus == TaskStatus.Aprovado || taskStatus == TaskStatus.Iniciado)
                     request = LoadFlowCasFromClient(request);
 
                 var workflow = new WorkflowClientRequest();
@@ -921,7 +921,7 @@ namespace Presentation.Layouts.Presentation
                 var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
                 var task = GetTaskById((int)ViewState["TaskId"]);
 
-                if (taskStatus == TaskStatus.Aprovado)
+                if (taskStatus == TaskStatus.Aprovado || taskStatus == TaskStatus.Iniciado)
                     request = LoadFlowLogisticsFromClient(request);
 
                 var workflow = new WorkflowClientRequest();
@@ -1008,7 +1008,7 @@ namespace Presentation.Layouts.Presentation
                 var request = GetRequestById(int.Parse(Request.QueryString["RequestId"]));
                 var task = GetTaskById((int)ViewState["TaskId"]);
 
-                if (taskStatus == TaskStatus.Aprovado)
+                if (taskStatus == TaskStatus.Aprovado || taskStatus == TaskStatus.Iniciado)
                     request = LoadFlowCreditFromClient(request);
 
                 var workflow = new WorkflowClientRequest();
