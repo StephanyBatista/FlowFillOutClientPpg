@@ -461,7 +461,7 @@
                                 <div class="form-group">
                                     <span class="control-label col-md-2">Volume - Data Vigencia</span>
                                     <div class="col-md-10">
-                                        <asp:Calendar runat="server" ID="txtVolumeEffectiveDate" OnSelectionChanged="VolumeEffectiveDateEvent"></asp:Calendar>
+                                        <asp:Calendar runat="server" ID="txtVolumeEffectiveDate" OnSelectionChanged="VolumeEffectiveDateEvent" OnVisibleMonthChanged="VolumeEffectiveDateMonthChangedEvent"></asp:Calendar>
                                         <%--<asp:TextBox ID="txtVolumeEffectiveDate" runat="server" CssClass="form-control"></asp:TextBox>--%>
                                         <span id="VolumeEffectiveDateRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
                                     </div>
@@ -681,7 +681,7 @@
                                 <div class="form-group">
                                     <span class="control-label col-md-2">Data Assinatura CAS</span>
                                     <div class="col-md-10">
-                                        <asp:Calendar runat="server" ID="txtDateAsignatureCas" OnSelectionChanged="DateAsignatureCasEvent" ></asp:Calendar>
+                                        <asp:Calendar runat="server" ID="txtDateAsignatureCas" OnSelectionChanged="DateAsignatureCasEvent" OnVisibleMonthChanged="DateAsignatureCasMonthChangedEvent" ></asp:Calendar>
                                         <%--<asp:TextBox ID="txtDateAsignatureCas" runat="server" CssClass="form-control"></asp:TextBox>--%>
                                         <span id="DateAsignatureCasRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
                                     </div>
@@ -690,7 +690,7 @@
                                 <div class="form-group">
                                     <span class="control-label col-md-2">Data Validade CAS</span>
                                     <div class="col-md-10">
-                                        <asp:Calendar runat="server" ID="txtDateExpirationCas" OnSelectionChanged="DateExpirationCasEvent" ></asp:Calendar>
+                                        <asp:Calendar runat="server" ID="txtDateExpirationCas" OnSelectionChanged="DateExpirationCasEvent" OnVisibleMonthChanged="DateExpirationCasMonthChangedEvent" ></asp:Calendar>
                                         <%--<asp:TextBox ID="txtDateExpirationCas" runat="server" CssClass="form-control"></asp:TextBox>--%>
                                         <span id="DateExpirationCasRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
                                     </div>
@@ -885,7 +885,7 @@
                                 <div class="form-group">
                                     <span class="control-label col-md-2">Data Inicio Contrato Vendor</span>
                                     <div class="col-md-10">
-                                        <asp:Calendar runat="server" ID="txtContractStartDate" OnSelectionChanged="ContractStartDateEvent" ></asp:Calendar>
+                                        <asp:Calendar runat="server" ID="txtContractStartDate" OnSelectionChanged="ContractStartDateEvent" OnVisibleMonthChanged="ContractStartDateMonthChangedEvent"></asp:Calendar>
                                         <%--<asp:TextBox ID="txtContractStartDate" runat="server" CssClass="form-control"></asp:TextBox>--%>
                                         <span id="ContractStartDateRequired" runat="Server" class="ms-formvalidation" title="Obrigatório">Obrigatório</span>
                                     </div>

@@ -756,6 +756,11 @@ namespace Presentation.Layouts.Presentation
         {
             hddScript.Value = "$('#abaCustomer').click();";
         }
+
+        protected void VolumeEffectiveDateMonthChangedEvent(object sender, MonthChangedEventArgs e)
+        {
+            hddScript.Value = "$('#abaCustomer').click();";
+        }
         #endregion
 
         #region FlowFiscal
@@ -882,7 +887,17 @@ namespace Presentation.Layouts.Presentation
             hddScript.Value = "$('#abaCas').click();";
         }
 
+        protected void DateAsignatureCasMonthChangedEvent(object sender, MonthChangedEventArgs e)
+        {
+            hddScript.Value = "$('#abaCas').click();";
+        }
+
         protected void DateExpirationCasEvent(object sender, EventArgs e)
+        {
+            hddScript.Value = "$('#abaCas').click();";
+        }
+
+        protected void DateExpirationCasMonthChangedEvent(object sender, MonthChangedEventArgs e)
         {
             hddScript.Value = "$('#abaCas').click();";
         }
@@ -1122,6 +1137,11 @@ namespace Presentation.Layouts.Presentation
         }
 
         protected void ContractStartDateEvent(object sender, EventArgs e)
+        {
+            hddScript.Value = "$('#abaCredit').click();";
+        }
+
+        protected void ContractStartDateMonthChangedEvent(object sender, MonthChangedEventArgs e)
         {
             hddScript.Value = "$('#abaCredit').click();";
         }
