@@ -833,7 +833,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-horizontal">
-                                <h4>Fluxo Crédit</h4>
+                                <h4>Fluxo Crédito</h4>
                                 <hr />
 
                                 <div class="form-group">
